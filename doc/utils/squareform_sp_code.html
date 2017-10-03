@@ -1,0 +1,177 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">SQUAREFORM_SP - Sparse counterpart of matlab's squareform</h1>
+<h2>Program code:</h2>
+<div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>w <span class="p">=</span><span class="w"> </span><span class="nf">squareform_sp</span><span class="p">(</span>w<span class="p">)</span><span class="w"></span>
+<span class="c">%SQUAREFORM_SP Sparse counterpart of matlab&#39;s squareform</span>
+<span class="c">%   Usage: w = squareform_sp(W);</span>
+<span class="c">%</span>
+<span class="c">%   Input parameters:</span>
+<span class="c">%       w: sparse vector with n(n-1)/2 elements OR</span>
+<span class="c">%       W: matrix with size [n, n] and zero diagonal</span>
+<span class="c">%</span>
+<span class="c">%   Output parameters:</span>
+<span class="c">%       W: matrix form of input vector w OR</span>
+<span class="c">%       w: vector form of input matrix W</span>
+<span class="c">%</span>
+<span class="c">%   This function is to be used instead of squareform.m when the matrix W</span>
+<span class="c">%   or the vector w is sparse. For large scale computations, e.g. for</span>
+<span class="c">%   learning the graph structure of a big graph it is necessary to take</span>
+<span class="c">%   into account the sparsity.</span>
+<span class="c">%</span>
+<span class="c">%   Example:</span>
+<span class="c">%</span>
+<span class="c">%       B = sprand(8, 8, 0.1);</span>
+<span class="c">%       B = B+B&#39;;</span>
+<span class="c">%       B(1:9:end) = 0;</span>
+<span class="c">%       b = squareform_sp(B);</span>
+<span class="c">%       Bs = squareform_sp(b);</span>
+<span class="c">%</span>
+<span class="c">%</span>
+<span class="c">%   See also: sum_squareform zero_diag</span>
+<span class="c">%</span>
+<span class="c">%   Url: https://lts2.epfl.ch/unlocbox/doc/utils/squareform_sp.php</span>
+
+<span class="c">% Copyright (C) 2012-2016 Nathanael Perraudin.</span>
+<span class="c">% This file is part of UNLOCBOX version 1.7.3</span>
+<span class="c">%</span>
+<span class="c">% This program is free software: you can redistribute it and/or modify</span>
+<span class="c">% it under the terms of the GNU General Public License as published by</span>
+<span class="c">% the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">% (at your option) any later version.</span>
+<span class="c">%</span>
+<span class="c">% This program is distributed in the hope that it will be useful,</span>
+<span class="c">% but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">% GNU General Public License for more details.</span>
+<span class="c">%</span>
+<span class="c">% You should have received a copy of the GNU General Public License</span>
+<span class="c">% along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="c">%   Date: December 2015</span>
+<span class="c">%   Author: Vassilis Kalofolias</span>
+<span class="c">%   Testing: test_squareform</span>
+
+<span class="c">% if input is not sparse it doesn&#39;t make sense to use this function!</span>
+<span class="k">if</span> <span class="n">not</span><span class="p">(</span><span class="n">issparse</span><span class="p">(</span><span class="n">w</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="n">nnz</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">/</span><span class="nb">numel</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">/</span><span class="mi">10</span>
+    <span class="n">w</span> <span class="p">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
+<span class="c">%     warning(&#39;Use standard squareform for non sparse vector! Full version returned.&#39;);</span>
+    <span class="k">return</span>
+<span class="k">end</span>
+
+
+<span class="k">if</span> <span class="nb">isvector</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="c">%% VECTOR -&gt; MATRIX</span>
+    <span class="n">l</span> <span class="p">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
+    <span class="n">n</span> <span class="p">=</span> <span class="nb">round</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">8</span><span class="o">*</span><span class="n">l</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+    <span class="c">% check input</span>
+    <span class="k">if</span> <span class="n">not</span><span class="p">(</span><span class="n">l</span> <span class="o">==</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">error</span><span class="p">(</span><span class="s">&#39;Bad vector size!&#39;</span><span class="p">);</span>
+    <span class="k">end</span>
+    
+    <span class="c">%% TODO: make more efficient! (Maybe impossible)</span>
+    <span class="k">if</span> <span class="n">iscolumn</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">ind_vec</span><span class="p">,</span> <span class="o">~</span><span class="p">,</span> <span class="n">s</span><span class="p">]</span> <span class="p">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="p">[</span><span class="o">~</span><span class="p">,</span> <span class="n">ind_vec</span><span class="p">,</span> <span class="n">s</span><span class="p">]</span> <span class="p">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
+    <span class="k">end</span>
+    
+    <span class="n">num_nz</span> <span class="p">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">ind_vec</span><span class="p">);</span>
+    
+    <span class="c">% indices inside the matrix</span>
+    <span class="n">ind_i</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">num_nz</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="n">ind_j</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">num_nz</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+    
+    <span class="n">curr_row</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">offset</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c">% length of current row of matrix, counting from after the diagonal</span>
+    <span class="n">len</span> <span class="p">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span> <span class="n">ii</span> <span class="p">=</span> <span class="mi">1</span> <span class="p">:</span> <span class="nb">length</span><span class="p">(</span><span class="n">ind_vec</span><span class="p">)</span>
+        <span class="n">ind_vec_i</span> <span class="p">=</span> <span class="n">ind_vec</span><span class="p">(</span><span class="n">ii</span><span class="p">);</span>
+        <span class="c">% if we change row, the vector index is bigger by at least the</span>
+        <span class="c">% length of the line + the offset.</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">ind_vec_i</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">len</span> <span class="o">+</span> <span class="n">offset</span><span class="p">))</span>
+            <span class="n">offset</span> <span class="p">=</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">len</span><span class="p">;</span>
+            <span class="n">len</span> <span class="p">=</span> <span class="n">len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">curr_row</span> <span class="p">=</span> <span class="n">curr_row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">end</span>
+        <span class="n">ind_i</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span> <span class="p">=</span> <span class="n">curr_row</span><span class="p">;</span>
+        <span class="n">ind_j</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span> <span class="p">=</span> <span class="n">ind_vec_i</span> <span class="o">-</span> <span class="n">offset</span> <span class="o">+</span> <span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">len</span><span class="p">);</span>
+    <span class="k">end</span>
+    
+    <span class="c">% for the lower triangular part just add the transposed matrix</span>
+    <span class="c">%w = sparse(ind_i, ind_j, s, n, n) + sparse(ind_j, ind_i, s, n, n);</span>
+    <span class="n">w</span> <span class="p">=</span> <span class="n">sparse</span><span class="p">([</span><span class="n">ind_i</span><span class="p">;</span> <span class="n">ind_j</span><span class="p">],</span> <span class="p">[</span><span class="n">ind_j</span><span class="p">;</span> <span class="n">ind_i</span><span class="p">],</span> <span class="p">[</span><span class="n">s</span><span class="p">(:);</span> <span class="n">s</span><span class="p">(:)],</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+    
+<span class="k">else</span>
+    <span class="c">%% MATRIX -&gt; VECTOR</span>
+    <span class="c">% first checks</span>
+    <span class="p">[</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">]</span> <span class="p">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
+    <span class="k">if</span> <span class="n">m</span> <span class="o">~=</span> <span class="n">n</span> <span class="o">||</span> <span class="o">~</span><span class="n">all</span><span class="p">(</span><span class="nb">diag</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">error</span><span class="p">(</span><span class="s">&#39;Matrix has to be square with zero diagonal!&#39;</span><span class="p">);</span>
+    <span class="k">end</span>
+    
+    <span class="p">[</span><span class="n">ind_i</span><span class="p">,</span> <span class="n">ind_j</span><span class="p">,</span> <span class="n">s</span><span class="p">]</span> <span class="p">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">w</span><span class="p">);</span>
+    <span class="c">% keep only upper triangular part</span>
+    <span class="n">ind_upper</span> <span class="p">=</span> <span class="n">ind_i</span> <span class="o">&lt;</span> <span class="n">ind_j</span><span class="p">;</span>
+    <span class="n">ind_i</span> <span class="p">=</span> <span class="n">ind_i</span><span class="p">(</span><span class="n">ind_upper</span><span class="p">);</span>
+    <span class="n">ind_j</span> <span class="p">=</span> <span class="n">ind_j</span><span class="p">(</span><span class="n">ind_upper</span><span class="p">);</span>
+    <span class="n">s</span> <span class="p">=</span> <span class="n">s</span><span class="p">(</span><span class="n">ind_upper</span><span class="p">);</span>
+    <span class="c">% compute new (vector) index from (i,j) (matrix) indices</span>
+    <span class="n">new_ind</span> <span class="p">=</span> <span class="n">ind_j</span> <span class="o">+</span> <span class="p">(</span><span class="n">ind_i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">n</span> <span class="o">-</span> <span class="n">ind_i</span><span class="o">.*</span><span class="p">(</span><span class="n">ind_i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+    <span class="n">w</span> <span class="p">=</span> <span class="n">sparse</span><span class="p">(</span><span class="n">new_ind</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="k">end</span>    
+
+<span class="k">end</span>
+</pre></div>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="squareform_sp.html">View the help</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p><div id="menutitle">See also:</div>
+<ul>
+<li><a href="#BASEURL#/doc/utils/sum_squareform.html">sum_squareform</a></li>
+<li><a href="#BASEURL#/doc/utils/zero_diag.html">zero_diag</a></li>
+</ul>
+</p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

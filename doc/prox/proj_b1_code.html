@@ -1,0 +1,227 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">PROJ_B1 - Projection onto a L1-ball</h1>
+<h2>Program code:</h2>
+<div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>[sol,info] <span class="p">=</span><span class="w"> </span><span class="nf">proj_b1</span><span class="p">(</span>x, ~, param<span class="p">)</span><span class="w"></span>
+<span class="c">%PROJ_B1 Projection onto a L1-ball</span>
+<span class="c">%   Usage:  sol=proj_b1(x, ~, param)</span>
+<span class="c">%           [sol,infos]=proj_b1(x, ~, param)</span>
+<span class="c">%</span>
+<span class="c">%   Input parameters:</span>
+<span class="c">%         x     : Input signal.</span>
+<span class="c">%         param : Structure of parameters.</span>
+<span class="c">%   Output parameters:</span>
+<span class="c">%         sol   : Solution.</span>
+<span class="c">%         info  : Structure summarizing informations at convergence</span>
+<span class="c">%</span>
+<span class="c">%   PROJ_B1(x,~,param) solves:</span>
+<span class="c">%</span>
+<span class="c">%      sol = argmin_{z} ||x - z||_2^2   s.t.  ||w.*z||_1 &lt; epsilon</span>
+<span class="c">%</span>
+<span class="c">%   Remark: the projection is the proximal operator of the indicative function of</span>
+<span class="c">%   w.*z||_1 &lt; epsilon. So it can be written:</span>
+<span class="c">%</span>
+<span class="c">%      prox_{f, gamma }(x)      where       f= i_c(||w.*z||_1 &lt; epsilon)</span>
+<span class="c">%</span>
+<span class="c">%   param is a Matlab structure containing the following fields:</span>
+<span class="c">%</span>
+<span class="c">%    param.epsilon : Radius of the L1 ball (default = 1).</span>
+<span class="c">%</span>
+<span class="c">%    param.weight : contain the weights (default ones).</span>
+<span class="c">%</span>
+<span class="c">%    param.verbose : 0 no log, 1 a summary at convergence, 2 print main</span>
+<span class="c">%     steps (default: 1)</span>
+<span class="c">%</span>
+<span class="c">%</span>
+<span class="c">%   info is a Matlab structure containing the following fields:</span>
+<span class="c">%</span>
+<span class="c">%    info.algo : Algorithm used</span>
+<span class="c">%</span>
+<span class="c">%    info.iter : Number of iteration</span>
+<span class="c">%</span>
+<span class="c">%    info.time : Time of exectution of the function in sec.</span>
+<span class="c">%</span>
+<span class="c">%    info.final_eval : Final evaluation of the function</span>
+<span class="c">%</span>
+<span class="c">%    info.crit : Stopping critterion used </span>
+<span class="c">%</span>
+<span class="c">%</span>
+<span class="c">%   Rem: The input &quot;~&quot; is useless but needed for compatibility issue.</span>
+<span class="c">%</span>
+<span class="c">%   This code is partly borrowed from the SPGL toolbox!</span>
+<span class="c">%</span>
+<span class="c">%   See also:  proj_b2 prox_l1</span>
+<span class="c">%</span>
+<span class="c">%   Url: https://lts2.epfl.ch/unlocbox/doc/prox/proj_b1.php</span>
+
+<span class="c">% Copyright (C) 2012-2016 Nathanael Perraudin.</span>
+<span class="c">% This file is part of UNLOCBOX version 1.7.3</span>
+<span class="c">%</span>
+<span class="c">% This program is free software: you can redistribute it and/or modify</span>
+<span class="c">% it under the terms of the GNU General Public License as published by</span>
+<span class="c">% the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">% (at your option) any later version.</span>
+<span class="c">%</span>
+<span class="c">% This program is distributed in the hope that it will be useful,</span>
+<span class="c">% but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">% GNU General Public License for more details.</span>
+<span class="c">%</span>
+<span class="c">% You should have received a copy of the GNU General Public License</span>
+<span class="c">% along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="c">%</span>
+<span class="c">% Author: Nathanael Perraudin</span>
+<span class="c">% Date: February 2015</span>
+<span class="c">% Testing: test_proj_b1</span>
+
+<span class="c">% Start the time counter</span>
+<span class="n">t1</span> <span class="p">=</span> <span class="n">tic</span><span class="p">;</span>
+
+<span class="c">% Optional input arguments</span>
+<span class="k">if</span> <span class="n">nargin</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span> <span class="n">param</span><span class="p">=</span><span class="n">struct</span><span class="p">;</span> <span class="k">end</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;epsilon&#39;</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">epsilon</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span> <span class="k">end</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;verbose&#39;</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span> <span class="k">end</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;weight&#39;</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">weight</span> <span class="p">=</span> <span class="nb">ones</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">x</span><span class="p">));</span> <span class="k">end</span>
+
+<span class="k">if</span> <span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span><span class="s">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">error</span><span class="p">(</span><span class="s">&#39;Change in the UNLocBoX! Use weight instead of w!&#39;</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="k">if</span> <span class="nb">isscalar</span><span class="p">(</span><span class="n">param</span><span class="p">.</span><span class="n">weight</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">weight</span> <span class="p">=</span> <span class="nb">ones</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span> <span class="n">param</span><span class="p">.</span><span class="n">weight</span><span class="p">;</span> <span class="k">end</span>
+<span class="n">param</span><span class="p">.</span><span class="n">weight</span> <span class="p">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">param</span><span class="p">.</span><span class="n">weight</span><span class="p">);</span>
+
+<span class="c">% Quick return for the easy cases.</span>
+<span class="k">if</span> <span class="n">sum</span><span class="p">(</span><span class="n">param</span><span class="p">.</span><span class="n">weight</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+   <span class="n">sol</span>   <span class="p">=</span> <span class="n">x</span><span class="p">;</span>
+   <span class="n">iter</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">crit</span><span class="p">=</span><span class="s">&#39;--&#39;</span><span class="p">;</span>
+    <span class="n">info</span><span class="p">.</span><span class="n">algo</span><span class="p">=</span><span class="n">mfilename</span><span class="p">;</span>
+    <span class="n">info</span><span class="p">.</span><span class="n">iter</span><span class="p">=</span><span class="n">iter</span><span class="p">;</span>
+    <span class="n">info</span><span class="p">.</span><span class="n">final_eval</span><span class="p">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="n">info</span><span class="p">.</span><span class="n">crit</span><span class="p">=</span><span class="n">crit</span><span class="p">;</span>
+    <span class="n">info</span><span class="p">.</span><span class="n">time</span><span class="p">=</span><span class="n">toc</span><span class="p">(</span><span class="n">t1</span><span class="p">);</span>
+   <span class="k">return</span>
+<span class="k">end</span>
+
+<span class="c">% Get sign of b and set to absolute values</span>
+<span class="n">signx</span> <span class="p">=</span> <span class="nb">sign</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="n">x</span> <span class="p">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+
+<span class="n">idx</span> <span class="p">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="nb">eps</span><span class="p">);</span> <span class="c">% Get index of all non-zero entries of d</span>
+<span class="n">sol</span>   <span class="p">=</span> <span class="n">x</span><span class="p">;</span>             <span class="c">% Ensure x_i = b_i for all i not in index set idx</span>
+<span class="p">[</span><span class="n">sol</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span><span class="n">iter</span><span class="p">]</span> <span class="p">=</span> <span class="n">one_projector</span><span class="p">(</span><span class="n">sol</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span><span class="n">param</span><span class="p">.</span><span class="n">weight</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span><span class="n">param</span><span class="p">.</span><span class="n">epsilon</span><span class="p">);</span>
+
+
+<span class="c">% Restore signs in x</span>
+<span class="n">sol</span> <span class="p">=</span> <span class="n">sol</span><span class="o">.*</span><span class="n">signx</span><span class="p">;</span>
+
+
+
+<span class="c">% Log after the projection onto the L2-ball</span>
+<span class="k">if</span> <span class="n">param</span><span class="p">.</span><span class="n">verbose</span> <span class="o">&gt;</span><span class="p">=</span> <span class="mi">1</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;  Proj. B1: epsilon = %e, ||x||_2 = %e,\n&#39;</span><span class="p">,</span> <span class="n">param</span><span class="p">.</span><span class="n">epsilon</span><span class="p">,</span> <span class="n">norm</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>
+<span class="k">end</span>
+
+<span class="n">crit</span><span class="p">=</span><span class="s">&#39;--&#39;</span><span class="p">;</span>
+<span class="n">info</span><span class="p">.</span><span class="n">algo</span><span class="p">=</span><span class="n">mfilename</span><span class="p">;</span>
+<span class="n">info</span><span class="p">.</span><span class="n">iter</span><span class="p">=</span><span class="n">iter</span><span class="p">;</span>
+<span class="n">info</span><span class="p">.</span><span class="n">final_eval</span><span class="p">=</span><span class="n">norm</span><span class="p">(</span><span class="n">param</span><span class="p">.</span><span class="n">weight</span><span class="o">.*</span><span class="n">sol</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">info</span><span class="p">.</span><span class="n">crit</span><span class="p">=</span><span class="n">crit</span><span class="p">;</span>
+<span class="n">info</span><span class="p">.</span><span class="n">time</span><span class="p">=</span><span class="n">toc</span><span class="p">(</span><span class="n">t1</span><span class="p">);</span>
+
+<span class="k">end</span>
+
+
+
+
+<span class="k">function</span><span class="w"> </span>[sol,iter] <span class="p">=</span><span class="w"> </span><span class="nf">one_projector</span><span class="p">(</span>x,weight,tau<span class="p">)</span><span class="w"></span>
+<span class="c">% This code is partly borrowed from the SPGL toolbox</span>
+  <span class="c">% Initialization</span>
+   <span class="n">N</span> <span class="p">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+   <span class="n">sol</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+
+   <span class="c">% Check for quick exit.</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">tau</span> <span class="o">&gt;</span><span class="p">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">weight</span><span class="o">.*</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> <span class="n">sol</span> <span class="p">=</span> <span class="n">x</span><span class="p">;</span> <span class="n">iter</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="k">return</span><span class="p">;</span> <span class="k">end</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">tau</span> <span class="o">&lt;</span>  <span class="nb">eps</span>         <span class="p">),</span>        <span class="n">iter</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="k">return</span><span class="p">;</span> <span class="k">end</span>
+
+   <span class="c">% Preprocessing (b is assumed to be &gt;= 0)</span>
+   <span class="p">[</span><span class="n">sw</span><span class="p">,</span><span class="n">idx</span><span class="p">]</span> <span class="p">=</span> <span class="n">sort</span><span class="p">(</span><span class="n">x</span> <span class="o">./</span> <span class="n">weight</span><span class="p">,</span><span class="s">&#39;descend&#39;</span><span class="p">);</span> <span class="c">% Descending.</span>
+   <span class="n">x</span>  <span class="p">=</span> <span class="n">x</span><span class="p">(</span><span class="n">idx</span><span class="p">);</span>
+   <span class="n">weight</span>  <span class="p">=</span> <span class="n">weight</span><span class="p">(</span><span class="n">idx</span><span class="p">);</span>
+
+   <span class="c">% Optimize</span>
+   <span class="n">csdb</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">csd2</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+   <span class="n">soft</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">ii</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="k">while</span> <span class="p">(</span><span class="n">ii</span> <span class="o">&lt;</span><span class="p">=</span> <span class="n">N</span><span class="p">)</span>
+      <span class="n">csdb</span> <span class="p">=</span> <span class="n">csdb</span> <span class="o">+</span> <span class="n">weight</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span><span class="o">.*</span><span class="n">x</span><span class="p">(</span><span class="n">ii</span><span class="p">);</span>
+      <span class="n">csd2</span> <span class="p">=</span> <span class="n">csd2</span> <span class="o">+</span> <span class="n">weight</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span><span class="o">.*</span><span class="n">weight</span><span class="p">(</span><span class="n">ii</span><span class="p">);</span>
+  
+      <span class="n">alpha1</span> <span class="p">=</span> <span class="p">(</span><span class="n">csdb</span> <span class="o">-</span> <span class="n">tau</span><span class="p">)</span> <span class="o">/</span> <span class="n">csd2</span><span class="p">;</span>
+      <span class="n">alpha2</span> <span class="p">=</span> <span class="n">sw</span><span class="p">(</span><span class="n">ii</span><span class="p">);</span>
+
+      <span class="k">if</span> <span class="n">alpha1</span> <span class="o">&gt;</span><span class="p">=</span> <span class="n">alpha2</span>
+         <span class="k">break</span><span class="p">;</span>
+      <span class="k">end</span>
+    
+      <span class="n">soft</span> <span class="p">=</span> <span class="n">alpha1</span><span class="p">;</span>  <span class="n">ii</span> <span class="p">=</span> <span class="n">ii</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+   <span class="k">end</span>
+   <span class="n">sol</span><span class="p">(</span><span class="n">idx</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">ii</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="p">=</span> <span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">ii</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">weight</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">ii</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">soft</span><span class="p">);</span>
+
+   <span class="c">% Set number of iterations</span>
+   <span class="n">iter</span> <span class="p">=</span> <span class="n">ii</span><span class="p">;</span>
+
+<span class="k">end</span>
+</pre></div>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="proj_b1.html">View the help</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p><div id="menutitle">See also:</div>
+<ul>
+<li><a href="#BASEURL#/doc/prox/proj_b2.html">proj_b2</a></li>
+<li><a href="#BASEURL#/doc/prox/prox_l1.html">prox_l1</a></li>
+</ul>
+</p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

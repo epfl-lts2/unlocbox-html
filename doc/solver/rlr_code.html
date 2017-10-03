@@ -1,0 +1,157 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">RLR - Regularized Linear Regression</h1>
+<h2>Program code:</h2>
+<div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>[sol, info] <span class="p">=</span><span class="w"> </span><span class="nf">rlr</span><span class="p">(</span>x_0,f,A,At, param<span class="p">)</span><span class="w"></span>
+<span class="c">%RLR Regularized Linear Regression </span>
+<span class="c">%   Usage: sol = rlr(x_0,f,A,At, param)</span>
+<span class="c">%          sol = rlr(x_0,f,A,At)</span>
+<span class="c">%          [sol, info] = rlr(..,)</span>
+<span class="c">%</span>
+<span class="c">%   Input parameters:</span>
+<span class="c">%         x_0   : Starting point of the algorithm</span>
+<span class="c">%         f     : Function to minimize</span>
+<span class="c">%         A     : Operator</span>
+<span class="c">%         At    : Adjoint operator</span>
+<span class="c">%         param : Optional parameter</span>
+<span class="c">%   Output parameters:</span>
+<span class="c">%         sol   : Solution</span>
+<span class="c">%         info  : Structure summarizing informations at convergence</span>
+<span class="c">%</span>
+<span class="c">%   This function solve minimization problem using forward-backward splitting</span>
+<span class="c">%</span>
+<span class="c">%   sol = RLR(x_0,f,A,At, param) solves:</span>
+<span class="c">%</span>
+<span class="c">%      sol = argmin ||x_0-Ax||_2^2 + f2(x)      for x belong to R^N</span>
+<span class="c">%</span>
+<span class="c">%   where x is the variable. </span>
+<span class="c">%</span>
+<span class="c">%    x_0 is the starting point.</span>
+<span class="c">%</span>
+<span class="c">%    f is a structure representing a convex function. Inside the structure, there</span>
+<span class="c">%     have to be the prox of the function that can be called by f.prox and </span>
+<span class="c">%     the  function itself that can be called by f.eval. </span>
+<span class="c">%</span>
+<span class="c">%    A is the operator</span>
+<span class="c">%</span>
+<span class="c">%    At is the adjoint operator of A</span>
+<span class="c">%</span>
+<span class="c">%    param a Matlab structure containing solver paremeters. See the</span>
+<span class="c">%     function SOLVEP for more information. Additionally it contains those</span>
+<span class="c">%     aditional fields:  </span>
+<span class="c">%</span>
+<span class="c">%      param.nu : bound on the norm of the operator A (default: 1), i.e.</span>
+<span class="c">%</span>
+<span class="c">%        ` ||A x||^2 &lt;= nu * ||x||^2 </span>
+<span class="c">%</span>
+<span class="c">%      param.method : is the method used to solve the problem. It can be &#39;FISTA&#39; or</span>
+<span class="c">%       &#39;ISTA&#39;. By default, it&#39;s &#39;FISTA&#39;.</span>
+<span class="c">%            </span>
+<span class="c">%   See also:  forward_backward solvep admm</span>
+<span class="c">%</span>
+<span class="c">%   References:</span>
+<span class="c">%     P. Combettes and J. Pesquet. A douglas--rachford splitting approach to</span>
+<span class="c">%     nonsmooth convex variational signal recovery. Selected Topics in Signal</span>
+<span class="c">%     Processing, IEEE Journal of, 1(4):564--574, 2007.</span>
+<span class="c">%     </span>
+<span class="c">%</span>
+<span class="c">%   Url: https://lts2.epfl.ch/unlocbox/doc/solver/rlr.php</span>
+
+<span class="c">% Copyright (C) 2012-2016 Nathanael Perraudin.</span>
+<span class="c">% This file is part of UNLOCBOX version 1.7.3</span>
+<span class="c">%</span>
+<span class="c">% This program is free software: you can redistribute it and/or modify</span>
+<span class="c">% it under the terms of the GNU General Public License as published by</span>
+<span class="c">% the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">% (at your option) any later version.</span>
+<span class="c">%</span>
+<span class="c">% This program is distributed in the hope that it will be useful,</span>
+<span class="c">% but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">% GNU General Public License for more details.</span>
+<span class="c">%</span>
+<span class="c">% You should have received a copy of the GNU General Public License</span>
+<span class="c">% along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="c">% Author: Nathanael Perraudin</span>
+<span class="c">% Date: sept 30 2011</span>
+<span class="c">%</span>
+
+<span class="c">% Start the time counter</span>
+<span class="n">t1</span> <span class="p">=</span> <span class="n">tic</span><span class="p">;</span>
+
+<span class="c">% test the evaluate function</span>
+<span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="p">=</span> <span class="n">test_eval</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
+
+<span class="c">% Optional input arguments</span>
+<span class="k">if</span> <span class="n">nargin</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">,</span> <span class="n">param</span><span class="p">=</span><span class="n">struct</span><span class="p">;</span> <span class="k">end</span>
+
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;nu&#39;</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">nu</span><span class="p">=</span><span class="mi">1</span> <span class="p">;</span> <span class="k">end</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;method&#39;</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">method</span><span class="p">=</span><span class="s">&#39;FISTA&#39;</span> <span class="p">;</span> <span class="k">end</span>
+
+
+<span class="c">% setting the function f2 </span>
+<span class="n">f2</span><span class="p">.</span><span class="n">grad</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="mi">2</span><span class="o">*</span><span class="n">At</span><span class="p">((</span><span class="n">A</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">x_0</span><span class="p">));</span>
+<span class="n">f2</span><span class="p">.</span><span class="n">eval</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">x_0</span><span class="p">,</span><span class="s">&#39;fro&#39;</span><span class="p">))</span>^<span class="mi">2</span><span class="p">;</span>
+<span class="n">f2</span><span class="p">.</span><span class="nb">beta</span> <span class="p">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">param</span><span class="p">.</span><span class="n">nu</span><span class="p">;</span>
+
+<span class="p">[</span><span class="n">sol</span><span class="p">,</span> <span class="n">info</span><span class="p">]</span> <span class="p">=</span> <span class="n">solvep</span><span class="p">(</span><span class="n">x_0</span><span class="p">,{</span><span class="n">f</span><span class="p">,</span><span class="n">f2</span><span class="p">},</span><span class="n">param</span><span class="p">);</span>
+
+<span class="n">info</span><span class="p">.</span><span class="n">algo</span><span class="p">=</span><span class="n">mfilename</span><span class="p">;</span>
+<span class="n">info</span><span class="p">.</span><span class="n">time</span><span class="p">=</span><span class="n">toc</span><span class="p">(</span><span class="n">t1</span><span class="p">);</span>
+
+
+<span class="k">end</span>
+</pre></div>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="rlr.html">View the help</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p><div id="menutitle">See also:</div>
+<ul>
+<li><a href="#BASEURL#/doc/solver/forward_backward.html">forward_backward</a></li>
+<li><a href="#BASEURL#/doc/solver/solvep.html">solvep</a></li>
+<li><a href="#BASEURL#/doc/solver/admm.html">admm</a></li>
+</ul>
+</p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

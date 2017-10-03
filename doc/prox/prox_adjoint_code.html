@@ -1,0 +1,116 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">PROX_ADJOINT - Proximal operator of the adjoint function of f</h1>
+<h2>Program code:</h2>
+<div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>[sol]  <span class="p">=</span><span class="w"> </span><span class="nf">prox_adjoint</span><span class="p">(</span>x, gamma, f<span class="p">)</span><span class="w"></span>
+<span class="c">%PROX_ADJOINT Proximal operator of the adjoint function of f</span>
+<span class="c">%   Usage:   sol=prox_adjoint(x, gamma, f);</span>
+<span class="c">%</span>
+<span class="c">%   Input parameters:</span>
+<span class="c">%         x     : Input signal.</span>
+<span class="c">%         gamma : Regularization parameter.</span>
+<span class="c">%         f     : Function</span>
+<span class="c">%   Output parameters:</span>
+<span class="c">%         sol   : Solution.</span>
+<span class="c">%         infos : Structure summarizing informations at convergence</span>
+<span class="c">%</span>
+<span class="c">%    PROX_ADJOINT( x,gamma,f ) solves:</span>
+<span class="c">%</span>
+<span class="c">%      sol = argmin_{z} 0.5*||x - z||_2^2 + gamma * f*</span>
+<span class="c">%</span>
+<span class="c">%   where f^ is the adjoint of f. This problem is solved thanks to the</span>
+<span class="c">%   Moreau&#39;s identity.</span>
+<span class="c">%</span>
+<span class="c">%   Warning: f needs to be a proper convex lower semi continuous function.</span>
+<span class="c">%</span>
+<span class="c">%</span>
+<span class="c">%   Url: https://lts2.epfl.ch/unlocbox/doc/prox/prox_adjoint.php</span>
+
+<span class="c">% Copyright (C) 2012-2016 Nathanael Perraudin.</span>
+<span class="c">% This file is part of UNLOCBOX version 1.7.3</span>
+<span class="c">%</span>
+<span class="c">% This program is free software: you can redistribute it and/or modify</span>
+<span class="c">% it under the terms of the GNU General Public License as published by</span>
+<span class="c">% the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">% (at your option) any later version.</span>
+<span class="c">%</span>
+<span class="c">% This program is distributed in the hope that it will be useful,</span>
+<span class="c">% but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">% GNU General Public License for more details.</span>
+<span class="c">%</span>
+<span class="c">% You should have received a copy of the GNU General Public License</span>
+<span class="c">% along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+
+<span class="c">% Author: Nathanael Perraudin</span>
+<span class="c">% Date: 31 May 2013</span>
+<span class="c">% Testing: test_prox_functions</span>
+
+<span class="k">if</span> <span class="nb">gamma</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="n">warning</span><span class="p">([</span><span class="s">&#39;gamma = 0. This is problably not correct.&#39;</span> <span class="c">...</span>
+        <span class="s">&#39; We replace it by eps to keep going.&#39;</span><span class="p">]);</span>
+    <span class="nb">gamma</span> <span class="p">=</span> <span class="nb">eps</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="c">% Optional input arguments</span>
+<span class="k">if</span> <span class="n">nargin</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">error</span><span class="p">(</span><span class="s">&#39;Two few input arguments!&#39;</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="c">% if nargout&gt;1</span>
+<span class="c">%     [sol_a, info] = gamma*f.prox(x/gamma,1/gamma);</span>
+<span class="c">%     info.adjoint = 1;</span>
+<span class="c">% else</span>
+<span class="n">sol_a</span> <span class="p">=</span> <span class="nb">gamma</span> <span class="o">*</span> <span class="n">f</span><span class="p">.</span><span class="n">prox</span><span class="p">(</span><span class="n">x</span> <span class="o">/</span> <span class="nb">gamma</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="nb">gamma</span><span class="p">);</span>
+<span class="c">% end</span>
+<span class="n">sol</span> <span class="p">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">sol_a</span><span class="p">;</span>
+
+<span class="k">end</span>
+</pre></div>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="prox_adjoint.html">View the help</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p></p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

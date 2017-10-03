@@ -1,0 +1,328 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">SOLVEP - solve a minimization problem</h1>
+<h2>Program code:</h2>
+<div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>[sol, info] <span class="p">=</span><span class="w"> </span><span class="nf">solvep</span><span class="p">(</span>x_0, F, param<span class="p">)</span><span class="w"></span>
+<span class="c">%SOLVEP solve a minimization problem</span>
+<span class="c">%   Usage: sol = solvep(x_0, F, param);</span>
+<span class="c">%          sol = solvep(x_0, F);</span>
+<span class="c">%          [sol,infos,objectiv] = solvep(...);</span>
+<span class="c">%</span>
+<span class="c">%   Input parameters:</span>
+<span class="c">%         x_0   : Starting point of the algorithm</span>
+<span class="c">%         F     : array of function to minimize (structure)</span>
+<span class="c">%         param : Optional parameter</span>
+<span class="c">%   Output parameters:</span>
+<span class="c">%         sol   : Solution</span>
+<span class="c">%         info  : Structure summarizing informations at convergence</span>
+<span class="c">%</span>
+<span class="c">%   SOLVEP solves:</span>
+<span class="c">%</span>
+<span class="c">%      sol = argmin sum_i fi(x)     for x belong to R^N</span>
+<span class="c">%</span>
+<span class="c">%   where x is the variable.</span>
+<span class="c">%</span>
+<span class="c">%   x_0 is the starting point of the algorithm. A good starting point</span>
+<span class="c">%   could significantly reduce the computation time</span>
+<span class="c">%</span>
+<span class="c">%   F is an array of structure representing convex function to be</span>
+<span class="c">%   minimized. These functions can be minimized thanks to:</span>
+<span class="c">%   1) their gradient (only if they are differentiable) OR</span>
+<span class="c">%   2) their proximal operator.</span>
+<span class="c">%   As a result the algorithm will need at least one of the above. To</span>
+<span class="c">%   define a function f1 you usually need to either create a structure</span>
+<span class="c">%   with the fields</span>
+<span class="c">%   1) f1.eval  AND</span>
+<span class="c">%   2) f1.prox</span>
+<span class="c">%   that is needed in case of non-differentiable functions f1, OR a</span>
+<span class="c">%   structure with the fields</span>
+<span class="c">%   1) f1.eval  AND</span>
+<span class="c">%   2) f1.grad  AND</span>
+<span class="c">%   3) f1.beta</span>
+<span class="c">%   The fields f1.eval, f1.prox and f1.grad contain an inline function that</span>
+<span class="c">%   computes respectively the evaluation of the function f1 itself, its</span>
+<span class="c">%   proximal operator or its gradient. The field f1.beta usually needed for</span>
+<span class="c">%   differentiable functions is an upper bound of the Lipschitz constant of</span>
+<span class="c">%   the gradient of f1 (i.e. the squared norm of the gradient operator).</span>
+<span class="c">%</span>
+<span class="c">%   Depending on the solver, not all this operators are necessary. Also,</span>
+<span class="c">%   depending on the existence of the above field, solvep chooses a</span>
+<span class="c">%   different solver. See each solver documentation for details.</span>
+<span class="c">%</span>
+<span class="c">%   When three functions are defined, F = {f1, f2, f3}, then primal dual</span>
+<span class="c">%   algorithms are used, in that case the linear operator that brings us</span>
+<span class="c">%   from the primal to the dual space and the adjoint operator should be</span>
+<span class="c">%   defined:</span>
+<span class="c">%   1) f1.L  : linear operator, matrix or operator (default identity)</span>
+<span class="c">%   2) f1.Lt : adjoint of f1.L, matrix or operator (default identity)</span>
+<span class="c">%   3) f1.norm_L : upper bound of the norm of operator L (default: 1)</span>
+<span class="c">%   </span>
+<span class="c">%   param a Matlab structure containing the following fields:</span>
+<span class="c">%</span>
+<span class="c">%    param.gamma : is the step size. Watch out, this parameter is</span>
+<span class="c">%     bounded. It should be below 1/beta (*f2 is beta Lipchitz</span>
+<span class="c">%     continuous). By default, it is computed with the lipschitz constant</span>
+<span class="c">%     of all smooth functions.</span>
+<span class="c">%</span>
+<span class="c">%    param.tol : Tolerance to stop iterating. Please see</span>
+<span class="c">%     param.stopping_criterion. (Default 1e-4).</span>
+<span class="c">%</span>
+<span class="c">%    param.algo : solver used for the problem. Determined</span>
+<span class="c">%     automatically with the functions in f.</span>
+<span class="c">%</span>
+<span class="c">%    param.stopping_criterion : is stopping criterion to end the</span>
+<span class="c">%     algorithm. Possible values are:</span>
+<span class="c">%</span>
+<span class="c">%      &#39;rel_norm_obj&#39; : Relative norm of the objective function.</span>
+<span class="c">%      &#39;rel_norm_primal&#39; : Relative norm of the primal variables. </span>
+<span class="c">%      &#39;rel_norm_dual&#39; : Relative norm of the dual variables. </span>
+<span class="c">%      &#39;rel_norm_primal_dual&#39; : Relative norm of the primal and the dual</span>
+<span class="c">%       variables.  </span>
+<span class="c">%      &#39;obj_increase&#39; : Stops when the objective function starts</span>
+<span class="c">%       increasing or stay equal.</span>
+<span class="c">%      &#39;obj_threshold&#39; : Stops when the objective function is below a</span>
+<span class="c">%       threshold. The threshold is set in param.tol.</span>
+<span class="c">%</span>
+<span class="c">%     For the &#39;rel_norm&#39; stopping criterion, the algorithm end if </span>
+<span class="c">%</span>
+<span class="c">%          &#39;  ||  n(t) - n(t-1) ||_2  /  || n(t) ||_2 &lt; tol,</span>
+<span class="c">%      </span>
+<span class="c">%       where  n(t) is the objective function, the primal or the dual</span>
+<span class="c">%       variable at iteration t. </span>
+<span class="c">%</span>
+<span class="c">%    param.maxit : is the maximum number of iteration. By default, it is</span>
+<span class="c">%     200. </span>
+<span class="c">% </span>
+<span class="c">%    param.verbose : 0 no log, 1 print main steps, 2 print all steps.</span>
+<span class="c">%</span>
+<span class="c">%    param.debug_mode : Compute all internal convergence parameters.</span>
+<span class="c">%     Activate this option for debugging</span>
+<span class="c">%</span>
+<span class="c">%   info is a Matlab structure containing the following fields:</span>
+<span class="c">%</span>
+<span class="c">%    info.algo : Algorithm used</span>
+<span class="c">%</span>
+<span class="c">%    info.iter : Number of iteration</span>
+<span class="c">%</span>
+<span class="c">%    info.time : Time of exectution of the function in sec.</span>
+<span class="c">%</span>
+<span class="c">%    info.crit : Stopping critterion used </span>
+<span class="c">%</span>
+<span class="c">%   Additionally, depending on the stopping critterion, the structure</span>
+<span class="c">%   info also contains:</span>
+<span class="c">%</span>
+<span class="c">%    info.objective : Value of the objective function</span>
+<span class="c">%</span>
+<span class="c">%    info.rel_norm_obj : Relative norm of the objective function.</span>
+<span class="c">%</span>
+<span class="c">%    info.rel_norm_primal : Relative norm of the primal variable.</span>
+<span class="c">%</span>
+<span class="c">%   If the flag param.debug_mode is activated, the previous quantity are</span>
+<span class="c">%   always computed. Moreover, for solver using dual variable, info also</span>
+<span class="c">%   contains:</span>
+<span class="c">%</span>
+<span class="c">%    info.rel_norm_dual : Relative norm of the dual variable.</span>
+<span class="c">%</span>
+<span class="c">%    info.dual_var : Final dual variables.</span>
+<span class="c">%</span>
+<span class="c">%</span>
+<span class="c">%   Url: https://lts2.epfl.ch/unlocbox/doc/solver/solvep.php</span>
+
+<span class="c">% Copyright (C) 2012-2016 Nathanael Perraudin.</span>
+<span class="c">% This file is part of UNLOCBOX version 1.7.3</span>
+<span class="c">%</span>
+<span class="c">% This program is free software: you can redistribute it and/or modify</span>
+<span class="c">% it under the terms of the GNU General Public License as published by</span>
+<span class="c">% the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">% (at your option) any later version.</span>
+<span class="c">%</span>
+<span class="c">% This program is distributed in the hope that it will be useful,</span>
+<span class="c">% but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">% GNU General Public License for more details.</span>
+<span class="c">%</span>
+<span class="c">% You should have received a copy of the GNU General Public License</span>
+<span class="c">% along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+
+<span class="c">% Author: Nathanael Perraudin</span>
+<span class="c">% Date: 16 oct 2015</span>
+<span class="c">% Testing: test_solver</span>
+
+<span class="c">% Start the time counter</span>
+<span class="n">t1</span> <span class="p">=</span> <span class="n">tic</span><span class="p">;</span>
+
+<span class="c">% Optional input arguments</span>
+<span class="k">if</span> <span class="n">nargin</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">,</span> <span class="n">param</span><span class="p">=</span><span class="n">struct</span><span class="p">;</span> <span class="k">end</span>
+
+<span class="k">if</span> <span class="n">nargin</span><span class="o">&lt;</span><span class="mi">2</span>
+    <span class="n">error</span><span class="p">(</span><span class="s">&#39;Not enough input arguments&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">if</span> <span class="n">nargout</span><span class="o">&gt;</span><span class="mi">3</span>
+    <span class="n">error</span><span class="p">(</span><span class="s">&#39;The third argument objective has been moved in info.objective&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+
+
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;tol&#39;</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">tol</span><span class="p">=</span><span class="mf">1e-4</span> <span class="p">;</span> <span class="k">end</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;maxit&#39;</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">maxit</span><span class="p">=</span><span class="mi">200</span><span class="p">;</span> <span class="k">end</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;verbose&#39;</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">verbose</span><span class="p">=</span><span class="mi">1</span> <span class="p">;</span> <span class="k">end</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;lambda&#39;</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">lambda</span><span class="p">=</span><span class="mf">0.99</span> <span class="p">;</span> <span class="k">end</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;fast_eval&#39;</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">fast_eval</span> <span class="p">=</span> <span class="mi">0</span>  <span class="p">;</span> <span class="k">end</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;debug_mode&#39;</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">debug_mode</span> <span class="p">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="k">end</span>
+
+
+
+<span class="c">% test the input for eval</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">iscell</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+    <span class="n">F</span> <span class="p">=</span> <span class="p">{</span><span class="n">F</span><span class="p">};</span>
+<span class="k">end</span>
+<span class="n">F</span> <span class="p">=</span> <span class="n">test_eval</span><span class="p">(</span><span class="n">F</span><span class="p">);</span>
+
+
+<span class="c">% test input for grad and prox</span>
+<span class="p">[</span><span class="n">Fg</span><span class="p">,</span><span class="n">Fp</span><span class="p">]</span> <span class="p">=</span> <span class="n">prepare_function</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">param</span><span class="p">);</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;gamma&#39;</span><span class="p">),</span> 
+    <span class="k">if</span> <span class="nb">numel</span><span class="p">(</span><span class="n">Fg</span><span class="p">)</span>
+        <span class="n">param</span><span class="p">.</span><span class="nb">gamma</span> <span class="p">=</span> <span class="n">compute_gamma</span><span class="p">(</span><span class="n">Fg</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">param</span><span class="p">.</span><span class="nb">gamma</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span> 
+    <span class="k">end</span>
+<span class="k">else</span>
+    <span class="k">if</span> <span class="n">param</span><span class="p">.</span><span class="n">verbose</span> <span class="o">&gt;</span><span class="p">=</span> <span class="mi">1</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;The time step is set manually to : %g\n&#39;</span><span class="p">,</span> <span class="n">param</span><span class="p">.</span><span class="nb">gamma</span><span class="p">);</span>
+    <span class="k">end</span>    
+<span class="k">end</span>
+
+<span class="c">% Select the algorithm</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;algo&#39;</span><span class="p">),</span> <span class="n">param</span><span class="p">.</span><span class="n">algo</span> <span class="p">=</span> <span class="n">select_solver</span><span class="p">(</span><span class="n">Fg</span><span class="p">,</span><span class="n">Fp</span><span class="p">)</span>  <span class="p">;</span> <span class="k">end</span>
+
+<span class="c">% Select the stopping critterion</span>
+<span class="k">if</span> <span class="o">~</span><span class="n">isfield</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="s">&#39;stopping_criterion&#39;</span><span class="p">)</span>
+    <span class="n">param</span><span class="p">.</span><span class="n">stopping_criterion</span> <span class="p">=</span> <span class="n">select_stopping_criterion</span><span class="p">(</span><span class="n">param</span><span class="p">.</span><span class="n">algo</span><span class="p">);</span>
+<span class="k">end</span><span class="p">;</span>
+
+<span class="n">algo</span> <span class="p">=</span> <span class="n">get_algo</span><span class="p">(</span><span class="n">param</span><span class="p">.</span><span class="n">algo</span><span class="p">);</span>
+
+<span class="c">% Transform all smooth functions into one function.</span>
+<span class="n">fg</span> <span class="p">=</span> <span class="n">add_smooth_functions</span><span class="p">(</span><span class="n">Fg</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="n">param</span><span class="p">.</span><span class="n">verbose</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">,</span> 
+    <span class="n">fprintf</span><span class="p">([</span><span class="s">&#39;Algorithm selected: &#39;</span><span class="p">,</span> <span class="n">algo</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="s">&#39; \n&#39;</span><span class="p">]);</span>
+<span class="k">end</span>
+
+<span class="p">[</span><span class="n">sol</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">param</span><span class="p">]</span> <span class="p">=</span> <span class="n">algo</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span> <span class="n">fg</span><span class="p">,</span> <span class="n">Fp</span><span class="p">,</span> <span class="n">param</span><span class="p">);</span>
+
+
+<span class="c">% Initialization</span>
+<span class="p">[</span><span class="n">info</span><span class="p">,</span> <span class="n">iter</span><span class="p">,</span> <span class="n">s</span><span class="p">]</span> <span class="p">=</span> <span class="n">initialize_convergence_variable</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">fg</span><span class="p">,</span> <span class="n">Fp</span><span class="p">,</span> <span class="n">param</span><span class="p">);</span>
+
+<span class="c">% Main loop</span>
+<span class="k">while</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">param</span><span class="p">.</span><span class="n">verbose</span> <span class="o">&gt;</span><span class="mi">1</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;Iter %.3i:   &#39;</span><span class="p">,</span> <span class="n">iter</span><span class="p">);</span>
+    <span class="k">end</span>
+    
+    <span class="p">[</span><span class="n">sol</span><span class="p">,</span> <span class="n">s</span><span class="p">]</span> <span class="p">=</span> <span class="n">algo</span><span class="p">.</span><span class="n">algorithm</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span> <span class="n">fg</span><span class="p">,</span> <span class="n">Fp</span><span class="p">,</span> <span class="n">sol</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">param</span><span class="p">);</span>
+    
+    <span class="p">[</span><span class="n">stop</span><span class="p">,</span> <span class="n">crit</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">iter</span><span class="p">,</span> <span class="n">info</span><span class="p">]</span> <span class="p">=</span> <span class="c">...</span>
+        <span class="n">convergence_test</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">iter</span><span class="p">,</span> <span class="n">fg</span><span class="p">,</span> <span class="n">Fp</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">param</span><span class="p">);</span>
+    <span class="p">[</span><span class="n">sol</span><span class="p">,</span> <span class="n">param</span><span class="p">]</span> <span class="p">=</span> <span class="n">post_process</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="n">iter</span><span class="p">,</span> <span class="n">info</span><span class="p">,</span> <span class="n">param</span><span class="p">);</span>
+    <span class="k">if</span> <span class="n">stop</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">end</span>
+    
+<span class="k">end</span>
+
+<span class="n">sol</span> <span class="p">=</span> <span class="n">algo</span><span class="p">.</span><span class="n">finalize</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span> <span class="n">fg</span><span class="p">,</span> <span class="n">Fp</span><span class="p">,</span> <span class="n">sol</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">param</span><span class="p">);</span>
+
+<span class="n">summary_print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">info</span><span class="p">,</span><span class="n">iter</span><span class="p">,</span><span class="n">algo</span><span class="p">,</span><span class="n">crit</span><span class="p">,</span><span class="n">param</span><span class="p">);</span>
+
+
+<span class="n">info</span><span class="p">.</span><span class="n">algo</span> <span class="p">=</span> <span class="n">algo</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
+<span class="n">info</span><span class="p">.</span><span class="n">iter</span> <span class="p">=</span> <span class="n">iter</span><span class="p">;</span>
+<span class="n">info</span><span class="p">.</span><span class="n">crit</span> <span class="p">=</span> <span class="n">crit</span><span class="p">;</span>
+<span class="n">info</span><span class="p">.</span><span class="n">time</span> <span class="p">=</span> <span class="n">toc</span><span class="p">(</span><span class="n">t1</span><span class="p">);</span>
+
+<span class="c">% Return the dual variable if availlable</span>
+<span class="k">if</span> <span class="n">isfield</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="s">&#39;dual_var&#39;</span><span class="p">)</span>
+    <span class="n">info</span><span class="p">.</span><span class="n">dual_var</span> <span class="p">=</span> <span class="n">s</span><span class="p">.</span><span class="n">dual_var</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">end</span>
+
+
+
+
+
+<span class="k">function</span><span class="w"> </span>gamma <span class="p">=</span><span class="w"> </span><span class="nf">compute_gamma</span><span class="p">(</span>Fg<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="nb">beta</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="n">ii</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">Fg</span><span class="p">)</span>
+        <span class="nb">beta</span> <span class="p">=</span> <span class="nb">beta</span> <span class="o">+</span> <span class="n">Fg</span><span class="p">{</span><span class="n">ii</span><span class="p">}.</span><span class="nb">beta</span><span class="p">;</span>
+    <span class="k">end</span>
+    <span class="k">if</span> <span class="nb">beta</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="nb">gamma</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">elseif</span> <span class="nb">beta</span> <span class="o">&gt;</span><span class="mi">0</span>
+        <span class="nb">gamma</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="nb">beta</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">error</span><span class="p">(</span><span class="s">&#39;Error in the libschitz constant!&#39;</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span>algo <span class="p">=</span><span class="w"> </span><span class="nf">get_algo</span><span class="p">(</span>name<span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span> <span class="n">isstruct</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">algo</span> <span class="p">=</span> <span class="n">name</span><span class="p">;</span>
+    <span class="k">elseif</span> <span class="n">ischar</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">algo</span> <span class="p">=</span> <span class="n">algoname</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">error</span><span class="p">(</span><span class="s">&#39;The algorithm is not a string and not a struct!&#39;</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="solvep.html">View the help</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p></p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

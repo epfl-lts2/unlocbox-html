@@ -1,0 +1,208 @@
+UnLocBoX version 1.7.3. Copyright 2012-2015 LTS2-EPFL, by Nathanael Perraudin
+The time step is set manually to : 0.1
+Algorithm selected: DOUGLAS_RACHFORD 
+Iter 001:     Prox_TV: obj = 3.631444e+03, rel_obj = 8.802566e-04, TOL_EPS, iter = 15
+  f(x^*) = 1.924997e+04, rel_eval = 1.887808e+00
+Iter 002:     Prox_TV: obj = 5.992899e+03, rel_obj = 9.863210e-04, TOL_EPS, iter = 12
+  f(x^*) = 4.077064e+04, rel_eval = 5.278474e-01
+Iter 003:     Prox_TV: obj = 5.628852e+03, rel_obj = 9.036499e-04, TOL_EPS, iter = 12
+  f(x^*) = 3.729457e+04, rel_eval = 9.320592e-02
+Iter 004:     Prox_TV: obj = 5.062992e+03, rel_obj = 6.071122e-04, TOL_EPS, iter = 13
+  f(x^*) = 3.241986e+04, rel_eval = 1.503617e-01
+Iter 005:     Prox_TV: obj = 4.483461e+03, rel_obj = 6.072110e-04, TOL_EPS, iter = 14
+  f(x^*) = 2.773042e+04, rel_eval = 1.691081e-01
+Iter 006:     Prox_TV: obj = 3.928986e+03, rel_obj = 7.031124e-04, TOL_EPS, iter = 15
+  f(x^*) = 2.347696e+04, rel_eval = 1.811762e-01
+Iter 007:     Prox_TV: obj = 3.422555e+03, rel_obj = 7.349153e-04, TOL_EPS, iter = 16
+  f(x^*) = 1.968908e+04, rel_eval = 1.923847e-01
+Iter 008:     Prox_TV: obj = 2.984953e+03, rel_obj = 8.223408e-04, TOL_EPS, iter = 17
+  f(x^*) = 1.640343e+04, rel_eval = 2.003024e-01
+Iter 009:     Prox_TV: obj = 2.622538e+03, rel_obj = 8.158446e-04, TOL_EPS, iter = 18
+  f(x^*) = 1.367660e+04, rel_eval = 1.993796e-01
+Iter 010:     Prox_TV: obj = 2.319932e+03, rel_obj = 8.516343e-04, TOL_EPS, iter = 19
+  f(x^*) = 1.147667e+04, rel_eval = 1.916873e-01
+Iter 011:     Prox_TV: obj = 2.058833e+03, rel_obj = 9.649852e-04, TOL_EPS, iter = 20
+  f(x^*) = 9.703240e+03, rel_eval = 1.827665e-01
+Iter 012:     Prox_TV: obj = 1.831431e+03, rel_obj = 8.997661e-04, TOL_EPS, iter = 21
+  f(x^*) = 8.277838e+03, rel_eval = 1.721950e-01
+Iter 013:     Prox_TV: obj = 1.636853e+03, rel_obj = 9.398538e-04, TOL_EPS, iter = 22
+  f(x^*) = 7.160538e+03, rel_eval = 1.560358e-01
+Iter 014:     Prox_TV: obj = 1.475790e+03, rel_obj = 8.257642e-04, TOL_EPS, iter = 24
+  f(x^*) = 6.310603e+03, rel_eval = 1.346836e-01
+Iter 015:     Prox_TV: obj = 1.350215e+03, rel_obj = 9.978650e-04, TOL_EPS, iter = 25
+  f(x^*) = 5.703300e+03, rel_eval = 1.064828e-01
+Iter 016:     Prox_TV: obj = 1.257321e+03, rel_obj = 9.134481e-04, TOL_EPS, iter = 26
+  f(x^*) = 5.281836e+03, rel_eval = 7.979490e-02
+Iter 017:     Prox_TV: obj = 1.189331e+03, rel_obj = 8.297335e-04, TOL_EPS, iter = 28
+  f(x^*) = 4.971520e+03, rel_eval = 6.241888e-02
+Iter 018:     Prox_TV: obj = 1.142112e+03, rel_obj = 9.004257e-04, TOL_EPS, iter = 29
+  f(x^*) = 4.757363e+03, rel_eval = 4.501570e-02
+Iter 019:     Prox_TV: obj = 1.112579e+03, rel_obj = 9.321395e-04, TOL_EPS, iter = 28
+  f(x^*) = 4.637139e+03, rel_eval = 2.592649e-02
+Iter 020:     Prox_TV: obj = 1.093534e+03, rel_obj = 9.388980e-04, TOL_EPS, iter = 28
+  f(x^*) = 4.555960e+03, rel_eval = 1.781823e-02
+Iter 021:     Prox_TV: obj = 1.082137e+03, rel_obj = 7.463552e-04, TOL_EPS, iter = 29
+  f(x^*) = 4.494979e+03, rel_eval = 1.356646e-02
+Iter 022:     Prox_TV: obj = 1.079503e+03, rel_obj = 9.206300e-04, TOL_EPS, iter = 29
+  f(x^*) = 4.460358e+03, rel_eval = 7.761949e-03
+Iter 023:     Prox_TV: obj = 1.084443e+03, rel_obj = 9.931759e-04, TOL_EPS, iter = 29
+  f(x^*) = 4.438529e+03, rel_eval = 4.917956e-03
+Iter 024:     Prox_TV: obj = 1.094637e+03, rel_obj = 6.446312e-04, TOL_EPS, iter = 30
+  f(x^*) = 4.416493e+03, rel_eval = 4.989519e-03
+Iter 025:     Prox_TV: obj = 1.109729e+03, rel_obj = 9.649566e-04, TOL_EPS, iter = 30
+  f(x^*) = 4.409892e+03, rel_eval = 1.496880e-03
+Iter 026:     Prox_TV: obj = 1.127220e+03, rel_obj = 9.420981e-04, TOL_EPS, iter = 30
+  f(x^*) = 4.412421e+03, rel_eval = 5.732800e-04
+Iter 027:     Prox_TV: obj = 1.144502e+03, rel_obj = 6.861705e-04, TOL_EPS, iter = 31
+  f(x^*) = 4.410018e+03, rel_eval = 5.449313e-04
+Iter 028:     Prox_TV: obj = 1.161276e+03, rel_obj = 6.464785e-04, TOL_EPS, iter = 32
+  f(x^*) = 4.409750e+03, rel_eval = 6.086412e-05
+Iter 029:     Prox_TV: obj = 1.184134e+03, rel_obj = 9.966047e-04, TOL_EPS, iter = 27
+  f(x^*) = 4.482164e+03, rel_eval = 1.615612e-02
+Iter 030:     Prox_TV: obj = 1.204089e+03, rel_obj = 9.612094e-04, TOL_EPS, iter = 24
+  f(x^*) = 4.554434e+03, rel_eval = 1.586794e-02
+Iter 031:     Prox_TV: obj = 1.215487e+03, rel_obj = 4.932003e-04, TOL_EPS, iter = 26
+  f(x^*) = 4.554807e+03, rel_eval = 8.187675e-05
+Iter 032:     Prox_TV: obj = 1.232379e+03, rel_obj = 8.421943e-04, TOL_EPS, iter = 23
+  f(x^*) = 4.607980e+03, rel_eval = 1.153936e-02
+Iter 033:     Prox_TV: obj = 1.242072e+03, rel_obj = 5.047184e-04, TOL_EPS, iter = 25
+  f(x^*) = 4.601191e+03, rel_eval = 1.475516e-03
+Iter 034:     Prox_TV: obj = 1.250639e+03, rel_obj = 4.994176e-04, TOL_EPS, iter = 27
+  f(x^*) = 4.573922e+03, rel_eval = 5.961749e-03
+Iter 035:     Prox_TV: obj = 1.265927e+03, rel_obj = 7.880923e-04, TOL_EPS, iter = 24
+  f(x^*) = 4.617694e+03, rel_eval = 9.479137e-03
+Iter 036:     Prox_TV: obj = 1.273837e+03, rel_obj = 7.000902e-04, TOL_EPS, iter = 26
+  f(x^*) = 4.601269e+03, rel_eval = 3.569654e-03
+Iter 037:     Prox_TV: obj = 1.286841e+03, rel_obj = 9.626001e-04, TOL_EPS, iter = 24
+  f(x^*) = 4.636028e+03, rel_eval = 7.497685e-03
+Iter 038:     Prox_TV: obj = 1.293498e+03, rel_obj = 6.477602e-04, TOL_EPS, iter = 26
+  f(x^*) = 4.617145e+03, rel_eval = 4.089842e-03
+Iter 039:     Prox_TV: obj = 1.305324e+03, rel_obj = 8.474731e-04, TOL_EPS, iter = 24
+  f(x^*) = 4.647341e+03, rel_eval = 6.497399e-03
+Iter 040:     Prox_TV: obj = 1.311181e+03, rel_obj = 6.850156e-04, TOL_EPS, iter = 26
+  f(x^*) = 4.627254e+03, rel_eval = 4.340964e-03
+Iter 041:     Prox_TV: obj = 1.322488e+03, rel_obj = 8.166706e-04, TOL_EPS, iter = 24
+  f(x^*) = 4.657508e+03, rel_eval = 6.495832e-03
+Iter 042:     Prox_TV: obj = 1.327835e+03, rel_obj = 6.919750e-04, TOL_EPS, iter = 26
+  f(x^*) = 4.638295e+03, rel_eval = 4.142408e-03
+Iter 043:     Prox_TV: obj = 1.339555e+03, rel_obj = 9.600699e-04, TOL_EPS, iter = 23
+  f(x^*) = 4.675297e+03, rel_eval = 7.914358e-03
+Iter 044:     Prox_TV: obj = 1.344789e+03, rel_obj = 5.571811e-04, TOL_EPS, iter = 25
+  f(x^*) = 4.667793e+03, rel_eval = 1.607587e-03
+Iter 045:     Prox_TV: obj = 1.354364e+03, rel_obj = 8.238051e-04, TOL_EPS, iter = 23
+  f(x^*) = 4.693985e+03, rel_eval = 5.579940e-03
+Iter 046:     Prox_TV: obj = 1.358463e+03, rel_obj = 6.037740e-04, TOL_EPS, iter = 25
+  f(x^*) = 4.679429e+03, rel_eval = 3.110484e-03
+Iter 047:     Prox_TV: obj = 1.368185e+03, rel_obj = 9.988481e-04, TOL_EPS, iter = 22
+  f(x^*) = 4.706759e+03, rel_eval = 5.806529e-03
+Iter 048:     Prox_TV: obj = 1.372405e+03, rel_obj = 5.217000e-04, TOL_EPS, iter = 24
+  f(x^*) = 4.703739e+03, rel_eval = 6.422158e-04
+Iter 049:     Prox_TV: obj = 1.381581e+03, rel_obj = 9.583789e-04, TOL_EPS, iter = 21
+  f(x^*) = 4.733571e+03, rel_eval = 6.302324e-03
+Iter 050:     Prox_TV: obj = 1.384812e+03, rel_obj = 5.948793e-04, TOL_EPS, iter = 23
+  f(x^*) = 4.729961e+03, rel_eval = 7.632295e-04
+Iter 051:     Prox_TV: obj = 1.392221e+03, rel_obj = 7.133414e-04, TOL_EPS, iter = 21
+  f(x^*) = 4.749868e+03, rel_eval = 4.191028e-03
+Iter 052:     Prox_TV: obj = 1.394745e+03, rel_obj = 5.093595e-04, TOL_EPS, iter = 23
+  f(x^*) = 4.739073e+03, rel_eval = 2.277769e-03
+Iter 053:     Prox_TV: obj = 1.401299e+03, rel_obj = 7.537573e-04, TOL_EPS, iter = 21
+  f(x^*) = 4.747690e+03, rel_eval = 1.814895e-03
+Iter 054:     Prox_TV: obj = 1.408599e+03, rel_obj = 9.711218e-04, TOL_EPS, iter = 20
+  f(x^*) = 4.776640e+03, rel_eval = 6.060700e-03
+Iter 055:     Prox_TV: obj = 1.410560e+03, rel_obj = 7.611124e-04, TOL_EPS, iter = 22
+  f(x^*) = 4.769456e+03, rel_eval = 1.506168e-03
+Iter 056:     Prox_TV: obj = 1.415963e+03, rel_obj = 7.293015e-04, TOL_EPS, iter = 20
+  f(x^*) = 4.772651e+03, rel_eval = 6.695066e-04
+Iter 057:     Prox_TV: obj = 1.418070e+03, rel_obj = 7.586614e-04, TOL_EPS, iter = 22
+  f(x^*) = 4.764776e+03, rel_eval = 1.652921e-03
+Iter 058:     Prox_TV: obj = 1.423955e+03, rel_obj = 6.927516e-04, TOL_EPS, iter = 20
+  f(x^*) = 4.770346e+03, rel_eval = 1.167637e-03
+Iter 059:     Prox_TV: obj = 1.426148e+03, rel_obj = 7.775589e-04, TOL_EPS, iter = 22
+  f(x^*) = 4.764606e+03, rel_eval = 1.204553e-03
+Iter 060:     Prox_TV: obj = 1.432066e+03, rel_obj = 6.374468e-04, TOL_EPS, iter = 20
+  f(x^*) = 4.771371e+03, rel_eval = 1.417795e-03
+Iter 061:     Prox_TV: obj = 1.437326e+03, rel_obj = 9.658273e-04, TOL_EPS, iter = 20
+  f(x^*) = 4.794507e+03, rel_eval = 4.825401e-03
+Iter 062:     Prox_TV: obj = 1.438107e+03, rel_obj = 5.432230e-04, TOL_EPS, iter = 22
+  f(x^*) = 4.775230e+03, rel_eval = 4.036800e-03
+Iter 063:     Prox_TV: obj = 1.443115e+03, rel_obj = 4.783203e-04, TOL_EPS, iter = 20
+  f(x^*) = 4.775530e+03, rel_eval = 6.275571e-05
+Iter 064:     Prox_TV: obj = 1.448150e+03, rel_obj = 8.334095e-04, TOL_EPS, iter = 20
+  f(x^*) = 4.799425e+03, rel_eval = 4.978873e-03
+Iter 065:     Prox_TV: obj = 1.451613e+03, rel_obj = 8.579588e-04, TOL_EPS, iter = 20
+  f(x^*) = 4.806358e+03, rel_eval = 1.442405e-03
+Iter 066:     Prox_TV: obj = 1.454618e+03, rel_obj = 8.327437e-04, TOL_EPS, iter = 20
+  f(x^*) = 4.809468e+03, rel_eval = 6.465134e-04
+Iter 067:     Prox_TV: obj = 1.457346e+03, rel_obj = 8.802860e-04, TOL_EPS, iter = 20
+  f(x^*) = 4.809195e+03, rel_eval = 5.668828e-05
+Iter 068:     Prox_TV: obj = 1.461406e+03, rel_obj = 9.674935e-04, TOL_EPS, iter = 19
+  f(x^*) = 4.800634e+03, rel_eval = 1.783341e-03
+Iter 069:     Prox_TV: obj = 1.465614e+03, rel_obj = 6.031208e-04, TOL_EPS, iter = 20
+  f(x^*) = 4.840712e+03, rel_eval = 8.279329e-03
+Iter 070:     Prox_TV: obj = 1.466940e+03, rel_obj = 6.638801e-04, TOL_EPS, iter = 19
+  f(x^*) = 4.812697e+03, rel_eval = 5.820961e-03
+Iter 071:     Prox_TV: obj = 1.471265e+03, rel_obj = 7.909466e-04, TOL_EPS, iter = 19
+  f(x^*) = 4.834080e+03, rel_eval = 4.423347e-03
+Iter 072:     Prox_TV: obj = 1.473941e+03, rel_obj = 7.801656e-04, TOL_EPS, iter = 19
+  f(x^*) = 4.839925e+03, rel_eval = 1.207701e-03
+Iter 073:     Prox_TV: obj = 1.476299e+03, rel_obj = 6.644996e-04, TOL_EPS, iter = 19
+  f(x^*) = 4.844854e+03, rel_eval = 1.017269e-03
+Iter 074:     Prox_TV: obj = 1.479166e+03, rel_obj = 9.668520e-04, TOL_EPS, iter = 18
+  f(x^*) = 4.827989e+03, rel_eval = 3.493117e-03
+Iter 075:     Prox_TV: obj = 1.483803e+03, rel_obj = 8.845164e-04, TOL_EPS, iter = 18
+  f(x^*) = 4.863890e+03, rel_eval = 7.381218e-03
+Iter 076:     Prox_TV: obj = 1.485753e+03, rel_obj = 6.849559e-04, TOL_EPS, iter = 18
+  f(x^*) = 4.871696e+03, rel_eval = 1.602191e-03
+Iter 077:     Prox_TV: obj = 1.487327e+03, rel_obj = 5.069537e-04, TOL_EPS, iter = 18
+  f(x^*) = 4.876499e+03, rel_eval = 9.849068e-04
+Iter 078:     Prox_TV: obj = 1.489201e+03, rel_obj = 9.781638e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.855532e+03, rel_eval = 4.318058e-03
+Iter 079:     Prox_TV: obj = 1.493350e+03, rel_obj = 7.873620e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.893568e+03, rel_eval = 7.772631e-03
+Iter 080:     Prox_TV: obj = 1.494732e+03, rel_obj = 5.289813e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.900718e+03, rel_eval = 1.458970e-03
+Iter 081:     Prox_TV: obj = 1.495806e+03, rel_obj = 3.267030e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.903862e+03, rel_eval = 6.411376e-04
+Iter 082:     Prox_TV: obj = 1.496499e+03, rel_obj = 3.479411e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.897139e+03, rel_eval = 1.372786e-03
+Iter 083:     Prox_TV: obj = 1.497745e+03, rel_obj = 3.816779e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.892940e+03, rel_eval = 8.582862e-04
+Iter 084:     Prox_TV: obj = 1.499261e+03, rel_obj = 4.047951e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.888048e+03, rel_eval = 1.000865e-03
+Iter 085:     Prox_TV: obj = 1.501208e+03, rel_obj = 3.772610e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.887063e+03, rel_eval = 2.014001e-04
+Iter 086:     Prox_TV: obj = 1.503176e+03, rel_obj = 3.747911e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.885080e+03, rel_eval = 4.059139e-04
+Iter 087:     Prox_TV: obj = 1.505288e+03, rel_obj = 3.551211e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.885062e+03, rel_eval = 3.749323e-06
+Iter 088:     Prox_TV: obj = 1.507369e+03, rel_obj = 3.415430e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.884902e+03, rel_eval = 3.266572e-05
+Iter 089:     Prox_TV: obj = 1.509467e+03, rel_obj = 3.018519e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.885669e+03, rel_eval = 1.569372e-04
+Iter 090:     Prox_TV: obj = 1.511484e+03, rel_obj = 2.816327e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.886029e+03, rel_eval = 7.366992e-05
+Iter 091:     Prox_TV: obj = 1.513468e+03, rel_obj = 2.672467e-04, TOL_EPS, iter = 17
+  f(x^*) = 4.887048e+03, rel_eval = 2.084538e-04
+Iter 092:     Prox_TV: obj = 1.515740e+03, rel_obj = 9.999684e-04, TOL_EPS, iter = 16
+  f(x^*) = 4.852680e+03, rel_eval = 7.082178e-03
+Iter 093:     Prox_TV: obj = 1.521548e+03, rel_obj = 7.931196e-04, TOL_EPS, iter = 16
+  f(x^*) = 4.904407e+03, rel_eval = 1.054706e-02
+Iter 094:     Prox_TV: obj = 1.523315e+03, rel_obj = 6.041437e-04, TOL_EPS, iter = 16
+  f(x^*) = 4.918237e+03, rel_eval = 2.811984e-03
+Iter 095:     Prox_TV: obj = 1.524233e+03, rel_obj = 3.903085e-04, TOL_EPS, iter = 16
+  f(x^*) = 4.926585e+03, rel_eval = 1.694426e-03
+Iter 096:     Prox_TV: obj = 1.524280e+03, rel_obj = 4.351769e-04, TOL_EPS, iter = 16
+  f(x^*) = 4.920880e+03, rel_eval = 1.159439e-03
+Iter 097:     Prox_TV: obj = 1.524802e+03, rel_obj = 4.656376e-04, TOL_EPS, iter = 16
+  f(x^*) = 4.917557e+03, rel_eval = 6.756350e-04
+Iter 098:     Prox_TV: obj = 1.525516e+03, rel_obj = 5.080930e-04, TOL_EPS, iter = 16
+  f(x^*) = 4.912306e+03, rel_eval = 1.068908e-03
+Iter 099:     Prox_TV: obj = 1.526691e+03, rel_obj = 4.865284e-04, TOL_EPS, iter = 16
+  f(x^*) = 4.911164e+03, rel_eval = 2.326487e-04
+Iter 100:     Prox_TV: obj = 1.527889e+03, rel_obj = 4.982696e-04, TOL_EPS, iter = 16
+  f(x^*) = 4.908505e+03, rel_eval = 5.416577e-04
+
+ DOUGLAS_RACHFORD:
+  f(x^*) = 4.908505e+03, rel_eval = 5.416577e-04
+ 100 iterations
+ Stopping criterion: MAX_IT 

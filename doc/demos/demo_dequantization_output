@@ -1,0 +1,370 @@
+[H[2J
+algorithm =
+
+DR
+
+The time step is set manually to : 0.01
+Algorithm selected: DOUGLAS_RACHFORD 
+Iter 001:     proj_box: 0.5*|| x - z ||_2^2 = 9.860761e-32 
+  f(x^*) = 1.844689e+01, rel_eval = 3.413447e-02
+Iter 002:     proj_box: 0.5*|| x - z ||_2^2 = 0.000000e+00 
+  f(x^*) = 1.783502e+01, rel_eval = 3.430767e-02
+Iter 003:     proj_box: 0.5*|| x - z ||_2^2 = 0.000000e+00 
+  f(x^*) = 1.724204e+01, rel_eval = 3.439153e-02
+Iter 004:     proj_box: 0.5*|| x - z ||_2^2 = 0.000000e+00 
+  f(x^*) = 1.669633e+01, rel_eval = 3.268413e-02
+Iter 005:     proj_box: 0.5*|| x - z ||_2^2 = 0.000000e+00 
+  f(x^*) = 1.617656e+01, rel_eval = 3.213120e-02
+Iter 006:     proj_box: 0.5*|| x - z ||_2^2 = 0.000000e+00 
+  f(x^*) = 1.570296e+01, rel_eval = 3.016003e-02
+Iter 007:     proj_box: 0.5*|| x - z ||_2^2 = 0.000000e+00 
+  f(x^*) = 1.524767e+01, rel_eval = 2.985942e-02
+Iter 008:     proj_box: 0.5*|| x - z ||_2^2 = 0.000000e+00 
+  f(x^*) = 1.483960e+01, rel_eval = 2.749861e-02
+Iter 009:     proj_box: 0.5*|| x - z ||_2^2 = 0.000000e+00 
+  f(x^*) = 1.448013e+01, rel_eval = 2.482553e-02
+Iter 010:     proj_box: 0.5*|| x - z ||_2^2 = 0.000000e+00 
+  f(x^*) = 1.414457e+01, rel_eval = 2.372320e-02
+Iter 011:     proj_box: 0.5*|| x - z ||_2^2 = 0.000000e+00 
+  f(x^*) = 1.383277e+01, rel_eval = 2.254056e-02
+Iter 012:     proj_box: 0.5*|| x - z ||_2^2 = 7.875931e-05 
+  f(x^*) = Inf, rel_eval = NaN
+Iter 013:     proj_box: 0.5*|| x - z ||_2^2 = 2.490137e-04 
+  f(x^*) = Inf, rel_eval = NaN
+Iter 014:     proj_box: 0.5*|| x - z ||_2^2 = 5.942854e-04 
+  f(x^*) = Inf, rel_eval = NaN
+Iter 015:     proj_box: 0.5*|| x - z ||_2^2 = 7.517562e-04 
+  f(x^*) = Inf, rel_eval = NaN
+Iter 016:     proj_box: 0.5*|| x - z ||_2^2 = 8.125336e-04 
+  f(x^*) = 1.285235e+01, rel_eval = Inf
+Iter 017:     proj_box: 0.5*|| x - z ||_2^2 = 1.006375e-03 
+  f(x^*) = 1.275695e+01, rel_eval = 7.478340e-03
+Iter 018:     proj_box: 0.5*|| x - z ||_2^2 = 1.268382e-03 
+  f(x^*) = 1.269717e+01, rel_eval = 4.707902e-03
+Iter 019:     proj_box: 0.5*|| x - z ||_2^2 = 1.627358e-03 
+  f(x^*) = 1.267051e+01, rel_eval = 2.104749e-03
+Iter 020:     proj_box: 0.5*|| x - z ||_2^2 = 1.620819e-03 
+  f(x^*) = 1.264525e+01, rel_eval = 1.997326e-03
+Iter 021:     proj_box: 0.5*|| x - z ||_2^2 = 1.449898e-03 
+  f(x^*) = 1.261135e+01, rel_eval = 2.688146e-03
+Iter 022:     proj_box: 0.5*|| x - z ||_2^2 = 1.423780e-03 
+  f(x^*) = 1.258104e+01, rel_eval = 2.408754e-03
+Iter 023:     proj_box: 0.5*|| x - z ||_2^2 = 1.535122e-03 
+  f(x^*) = 1.256391e+01, rel_eval = 1.363672e-03
+Iter 024:     proj_box: 0.5*|| x - z ||_2^2 = 1.637697e-03 
+  f(x^*) = 1.255429e+01, rel_eval = 7.661299e-04
+Iter 025:     proj_box: 0.5*|| x - z ||_2^2 = 1.637187e-03 
+  f(x^*) = 1.254187e+01, rel_eval = 9.902005e-04
+Iter 026:     proj_box: 0.5*|| x - z ||_2^2 = 1.600101e-03 
+  f(x^*) = Inf, rel_eval = NaN
+Iter 027:     proj_box: 0.5*|| x - z ||_2^2 = 1.518522e-03 
+  f(x^*) = 1.252284e+01, rel_eval = Inf
+Iter 028:     proj_box: 0.5*|| x - z ||_2^2 = 1.458597e-03 
+  f(x^*) = 1.251242e+01, rel_eval = 8.329859e-04
+Iter 029:     proj_box: 0.5*|| x - z ||_2^2 = 1.441018e-03 
+  f(x^*) = 1.250309e+01, rel_eval = 7.457973e-04
+Iter 030:     proj_box: 0.5*|| x - z ||_2^2 = 1.426149e-03 
+  f(x^*) = 1.249336e+01, rel_eval = 7.793487e-04
+Iter 031:     proj_box: 0.5*|| x - z ||_2^2 = 1.428140e-03 
+  f(x^*) = 1.248544e+01, rel_eval = 6.340912e-04
+Iter 032:     proj_box: 0.5*|| x - z ||_2^2 = 1.410201e-03 
+  f(x^*) = 1.247951e+01, rel_eval = 4.754228e-04
+Iter 033:     proj_box: 0.5*|| x - z ||_2^2 = 1.361827e-03 
+  f(x^*) = 1.247015e+01, rel_eval = 7.506879e-04
+Iter 034:     proj_box: 0.5*|| x - z ||_2^2 = 1.363844e-03 
+  f(x^*) = 1.246087e+01, rel_eval = 7.448260e-04
+Iter 035:     proj_box: 0.5*|| x - z ||_2^2 = 1.379654e-03 
+  f(x^*) = 1.245237e+01, rel_eval = 6.822181e-04
+Iter 036:     proj_box: 0.5*|| x - z ||_2^2 = 1.393111e-03 
+  f(x^*) = 1.244446e+01, rel_eval = 6.354129e-04
+Iter 037:     proj_box: 0.5*|| x - z ||_2^2 = 1.399625e-03 
+  f(x^*) = 1.243935e+01, rel_eval = 4.109273e-04
+Iter 038:     proj_box: 0.5*|| x - z ||_2^2 = 1.358587e-03 
+  f(x^*) = 1.243181e+01, rel_eval = 6.063463e-04
+Iter 039:     proj_box: 0.5*|| x - z ||_2^2 = 1.344549e-03 
+  f(x^*) = 1.242455e+01, rel_eval = 5.842237e-04
+Iter 040:     proj_box: 0.5*|| x - z ||_2^2 = 1.330805e-03 
+  f(x^*) = 1.241854e+01, rel_eval = 4.840792e-04
+Iter 041:     proj_box: 0.5*|| x - z ||_2^2 = 1.301414e-03 
+  f(x^*) = 1.241176e+01, rel_eval = 5.465862e-04
+Iter 042:     proj_box: 0.5*|| x - z ||_2^2 = 1.285533e-03 
+  f(x^*) = 1.240524e+01, rel_eval = 5.252860e-04
+Iter 043:     proj_box: 0.5*|| x - z ||_2^2 = 1.271390e-03 
+  f(x^*) = 1.239873e+01, rel_eval = 5.252411e-04
+Iter 044:     proj_box: 0.5*|| x - z ||_2^2 = 1.261585e-03 
+  f(x^*) = Inf, rel_eval = NaN
+Iter 045:     proj_box: 0.5*|| x - z ||_2^2 = 1.256616e-03 
+  f(x^*) = 1.238557e+01, rel_eval = Inf
+Iter 046:     proj_box: 0.5*|| x - z ||_2^2 = 1.257143e-03 
+  f(x^*) = 1.237895e+01, rel_eval = 5.345349e-04
+Iter 047:     proj_box: 0.5*|| x - z ||_2^2 = 1.263304e-03 
+  f(x^*) = 1.237239e+01, rel_eval = 5.299095e-04
+Iter 048:     proj_box: 0.5*|| x - z ||_2^2 = 1.274412e-03 
+  f(x^*) = 1.236595e+01, rel_eval = 5.210762e-04
+Iter 049:     proj_box: 0.5*|| x - z ||_2^2 = 1.288942e-03 
+  f(x^*) = 1.235972e+01, rel_eval = 5.043487e-04
+Iter 050:     proj_box: 0.5*|| x - z ||_2^2 = 1.302995e-03 
+  f(x^*) = 1.235371e+01, rel_eval = 4.858640e-04
+Iter 051:     proj_box: 0.5*|| x - z ||_2^2 = 1.312589e-03 
+  f(x^*) = 1.234781e+01, rel_eval = 4.780453e-04
+Iter 052:     proj_box: 0.5*|| x - z ||_2^2 = 1.320956e-03 
+  f(x^*) = 1.234234e+01, rel_eval = 4.432301e-04
+Iter 053:     proj_box: 0.5*|| x - z ||_2^2 = 1.331584e-03 
+  f(x^*) = 1.233727e+01, rel_eval = 4.111131e-04
+Iter 054:     proj_box: 0.5*|| x - z ||_2^2 = 1.345612e-03 
+  f(x^*) = 1.233248e+01, rel_eval = 3.883667e-04
+Iter 055:     proj_box: 0.5*|| x - z ||_2^2 = 1.359572e-03 
+  f(x^*) = 1.232790e+01, rel_eval = 3.713914e-04
+Iter 056:     proj_box: 0.5*|| x - z ||_2^2 = 1.368856e-03 
+  f(x^*) = 1.232349e+01, rel_eval = 3.579578e-04
+Iter 057:     proj_box: 0.5*|| x - z ||_2^2 = 1.370948e-03 
+  f(x^*) = 1.231925e+01, rel_eval = 3.439124e-04
+Iter 058:     proj_box: 0.5*|| x - z ||_2^2 = 1.364606e-03 
+  f(x^*) = 1.231519e+01, rel_eval = 3.298557e-04
+Iter 059:     proj_box: 0.5*|| x - z ||_2^2 = 1.348945e-03 
+  f(x^*) = 1.231081e+01, rel_eval = 3.557688e-04
+Iter 060:     proj_box: 0.5*|| x - z ||_2^2 = 1.332938e-03 
+  f(x^*) = 1.230623e+01, rel_eval = 3.722917e-04
+Iter 061:     proj_box: 0.5*|| x - z ||_2^2 = 1.319972e-03 
+  f(x^*) = 1.230168e+01, rel_eval = 3.697541e-04
+Iter 062:     proj_box: 0.5*|| x - z ||_2^2 = 1.310304e-03 
+  f(x^*) = 1.229821e+01, rel_eval = 2.822879e-04
+Iter 063:     proj_box: 0.5*|| x - z ||_2^2 = 1.288311e-03 
+  f(x^*) = 1.229559e+01, rel_eval = 2.126884e-04
+Iter 064:     proj_box: 0.5*|| x - z ||_2^2 = 1.252815e-03 
+  f(x^*) = 1.229152e+01, rel_eval = 3.318258e-04
+Iter 065:     proj_box: 0.5*|| x - z ||_2^2 = 1.239504e-03 
+  f(x^*) = 1.228670e+01, rel_eval = 3.917475e-04
+Iter 066:     proj_box: 0.5*|| x - z ||_2^2 = 1.247613e-03 
+  f(x^*) = 1.228286e+01, rel_eval = 3.131613e-04
+Iter 067:     proj_box: 0.5*|| x - z ||_2^2 = 1.254397e-03 
+  f(x^*) = 1.228002e+01, rel_eval = 2.310122e-04
+Iter 068:     proj_box: 0.5*|| x - z ||_2^2 = 1.254272e-03 
+  f(x^*) = 1.227772e+01, rel_eval = 1.868335e-04
+Iter 069:     proj_box: 0.5*|| x - z ||_2^2 = 1.249960e-03 
+  f(x^*) = 1.227513e+01, rel_eval = 2.116621e-04
+Iter 070:     proj_box: 0.5*|| x - z ||_2^2 = 1.254803e-03 
+  f(x^*) = 1.227215e+01, rel_eval = 2.421498e-04
+Iter 071:     proj_box: 0.5*|| x - z ||_2^2 = 1.273923e-03 
+  f(x^*) = 1.226909e+01, rel_eval = 2.495688e-04
+Iter 072:     proj_box: 0.5*|| x - z ||_2^2 = 1.305606e-03 
+  f(x^*) = 1.226619e+01, rel_eval = 2.369035e-04
+Iter 073:     proj_box: 0.5*|| x - z ||_2^2 = 1.345771e-03 
+  f(x^*) = 1.226425e+01, rel_eval = 1.579595e-04
+Iter 074:     proj_box: 0.5*|| x - z ||_2^2 = 1.373826e-03 
+  f(x^*) = 1.226261e+01, rel_eval = 1.333571e-04
+Iter 075:     proj_box: 0.5*|| x - z ||_2^2 = 1.390969e-03 
+  f(x^*) = 1.226087e+01, rel_eval = 1.424567e-04
+Iter 076:     proj_box: 0.5*|| x - z ||_2^2 = 1.401899e-03 
+  f(x^*) = 1.225901e+01, rel_eval = 1.511767e-04
+Iter 077:     proj_box: 0.5*|| x - z ||_2^2 = 1.408070e-03 
+  f(x^*) = 1.225714e+01, rel_eval = 1.532346e-04
+Iter 078:     proj_box: 0.5*|| x - z ||_2^2 = 1.409627e-03 
+  f(x^*) = 1.225542e+01, rel_eval = 1.399479e-04
+Iter 079:     proj_box: 0.5*|| x - z ||_2^2 = 1.403835e-03 
+  f(x^*) = 1.225396e+01, rel_eval = 1.190246e-04
+Iter 080:     proj_box: 0.5*|| x - z ||_2^2 = 1.388109e-03 
+  f(x^*) = 1.225187e+01, rel_eval = 1.709058e-04
+Iter 081:     proj_box: 0.5*|| x - z ||_2^2 = 1.377289e-03 
+  f(x^*) = 1.224954e+01, rel_eval = 1.901964e-04
+Iter 082:     proj_box: 0.5*|| x - z ||_2^2 = 1.369099e-03 
+  f(x^*) = 1.224717e+01, rel_eval = 1.932521e-04
+Iter 083:     proj_box: 0.5*|| x - z ||_2^2 = 1.361379e-03 
+  f(x^*) = 1.224570e+01, rel_eval = 1.204849e-04
+Iter 084:     proj_box: 0.5*|| x - z ||_2^2 = 1.337636e-03 
+  f(x^*) = 1.224342e+01, rel_eval = 1.856025e-04
+Iter 085:     proj_box: 0.5*|| x - z ||_2^2 = 1.322914e-03 
+  f(x^*) = 1.224100e+01, rel_eval = 1.977559e-04
+Iter 086:     proj_box: 0.5*|| x - z ||_2^2 = 1.316574e-03 
+  f(x^*) = 1.223882e+01, rel_eval = 1.784174e-04
+Iter 087:     proj_box: 0.5*|| x - z ||_2^2 = 1.315364e-03 
+  f(x^*) = 1.223701e+01, rel_eval = 1.481942e-04
+Iter 088:     proj_box: 0.5*|| x - z ||_2^2 = 1.315482e-03 
+  f(x^*) = 1.223587e+01, rel_eval = 9.279901e-05
+Iter 089:     proj_box: 0.5*|| x - z ||_2^2 = 1.307913e-03 
+  f(x^*) = 1.223420e+01, rel_eval = 1.364213e-04
+Iter 090:     proj_box: 0.5*|| x - z ||_2^2 = 1.310023e-03 
+  f(x^*) = 1.223255e+01, rel_eval = 1.353442e-04
+Iter 091:     proj_box: 0.5*|| x - z ||_2^2 = 1.316446e-03 
+  f(x^*) = 1.223113e+01, rel_eval = 1.159788e-04
+Iter 092:     proj_box: 0.5*|| x - z ||_2^2 = 1.322580e-03 
+  f(x^*) = 1.222989e+01, rel_eval = 1.012163e-04
+Iter 093:     proj_box: 0.5*|| x - z ||_2^2 = 1.327288e-03 
+  f(x^*) = 1.222870e+01, rel_eval = 9.766865e-05
+Iter 094:     proj_box: 0.5*|| x - z ||_2^2 = 1.332034e-03 
+  f(x^*) = 1.222759e+01, rel_eval = 9.037750e-05
+Iter 095:     proj_box: 0.5*|| x - z ||_2^2 = 1.336330e-03 
+  f(x^*) = 1.222663e+01, rel_eval = 7.874195e-05
+Iter 096:     proj_box: 0.5*|| x - z ||_2^2 = 1.338887e-03 
+  f(x^*) = 1.222563e+01, rel_eval = 8.171866e-05
+Iter 097:     proj_box: 0.5*|| x - z ||_2^2 = 1.342181e-03 
+  f(x^*) = 1.222457e+01, rel_eval = 8.675318e-05
+Iter 098:     proj_box: 0.5*|| x - z ||_2^2 = 1.346987e-03 
+  f(x^*) = 1.222348e+01, rel_eval = 8.899799e-05
+Iter 099:     proj_box: 0.5*|| x - z ||_2^2 = 1.352781e-03 
+  f(x^*) = 1.222239e+01, rel_eval = 8.930041e-05
+Iter 100:     proj_box: 0.5*|| x - z ||_2^2 = 1.358702e-03 
+  f(x^*) = 1.222142e+01, rel_eval = 7.896371e-05
+Iter 101:     proj_box: 0.5*|| x - z ||_2^2 = 1.361414e-03 
+  f(x^*) = 1.222053e+01, rel_eval = 7.306819e-05
+Iter 102:     proj_box: 0.5*|| x - z ||_2^2 = 1.359984e-03 
+  f(x^*) = 1.221990e+01, rel_eval = 5.188089e-05
+Iter 103:     proj_box: 0.5*|| x - z ||_2^2 = 1.350727e-03 
+  f(x^*) = 1.221896e+01, rel_eval = 7.664021e-05
+Iter 104:     proj_box: 0.5*|| x - z ||_2^2 = 1.343242e-03 
+  f(x^*) = Inf, rel_eval = NaN
+Iter 105:     proj_box: 0.5*|| x - z ||_2^2 = 1.348799e-03 
+  f(x^*) = 1.221576e+01, rel_eval = Inf
+Iter 106:     proj_box: 0.5*|| x - z ||_2^2 = 1.358763e-03 
+  f(x^*) = 1.221462e+01, rel_eval = 9.296331e-05
+Iter 107:     proj_box: 0.5*|| x - z ||_2^2 = 1.365861e-03 
+  f(x^*) = 1.221402e+01, rel_eval = 4.956686e-05
+Iter 108:     proj_box: 0.5*|| x - z ||_2^2 = 1.363744e-03 
+  f(x^*) = 1.221444e+01, rel_eval = 3.446910e-05
+Iter 109:     proj_box: 0.5*|| x - z ||_2^2 = 1.339662e-03 
+  f(x^*) = 1.221357e+01, rel_eval = 7.113867e-05
+Iter 110:     proj_box: 0.5*|| x - z ||_2^2 = 1.328746e-03 
+  f(x^*) = 1.221221e+01, rel_eval = 1.115483e-04
+Iter 111:     proj_box: 0.5*|| x - z ||_2^2 = 1.327638e-03 
+  f(x^*) = 1.221089e+01, rel_eval = 1.077363e-04
+Iter 112:     proj_box: 0.5*|| x - z ||_2^2 = 1.330130e-03 
+  f(x^*) = 1.220976e+01, rel_eval = 9.288550e-05
+Iter 113:     proj_box: 0.5*|| x - z ||_2^2 = 1.332813e-03 
+  f(x^*) = 1.220910e+01, rel_eval = 5.385347e-05
+Iter 114:     proj_box: 0.5*|| x - z ||_2^2 = 1.328313e-03 
+  f(x^*) = 1.220815e+01, rel_eval = 7.801720e-05
+Iter 115:     proj_box: 0.5*|| x - z ||_2^2 = 1.327475e-03 
+  f(x^*) = 1.220696e+01, rel_eval = 9.760329e-05
+Iter 116:     proj_box: 0.5*|| x - z ||_2^2 = 1.332228e-03 
+  f(x^*) = 1.220584e+01, rel_eval = 9.147890e-05
+Iter 117:     proj_box: 0.5*|| x - z ||_2^2 = 1.338765e-03 
+  f(x^*) = 1.220491e+01, rel_eval = 7.590161e-05
+Iter 118:     proj_box: 0.5*|| x - z ||_2^2 = 1.344018e-03 
+  f(x^*) = 1.220413e+01, rel_eval = 6.415791e-05
+Iter 119:     proj_box: 0.5*|| x - z ||_2^2 = 1.346931e-03 
+  f(x^*) = Inf, rel_eval = NaN
+Iter 120:     proj_box: 0.5*|| x - z ||_2^2 = 1.347904e-03 
+  f(x^*) = 1.220263e+01, rel_eval = Inf
+Iter 121:     proj_box: 0.5*|| x - z ||_2^2 = 1.347840e-03 
+  f(x^*) = 1.220201e+01, rel_eval = 5.151348e-05
+Iter 122:     proj_box: 0.5*|| x - z ||_2^2 = 1.345726e-03 
+  f(x^*) = 1.220171e+01, rel_eval = 2.392960e-05
+Iter 123:     proj_box: 0.5*|| x - z ||_2^2 = 1.339782e-03 
+  f(x^*) = 1.220158e+01, rel_eval = 1.082962e-05
+Iter 124:     proj_box: 0.5*|| x - z ||_2^2 = 1.332842e-03 
+  f(x^*) = 1.220140e+01, rel_eval = 1.490682e-05
+Iter 125:     proj_box: 0.5*|| x - z ||_2^2 = 1.328671e-03 
+  f(x^*) = 1.220118e+01, rel_eval = 1.778900e-05
+Iter 126:     proj_box: 0.5*|| x - z ||_2^2 = 1.327319e-03 
+  f(x^*) = 1.220116e+01, rel_eval = 1.412055e-06
+Iter 127:     proj_box: 0.5*|| x - z ||_2^2 = 1.322892e-03 
+  f(x^*) = 1.220092e+01, rel_eval = 2.044634e-05
+Iter 128:     proj_box: 0.5*|| x - z ||_2^2 = 1.320324e-03 
+  f(x^*) = 1.220045e+01, rel_eval = 3.815760e-05
+Iter 129:     proj_box: 0.5*|| x - z ||_2^2 = 1.320671e-03 
+  f(x^*) = 1.219996e+01, rel_eval = 4.041062e-05
+Iter 130:     proj_box: 0.5*|| x - z ||_2^2 = 1.322336e-03 
+  f(x^*) = 1.219957e+01, rel_eval = 3.174553e-05
+Iter 131:     proj_box: 0.5*|| x - z ||_2^2 = 1.323587e-03 
+  f(x^*) = 1.219931e+01, rel_eval = 2.153411e-05
+Iter 132:     proj_box: 0.5*|| x - z ||_2^2 = 1.323770e-03 
+  f(x^*) = 1.219912e+01, rel_eval = 1.546555e-05
+Iter 133:     proj_box: 0.5*|| x - z ||_2^2 = 1.323144e-03 
+  f(x^*) = 1.219894e+01, rel_eval = 1.438995e-05
+Iter 134:     proj_box: 0.5*|| x - z ||_2^2 = 1.322232e-03 
+  f(x^*) = 1.219874e+01, rel_eval = 1.659241e-05
+Iter 135:     proj_box: 0.5*|| x - z ||_2^2 = 1.321399e-03 
+  f(x^*) = Inf, rel_eval = NaN
+Iter 136:     proj_box: 0.5*|| x - z ||_2^2 = 1.320795e-03 
+  f(x^*) = Inf, rel_eval = NaN
+Iter 137:     proj_box: 0.5*|| x - z ||_2^2 = 1.320481e-03 
+  f(x^*) = Inf, rel_eval = NaN
+Iter 138:     proj_box: 0.5*|| x - z ||_2^2 = 1.320533e-03 
+  f(x^*) = Inf, rel_eval = NaN
+Iter 139:     proj_box: 0.5*|| x - z ||_2^2 = 1.321037e-03 
+  f(x^*) = 1.219728e+01, rel_eval = Inf
+Iter 140:     proj_box: 0.5*|| x - z ||_2^2 = 1.322020e-03 
+  f(x^*) = 1.219698e+01, rel_eval = 2.433844e-05
+Iter 141:     proj_box: 0.5*|| x - z ||_2^2 = 1.323394e-03 
+  f(x^*) = 1.219670e+01, rel_eval = 2.272148e-05
+Iter 142:     proj_box: 0.5*|| x - z ||_2^2 = 1.324964e-03 
+  f(x^*) = 1.219643e+01, rel_eval = 2.210894e-05
+Iter 143:     proj_box: 0.5*|| x - z ||_2^2 = 1.326744e-03 
+  f(x^*) = 1.219617e+01, rel_eval = 2.137005e-05
+Iter 144:     proj_box: 0.5*|| x - z ||_2^2 = 1.328549e-03 
+  f(x^*) = 1.219594e+01, rel_eval = 1.942456e-05
+Iter 145:     proj_box: 0.5*|| x - z ||_2^2 = 1.329933e-03 
+  f(x^*) = 1.219572e+01, rel_eval = 1.755690e-05
+Iter 146:     proj_box: 0.5*|| x - z ||_2^2 = 1.330684e-03 
+  f(x^*) = 1.219552e+01, rel_eval = 1.681154e-05
+Iter 147:     proj_box: 0.5*|| x - z ||_2^2 = 1.330931e-03 
+  f(x^*) = 1.219531e+01, rel_eval = 1.710635e-05
+Iter 148:     proj_box: 0.5*|| x - z ||_2^2 = 1.330954e-03 
+  f(x^*) = 1.219512e+01, rel_eval = 1.517435e-05
+Iter 149:     proj_box: 0.5*|| x - z ||_2^2 = 1.330384e-03 
+  f(x^*) = 1.219511e+01, rel_eval = 1.262680e-06
+Iter 150:     proj_box: 0.5*|| x - z ||_2^2 = 1.326309e-03 
+  f(x^*) = 1.219498e+01, rel_eval = 1.094668e-05
+Iter 151:     proj_box: 0.5*|| x - z ||_2^2 = 1.322983e-03 
+  f(x^*) = 1.219480e+01, rel_eval = 1.399674e-05
+Iter 152:     proj_box: 0.5*|| x - z ||_2^2 = 1.320195e-03 
+  f(x^*) = 1.219464e+01, rel_eval = 1.346026e-05
+Iter 153:     proj_box: 0.5*|| x - z ||_2^2 = 1.317680e-03 
+  f(x^*) = 1.219449e+01, rel_eval = 1.271922e-05
+Iter 154:     proj_box: 0.5*|| x - z ||_2^2 = 1.315548e-03 
+  f(x^*) = 1.219433e+01, rel_eval = 1.306059e-05
+Iter 155:     proj_box: 0.5*|| x - z ||_2^2 = 1.314171e-03 
+  f(x^*) = 1.219415e+01, rel_eval = 1.415078e-05
+Iter 156:     proj_box: 0.5*|| x - z ||_2^2 = 1.313933e-03 
+  f(x^*) = 1.219397e+01, rel_eval = 1.525090e-05
+Iter 157:     proj_box: 0.5*|| x - z ||_2^2 = 1.315082e-03 
+  f(x^*) = 1.219377e+01, rel_eval = 1.591781e-05
+Iter 158:     proj_box: 0.5*|| x - z ||_2^2 = 1.317722e-03 
+  f(x^*) = 1.219399e+01, rel_eval = 1.756559e-05
+Iter 159:     proj_box: 0.5*|| x - z ||_2^2 = 1.314198e-03 
+  f(x^*) = 1.219412e+01, rel_eval = 1.091915e-05
+Iter 160:     proj_box: 0.5*|| x - z ||_2^2 = 1.310500e-03 
+  f(x^*) = 1.219401e+01, rel_eval = 9.411190e-06
+Iter 161:     proj_box: 0.5*|| x - z ||_2^2 = 1.310758e-03 
+  f(x^*) = 1.219387e+01, rel_eval = 1.144425e-05
+Iter 162:     proj_box: 0.5*|| x - z ||_2^2 = 1.313007e-03 
+  f(x^*) = 1.219379e+01, rel_eval = 6.466992e-06
+Iter 163:     proj_box: 0.5*|| x - z ||_2^2 = 1.315779e-03 
+  f(x^*) = 1.219375e+01, rel_eval = 2.694715e-06
+Iter 164:     proj_box: 0.5*|| x - z ||_2^2 = 1.318740e-03 
+  f(x^*) = 1.219373e+01, rel_eval = 2.060960e-06
+Iter 165:     proj_box: 0.5*|| x - z ||_2^2 = 1.322137e-03 
+  f(x^*) = 1.219369e+01, rel_eval = 2.998437e-06
+Iter 166:     proj_box: 0.5*|| x - z ||_2^2 = 1.326161e-03 
+  f(x^*) = 1.219368e+01, rel_eval = 1.098449e-06
+Iter 167:     proj_box: 0.5*|| x - z ||_2^2 = 1.330059e-03 
+  f(x^*) = 1.219366e+01, rel_eval = 1.216519e-06
+Iter 168:     proj_box: 0.5*|| x - z ||_2^2 = 1.333876e-03 
+  f(x^*) = 1.219363e+01, rel_eval = 2.859319e-06
+Iter 169:     proj_box: 0.5*|| x - z ||_2^2 = 1.337775e-03 
+  f(x^*) = 1.219358e+01, rel_eval = 3.967198e-06
+Iter 170:     proj_box: 0.5*|| x - z ||_2^2 = 1.341604e-03 
+  f(x^*) = 1.219353e+01, rel_eval = 4.505336e-06
+Iter 171:     proj_box: 0.5*|| x - z ||_2^2 = 1.345150e-03 
+  f(x^*) = 1.219347e+01, rel_eval = 4.999421e-06
+Iter 172:     proj_box: 0.5*|| x - z ||_2^2 = 1.348274e-03 
+  f(x^*) = 1.219345e+01, rel_eval = 9.322235e-07
+
+ DOUGLAS_RACHFORD:
+  f(x^*) = 1.219345e+01, rel_eval = 9.322235e-07
+ 172 iterations
+ Stopping criterion: REL_NORM_OBJ 
+
+
+info = 
+
+  struct with fields:
+
+    objective: [301×1 double]
+     rel_eval: [300×1 double]
+         algo: 'DOUGLAS_RACHFORD'
+         iter: 172
+         crit: 'REL_NORM_OBJ'
+         time: 1.0350
+
+  proj_box: 0.5*|| x - z ||_2^2 = 6.108483e-08 

@@ -1,0 +1,5 @@
+UnLocBoX version 1.7.3. Copyright 2012-2015 LTS2-EPFL, by Nathanael Perraudin
+The time step is set manually to : 0.1
+DOUGLAS_RACHFORD  f(x^*) = 1.020771e+02, rel_eval = 8.919781e-05, it = 41, REL_NORM_OBJ
+The time step is set manually to : 0.1
+DOUGLAS_RACHFORD  f(x^*) = 4.317867e+02, rel_eval = 3.538401e-03, it = 300, MAX_IT

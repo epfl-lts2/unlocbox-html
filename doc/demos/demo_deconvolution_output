@@ -1,0 +1,907 @@
+UnLocBoX version 1.7.3. Copyright 2012-2015 LTS2-EPFL, by Nathanael Perraudin
+Algorithm selected: DOUGLAS_RACHFORD 
+Iter 001:     prox_L1: ||A x-y||_1 = 4.311779e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.255720e+00, MAX_IT, iter = 10
+  f(x^*) = 7.433860e-01, rel_eval = 6.863604e+00
+Iter 002:     prox_L1: ||A x-y||_1 = 7.331399e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.930096e-01, MAX_IT, iter = 10
+  f(x^*) = 6.980875e-01, rel_eval = 6.488932e-02
+Iter 003:     prox_L1: ||A x-y||_1 = 6.056326e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.300987e-01, MAX_IT, iter = 10
+  f(x^*) = 6.786341e-01, rel_eval = 2.866552e-02
+Iter 004:     prox_L1: ||A x-y||_1 = 6.015947e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 6.308727e-01, MAX_IT, iter = 10
+  f(x^*) = 6.652840e-01, rel_eval = 2.006685e-02
+Iter 005:     prox_L1: ||A x-y||_1 = 6.013918e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 5.619032e-01, MAX_IT, iter = 10
+  f(x^*) = 6.554199e-01, rel_eval = 1.505007e-02
+Iter 006:     prox_L1: ||A x-y||_1 = 6.021777e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 5.101188e-01, MAX_IT, iter = 10
+  f(x^*) = 6.479239e-01, rel_eval = 1.156919e-02
+Iter 007:     prox_L1: ||A x-y||_1 = 6.029776e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 4.692601e-01, MAX_IT, iter = 10
+  f(x^*) = 6.420142e-01, rel_eval = 9.204983e-03
+Iter 008:     prox_L1: ||A x-y||_1 = 6.036527e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 4.359066e-01, MAX_IT, iter = 10
+  f(x^*) = 6.372856e-01, rel_eval = 7.419846e-03
+Iter 009:     prox_L1: ||A x-y||_1 = 6.041544e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 4.080014e-01, MAX_IT, iter = 10
+  f(x^*) = 6.334075e-01, rel_eval = 6.122626e-03
+Iter 010:     prox_L1: ||A x-y||_1 = 6.044925e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 3.842212e-01, MAX_IT, iter = 10
+  f(x^*) = 6.301671e-01, rel_eval = 5.142072e-03
+Iter 011:     prox_L1: ||A x-y||_1 = 6.046862e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 3.636603e-01, MAX_IT, iter = 10
+  f(x^*) = 6.274179e-01, rel_eval = 4.381840e-03
+Iter 012:     prox_L1: ||A x-y||_1 = 6.047527e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 3.456719e-01, MAX_IT, iter = 10
+  f(x^*) = 6.250376e-01, rel_eval = 3.808255e-03
+Iter 013:     prox_L1: ||A x-y||_1 = 6.047072e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 3.297850e-01, MAX_IT, iter = 10
+  f(x^*) = 6.229426e-01, rel_eval = 3.363059e-03
+Iter 014:     prox_L1: ||A x-y||_1 = 6.045676e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 3.156396e-01, MAX_IT, iter = 10
+  f(x^*) = 6.210734e-01, rel_eval = 3.009674e-03
+Iter 015:     prox_L1: ||A x-y||_1 = 6.043509e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 3.029554e-01, MAX_IT, iter = 10
+  f(x^*) = 6.193896e-01, rel_eval = 2.718411e-03
+Iter 016:     prox_L1: ||A x-y||_1 = 6.040465e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.915102e-01, MAX_IT, iter = 10
+  f(x^*) = 6.178314e-01, rel_eval = 2.522070e-03
+Iter 017:     prox_L1: ||A x-y||_1 = 6.036776e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.811269e-01, MAX_IT, iter = 10
+  f(x^*) = 6.163859e-01, rel_eval = 2.345172e-03
+Iter 018:     prox_L1: ||A x-y||_1 = 6.032621e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.716741e-01, MAX_IT, iter = 10
+  f(x^*) = 6.150392e-01, rel_eval = 2.189591e-03
+Iter 019:     prox_L1: ||A x-y||_1 = 6.028114e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.630271e-01, MAX_IT, iter = 10
+  f(x^*) = 6.137806e-01, rel_eval = 2.050574e-03
+Iter 020:     prox_L1: ||A x-y||_1 = 6.023322e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.550859e-01, MAX_IT, iter = 10
+  f(x^*) = 6.125956e-01, rel_eval = 1.934337e-03
+Iter 021:     prox_L1: ||A x-y||_1 = 6.018154e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.477623e-01, MAX_IT, iter = 10
+  f(x^*) = 6.114595e-01, rel_eval = 1.858079e-03
+Iter 022:     prox_L1: ||A x-y||_1 = 6.012573e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.409835e-01, MAX_IT, iter = 10
+  f(x^*) = 6.103544e-01, rel_eval = 1.810600e-03
+Iter 023:     prox_L1: ||A x-y||_1 = 6.006575e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.346885e-01, MAX_IT, iter = 10
+  f(x^*) = 6.092675e-01, rel_eval = 1.783817e-03
+Iter 024:     prox_L1: ||A x-y||_1 = 6.000284e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.288290e-01, MAX_IT, iter = 10
+  f(x^*) = 6.082024e-01, rel_eval = 1.751276e-03
+Iter 025:     prox_L1: ||A x-y||_1 = 5.993728e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.233603e-01, MAX_IT, iter = 10
+  f(x^*) = 6.071532e-01, rel_eval = 1.728060e-03
+Iter 026:     prox_L1: ||A x-y||_1 = 5.987011e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.182477e-01, MAX_IT, iter = 10
+  f(x^*) = 6.061252e-01, rel_eval = 1.695973e-03
+Iter 027:     prox_L1: ||A x-y||_1 = 5.980124e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.134537e-01, MAX_IT, iter = 10
+  f(x^*) = 6.051119e-01, rel_eval = 1.674625e-03
+Iter 028:     prox_L1: ||A x-y||_1 = 5.973094e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.089500e-01, MAX_IT, iter = 10
+  f(x^*) = 6.041118e-01, rel_eval = 1.655460e-03
+Iter 029:     prox_L1: ||A x-y||_1 = 5.965967e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.047100e-01, MAX_IT, iter = 10
+  f(x^*) = 6.031262e-01, rel_eval = 1.634219e-03
+Iter 030:     prox_L1: ||A x-y||_1 = 5.958757e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 2.007119e-01, MAX_IT, iter = 10
+  f(x^*) = 6.021522e-01, rel_eval = 1.617481e-03
+Iter 031:     prox_L1: ||A x-y||_1 = 5.951466e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.969358e-01, MAX_IT, iter = 10
+  f(x^*) = 6.011904e-01, rel_eval = 1.599854e-03
+Iter 032:     prox_L1: ||A x-y||_1 = 5.944114e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.933609e-01, MAX_IT, iter = 10
+  f(x^*) = 6.002378e-01, rel_eval = 1.586994e-03
+Iter 033:     prox_L1: ||A x-y||_1 = 5.936672e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.899701e-01, MAX_IT, iter = 10
+  f(x^*) = 5.992909e-01, rel_eval = 1.580100e-03
+Iter 034:     prox_L1: ||A x-y||_1 = 5.929187e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.867513e-01, MAX_IT, iter = 10
+  f(x^*) = 5.983526e-01, rel_eval = 1.568146e-03
+Iter 035:     prox_L1: ||A x-y||_1 = 5.921690e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.836922e-01, MAX_IT, iter = 10
+  f(x^*) = 5.974254e-01, rel_eval = 1.551872e-03
+Iter 036:     prox_L1: ||A x-y||_1 = 5.914175e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.807821e-01, MAX_IT, iter = 10
+  f(x^*) = 5.965077e-01, rel_eval = 1.538614e-03
+Iter 037:     prox_L1: ||A x-y||_1 = 5.906641e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.780076e-01, MAX_IT, iter = 10
+  f(x^*) = 5.955972e-01, rel_eval = 1.528652e-03
+Iter 038:     prox_L1: ||A x-y||_1 = 5.899113e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.753606e-01, MAX_IT, iter = 10
+  f(x^*) = 5.946966e-01, rel_eval = 1.514366e-03
+Iter 039:     prox_L1: ||A x-y||_1 = 5.891606e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.728315e-01, MAX_IT, iter = 10
+  f(x^*) = 5.938062e-01, rel_eval = 1.499424e-03
+Iter 040:     prox_L1: ||A x-y||_1 = 5.884123e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.704143e-01, MAX_IT, iter = 10
+  f(x^*) = 5.929257e-01, rel_eval = 1.485071e-03
+Iter 041:     prox_L1: ||A x-y||_1 = 5.876640e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.680982e-01, MAX_IT, iter = 10
+  f(x^*) = 5.920522e-01, rel_eval = 1.475295e-03
+Iter 042:     prox_L1: ||A x-y||_1 = 5.869136e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.658785e-01, MAX_IT, iter = 10
+  f(x^*) = 5.911840e-01, rel_eval = 1.468732e-03
+Iter 043:     prox_L1: ||A x-y||_1 = 5.861654e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.637485e-01, MAX_IT, iter = 10
+  f(x^*) = 5.903238e-01, rel_eval = 1.457100e-03
+Iter 044:     prox_L1: ||A x-y||_1 = 5.854195e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.617014e-01, MAX_IT, iter = 10
+  f(x^*) = 5.894720e-01, rel_eval = 1.445057e-03
+Iter 045:     prox_L1: ||A x-y||_1 = 5.846755e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.597329e-01, MAX_IT, iter = 10
+  f(x^*) = 5.886276e-01, rel_eval = 1.434404e-03
+Iter 046:     prox_L1: ||A x-y||_1 = 5.839348e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.578392e-01, MAX_IT, iter = 10
+  f(x^*) = 5.877914e-01, rel_eval = 1.422656e-03
+Iter 047:     prox_L1: ||A x-y||_1 = 5.831965e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.560156e-01, MAX_IT, iter = 10
+  f(x^*) = 5.869621e-01, rel_eval = 1.412971e-03
+Iter 048:     prox_L1: ||A x-y||_1 = 5.824625e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.542588e-01, MAX_IT, iter = 10
+  f(x^*) = 5.861418e-01, rel_eval = 1.399390e-03
+Iter 049:     prox_L1: ||A x-y||_1 = 5.817331e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.525641e-01, MAX_IT, iter = 10
+  f(x^*) = 5.853298e-01, rel_eval = 1.387206e-03
+Iter 050:     prox_L1: ||A x-y||_1 = 5.810057e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.509276e-01, MAX_IT, iter = 10
+  f(x^*) = 5.845239e-01, rel_eval = 1.378756e-03
+Iter 051:     prox_L1: ||A x-y||_1 = 5.802803e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.493470e-01, MAX_IT, iter = 10
+  f(x^*) = 5.837244e-01, rel_eval = 1.369654e-03
+Iter 052:     prox_L1: ||A x-y||_1 = 5.795610e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.478207e-01, MAX_IT, iter = 10
+  f(x^*) = 5.829348e-01, rel_eval = 1.354546e-03
+Iter 053:     prox_L1: ||A x-y||_1 = 5.788471e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.463442e-01, MAX_IT, iter = 10
+  f(x^*) = 5.821529e-01, rel_eval = 1.343143e-03
+Iter 054:     prox_L1: ||A x-y||_1 = 5.781371e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.449162e-01, MAX_IT, iter = 10
+  f(x^*) = 5.813778e-01, rel_eval = 1.333137e-03
+Iter 055:     prox_L1: ||A x-y||_1 = 5.774327e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.435342e-01, MAX_IT, iter = 10
+  f(x^*) = 5.806117e-01, rel_eval = 1.319540e-03
+Iter 056:     prox_L1: ||A x-y||_1 = 5.767335e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.421947e-01, MAX_IT, iter = 10
+  f(x^*) = 5.798540e-01, rel_eval = 1.306680e-03
+Iter 057:     prox_L1: ||A x-y||_1 = 5.760405e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.408964e-01, MAX_IT, iter = 10
+  f(x^*) = 5.791052e-01, rel_eval = 1.293032e-03
+Iter 058:     prox_L1: ||A x-y||_1 = 5.753529e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.396375e-01, MAX_IT, iter = 10
+  f(x^*) = 5.783645e-01, rel_eval = 1.280749e-03
+Iter 059:     prox_L1: ||A x-y||_1 = 5.746710e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.384177e-01, MAX_IT, iter = 10
+  f(x^*) = 5.776317e-01, rel_eval = 1.268557e-03
+Iter 060:     prox_L1: ||A x-y||_1 = 5.739938e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.372338e-01, MAX_IT, iter = 10
+  f(x^*) = 5.769061e-01, rel_eval = 1.257741e-03
+Iter 061:     prox_L1: ||A x-y||_1 = 5.733197e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.360847e-01, MAX_IT, iter = 10
+  f(x^*) = 5.761860e-01, rel_eval = 1.249842e-03
+Iter 062:     prox_L1: ||A x-y||_1 = 5.726512e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.349682e-01, MAX_IT, iter = 10
+  f(x^*) = 5.754736e-01, rel_eval = 1.237977e-03
+Iter 063:     prox_L1: ||A x-y||_1 = 5.719874e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.338822e-01, MAX_IT, iter = 10
+  f(x^*) = 5.747670e-01, rel_eval = 1.229276e-03
+Iter 064:     prox_L1: ||A x-y||_1 = 5.713277e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.328263e-01, MAX_IT, iter = 10
+  f(x^*) = 5.740668e-01, rel_eval = 1.219751e-03
+Iter 065:     prox_L1: ||A x-y||_1 = 5.706727e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.317994e-01, MAX_IT, iter = 10
+  f(x^*) = 5.733733e-01, rel_eval = 1.209476e-03
+Iter 066:     prox_L1: ||A x-y||_1 = 5.700228e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.308012e-01, MAX_IT, iter = 10
+  f(x^*) = 5.726866e-01, rel_eval = 1.199136e-03
+Iter 067:     prox_L1: ||A x-y||_1 = 5.693769e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.298288e-01, MAX_IT, iter = 10
+  f(x^*) = 5.720052e-01, rel_eval = 1.191250e-03
+Iter 068:     prox_L1: ||A x-y||_1 = 5.687358e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.288822e-01, MAX_IT, iter = 10
+  f(x^*) = 5.713298e-01, rel_eval = 1.182060e-03
+Iter 069:     prox_L1: ||A x-y||_1 = 5.680996e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.279602e-01, MAX_IT, iter = 10
+  f(x^*) = 5.706609e-01, rel_eval = 1.172266e-03
+Iter 070:     prox_L1: ||A x-y||_1 = 5.674682e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.270614e-01, MAX_IT, iter = 10
+  f(x^*) = 5.699982e-01, rel_eval = 1.162569e-03
+Iter 071:     prox_L1: ||A x-y||_1 = 5.668421e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.261852e-01, MAX_IT, iter = 10
+  f(x^*) = 5.693420e-01, rel_eval = 1.152601e-03
+Iter 072:     prox_L1: ||A x-y||_1 = 5.662191e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.253307e-01, MAX_IT, iter = 10
+  f(x^*) = 5.686901e-01, rel_eval = 1.146250e-03
+Iter 073:     prox_L1: ||A x-y||_1 = 5.656006e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.244967e-01, MAX_IT, iter = 10
+  f(x^*) = 5.680438e-01, rel_eval = 1.137776e-03
+Iter 074:     prox_L1: ||A x-y||_1 = 5.649856e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.236822e-01, MAX_IT, iter = 10
+  f(x^*) = 5.674019e-01, rel_eval = 1.131294e-03
+Iter 075:     prox_L1: ||A x-y||_1 = 5.643740e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.228865e-01, MAX_IT, iter = 10
+  f(x^*) = 5.667642e-01, rel_eval = 1.125228e-03
+Iter 076:     prox_L1: ||A x-y||_1 = 5.637661e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.221092e-01, MAX_IT, iter = 10
+  f(x^*) = 5.661311e-01, rel_eval = 1.118254e-03
+Iter 077:     prox_L1: ||A x-y||_1 = 5.631609e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.213487e-01, MAX_IT, iter = 10
+  f(x^*) = 5.655018e-01, rel_eval = 1.112816e-03
+Iter 078:     prox_L1: ||A x-y||_1 = 5.625595e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.206044e-01, MAX_IT, iter = 10
+  f(x^*) = 5.648766e-01, rel_eval = 1.106714e-03
+Iter 079:     prox_L1: ||A x-y||_1 = 5.619630e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.198763e-01, MAX_IT, iter = 10
+  f(x^*) = 5.642571e-01, rel_eval = 1.097996e-03
+Iter 080:     prox_L1: ||A x-y||_1 = 5.613704e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.191641e-01, MAX_IT, iter = 10
+  f(x^*) = 5.636425e-01, rel_eval = 1.090457e-03
+Iter 081:     prox_L1: ||A x-y||_1 = 5.607812e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.184672e-01, MAX_IT, iter = 10
+  f(x^*) = 5.630316e-01, rel_eval = 1.085008e-03
+Iter 082:     prox_L1: ||A x-y||_1 = 5.601963e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.177859e-01, MAX_IT, iter = 10
+  f(x^*) = 5.624259e-01, rel_eval = 1.076835e-03
+Iter 083:     prox_L1: ||A x-y||_1 = 5.596158e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.171196e-01, MAX_IT, iter = 10
+  f(x^*) = 5.618254e-01, rel_eval = 1.068897e-03
+Iter 084:     prox_L1: ||A x-y||_1 = 5.590388e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.164673e-01, MAX_IT, iter = 10
+  f(x^*) = 5.612288e-01, rel_eval = 1.063005e-03
+Iter 085:     prox_L1: ||A x-y||_1 = 5.584644e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.158284e-01, MAX_IT, iter = 10
+  f(x^*) = 5.606351e-01, rel_eval = 1.059031e-03
+Iter 086:     prox_L1: ||A x-y||_1 = 5.578926e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.152021e-01, MAX_IT, iter = 10
+  f(x^*) = 5.600445e-01, rel_eval = 1.054523e-03
+Iter 087:     prox_L1: ||A x-y||_1 = 5.573249e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.145891e-01, MAX_IT, iter = 10
+  f(x^*) = 5.594584e-01, rel_eval = 1.047640e-03
+Iter 088:     prox_L1: ||A x-y||_1 = 5.567610e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.139887e-01, MAX_IT, iter = 10
+  f(x^*) = 5.588768e-01, rel_eval = 1.040547e-03
+Iter 089:     prox_L1: ||A x-y||_1 = 5.562002e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.134002e-01, MAX_IT, iter = 10
+  f(x^*) = 5.582987e-01, rel_eval = 1.035548e-03
+Iter 090:     prox_L1: ||A x-y||_1 = 5.556435e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.128231e-01, MAX_IT, iter = 10
+  f(x^*) = 5.577249e-01, rel_eval = 1.028873e-03
+Iter 091:     prox_L1: ||A x-y||_1 = 5.550922e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.122583e-01, MAX_IT, iter = 10
+  f(x^*) = 5.571570e-01, rel_eval = 1.019187e-03
+Iter 092:     prox_L1: ||A x-y||_1 = 5.545452e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.117050e-01, MAX_IT, iter = 10
+  f(x^*) = 5.565938e-01, rel_eval = 1.011869e-03
+Iter 093:     prox_L1: ||A x-y||_1 = 5.540017e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.111627e-01, MAX_IT, iter = 10
+  f(x^*) = 5.560347e-01, rel_eval = 1.005612e-03
+Iter 094:     prox_L1: ||A x-y||_1 = 5.534617e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.106317e-01, MAX_IT, iter = 10
+  f(x^*) = 5.554796e-01, rel_eval = 9.993331e-04
+Iter 095:     prox_L1: ||A x-y||_1 = 5.529255e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.101104e-01, MAX_IT, iter = 10
+  f(x^*) = 5.549289e-01, rel_eval = 9.923507e-04
+Iter 096:     prox_L1: ||A x-y||_1 = 5.523932e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.095995e-01, MAX_IT, iter = 10
+  f(x^*) = 5.543823e-01, rel_eval = 9.860119e-04
+Iter 097:     prox_L1: ||A x-y||_1 = 5.518649e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.090986e-01, MAX_IT, iter = 10
+  f(x^*) = 5.538394e-01, rel_eval = 9.801825e-04
+Iter 098:     prox_L1: ||A x-y||_1 = 5.513405e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.086068e-01, MAX_IT, iter = 10
+  f(x^*) = 5.533011e-01, rel_eval = 9.728482e-04
+Iter 099:     prox_L1: ||A x-y||_1 = 5.508196e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.081237e-01, MAX_IT, iter = 10
+  f(x^*) = 5.527666e-01, rel_eval = 9.669776e-04
+Iter 100:     prox_L1: ||A x-y||_1 = 5.503017e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.076491e-01, MAX_IT, iter = 10
+  f(x^*) = 5.522352e-01, rel_eval = 9.623024e-04
+Iter 101:     prox_L1: ||A x-y||_1 = 5.497867e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.071828e-01, MAX_IT, iter = 10
+  f(x^*) = 5.517072e-01, rel_eval = 9.569999e-04
+Iter 102:     prox_L1: ||A x-y||_1 = 5.492765e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.067243e-01, MAX_IT, iter = 10
+  f(x^*) = 5.511839e-01, rel_eval = 9.494294e-04
+Iter 103:     prox_L1: ||A x-y||_1 = 5.487702e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.062737e-01, MAX_IT, iter = 10
+  f(x^*) = 5.506648e-01, rel_eval = 9.426396e-04
+Iter 104:     prox_L1: ||A x-y||_1 = 5.482678e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.058314e-01, MAX_IT, iter = 10
+  f(x^*) = 5.501501e-01, rel_eval = 9.354869e-04
+Iter 105:     prox_L1: ||A x-y||_1 = 5.477693e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.053969e-01, MAX_IT, iter = 10
+  f(x^*) = 5.496397e-01, rel_eval = 9.286135e-04
+Iter 106:     prox_L1: ||A x-y||_1 = 5.472738e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.049697e-01, MAX_IT, iter = 10
+  f(x^*) = 5.491326e-01, rel_eval = 9.235588e-04
+Iter 107:     prox_L1: ||A x-y||_1 = 5.467815e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.045495e-01, MAX_IT, iter = 10
+  f(x^*) = 5.486287e-01, rel_eval = 9.184037e-04
+Iter 108:     prox_L1: ||A x-y||_1 = 5.462929e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.041365e-01, MAX_IT, iter = 10
+  f(x^*) = 5.481288e-01, rel_eval = 9.120489e-04
+Iter 109:     prox_L1: ||A x-y||_1 = 5.458084e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.037302e-01, MAX_IT, iter = 10
+  f(x^*) = 5.476328e-01, rel_eval = 9.057706e-04
+Iter 110:     prox_L1: ||A x-y||_1 = 5.453273e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.033311e-01, MAX_IT, iter = 10
+  f(x^*) = 5.471406e-01, rel_eval = 8.996049e-04
+Iter 111:     prox_L1: ||A x-y||_1 = 5.448489e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.029386e-01, MAX_IT, iter = 10
+  f(x^*) = 5.466511e-01, rel_eval = 8.954643e-04
+Iter 112:     prox_L1: ||A x-y||_1 = 5.443730e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.025522e-01, MAX_IT, iter = 10
+  f(x^*) = 5.461644e-01, rel_eval = 8.911136e-04
+Iter 113:     prox_L1: ||A x-y||_1 = 5.438994e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.021717e-01, MAX_IT, iter = 10
+  f(x^*) = 5.456801e-01, rel_eval = 8.873746e-04
+Iter 114:     prox_L1: ||A x-y||_1 = 5.434292e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.017971e-01, MAX_IT, iter = 10
+  f(x^*) = 5.451996e-01, rel_eval = 8.813631e-04
+Iter 115:     prox_L1: ||A x-y||_1 = 5.429617e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.014285e-01, MAX_IT, iter = 10
+  f(x^*) = 5.447220e-01, rel_eval = 8.768780e-04
+Iter 116:     prox_L1: ||A x-y||_1 = 5.424972e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.010659e-01, MAX_IT, iter = 10
+  f(x^*) = 5.442475e-01, rel_eval = 8.717515e-04
+Iter 117:     prox_L1: ||A x-y||_1 = 5.420351e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.007089e-01, MAX_IT, iter = 10
+  f(x^*) = 5.437756e-01, rel_eval = 8.677700e-04
+Iter 118:     prox_L1: ||A x-y||_1 = 5.415765e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.003571e-01, MAX_IT, iter = 10
+  f(x^*) = 5.433075e-01, rel_eval = 8.616447e-04
+Iter 119:     prox_L1: ||A x-y||_1 = 5.411213e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 1.000106e-01, MAX_IT, iter = 10
+  f(x^*) = 5.428429e-01, rel_eval = 8.559399e-04
+Iter 120:     prox_L1: ||A x-y||_1 = 5.406691e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.966915e-02, MAX_IT, iter = 10
+  f(x^*) = 5.423811e-01, rel_eval = 8.513215e-04
+Iter 121:     prox_L1: ||A x-y||_1 = 5.402206e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.933321e-02, MAX_IT, iter = 10
+  f(x^*) = 5.419235e-01, rel_eval = 8.444988e-04
+Iter 122:     prox_L1: ||A x-y||_1 = 5.397754e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.900231e-02, MAX_IT, iter = 10
+  f(x^*) = 5.414694e-01, rel_eval = 8.385575e-04
+Iter 123:     prox_L1: ||A x-y||_1 = 5.393329e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.867638e-02, MAX_IT, iter = 10
+  f(x^*) = 5.410176e-01, rel_eval = 8.351317e-04
+Iter 124:     prox_L1: ||A x-y||_1 = 5.388928e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.835528e-02, MAX_IT, iter = 10
+  f(x^*) = 5.405685e-01, rel_eval = 8.307112e-04
+Iter 125:     prox_L1: ||A x-y||_1 = 5.384548e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.803888e-02, MAX_IT, iter = 10
+  f(x^*) = 5.401218e-01, rel_eval = 8.272003e-04
+Iter 126:     prox_L1: ||A x-y||_1 = 5.380193e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.772696e-02, MAX_IT, iter = 10
+  f(x^*) = 5.396774e-01, rel_eval = 8.233068e-04
+Iter 127:     prox_L1: ||A x-y||_1 = 5.375862e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.741966e-02, MAX_IT, iter = 10
+  f(x^*) = 5.392359e-01, rel_eval = 8.187257e-04
+Iter 128:     prox_L1: ||A x-y||_1 = 5.371569e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.711698e-02, MAX_IT, iter = 10
+  f(x^*) = 5.387984e-01, rel_eval = 8.121153e-04
+Iter 129:     prox_L1: ||A x-y||_1 = 5.367300e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.681897e-02, MAX_IT, iter = 10
+  f(x^*) = 5.383633e-01, rel_eval = 8.081534e-04
+Iter 130:     prox_L1: ||A x-y||_1 = 5.363051e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.652531e-02, MAX_IT, iter = 10
+  f(x^*) = 5.379306e-01, rel_eval = 8.043902e-04
+Iter 131:     prox_L1: ||A x-y||_1 = 5.358825e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.623565e-02, MAX_IT, iter = 10
+  f(x^*) = 5.375004e-01, rel_eval = 8.003202e-04
+Iter 132:     prox_L1: ||A x-y||_1 = 5.354623e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.594965e-02, MAX_IT, iter = 10
+  f(x^*) = 5.370722e-01, rel_eval = 7.973336e-04
+Iter 133:     prox_L1: ||A x-y||_1 = 5.350446e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.566721e-02, MAX_IT, iter = 10
+  f(x^*) = 5.366462e-01, rel_eval = 7.938132e-04
+Iter 134:     prox_L1: ||A x-y||_1 = 5.346294e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.538888e-02, MAX_IT, iter = 10
+  f(x^*) = 5.362232e-01, rel_eval = 7.888701e-04
+Iter 135:     prox_L1: ||A x-y||_1 = 5.342179e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.511485e-02, MAX_IT, iter = 10
+  f(x^*) = 5.358040e-01, rel_eval = 7.823432e-04
+Iter 136:     prox_L1: ||A x-y||_1 = 5.338097e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.484437e-02, MAX_IT, iter = 10
+  f(x^*) = 5.353884e-01, rel_eval = 7.763237e-04
+Iter 137:     prox_L1: ||A x-y||_1 = 5.334038e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.457735e-02, MAX_IT, iter = 10
+  f(x^*) = 5.349750e-01, rel_eval = 7.727893e-04
+Iter 138:     prox_L1: ||A x-y||_1 = 5.330004e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.431394e-02, MAX_IT, iter = 10
+  f(x^*) = 5.345642e-01, rel_eval = 7.683148e-04
+Iter 139:     prox_L1: ||A x-y||_1 = 5.325985e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.405387e-02, MAX_IT, iter = 10
+  f(x^*) = 5.341552e-01, rel_eval = 7.657013e-04
+Iter 140:     prox_L1: ||A x-y||_1 = 5.321991e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.379691e-02, MAX_IT, iter = 10
+  f(x^*) = 5.337486e-01, rel_eval = 7.617596e-04
+Iter 141:     prox_L1: ||A x-y||_1 = 5.318023e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.354281e-02, MAX_IT, iter = 10
+  f(x^*) = 5.333447e-01, rel_eval = 7.573278e-04
+Iter 142:     prox_L1: ||A x-y||_1 = 5.314080e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.329191e-02, MAX_IT, iter = 10
+  f(x^*) = 5.329436e-01, rel_eval = 7.527452e-04
+Iter 143:     prox_L1: ||A x-y||_1 = 5.310169e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.304432e-02, MAX_IT, iter = 10
+  f(x^*) = 5.325458e-01, rel_eval = 7.468232e-04
+Iter 144:     prox_L1: ||A x-y||_1 = 5.306287e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.279978e-02, MAX_IT, iter = 10
+  f(x^*) = 5.321508e-01, rel_eval = 7.423485e-04
+Iter 145:     prox_L1: ||A x-y||_1 = 5.302428e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.255796e-02, MAX_IT, iter = 10
+  f(x^*) = 5.317580e-01, rel_eval = 7.387432e-04
+Iter 146:     prox_L1: ||A x-y||_1 = 5.298591e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.231921e-02, MAX_IT, iter = 10
+  f(x^*) = 5.313676e-01, rel_eval = 7.345709e-04
+Iter 147:     prox_L1: ||A x-y||_1 = 5.294776e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.208362e-02, MAX_IT, iter = 10
+  f(x^*) = 5.309795e-01, rel_eval = 7.309516e-04
+Iter 148:     prox_L1: ||A x-y||_1 = 5.290981e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.185070e-02, MAX_IT, iter = 10
+  f(x^*) = 5.305935e-01, rel_eval = 7.275728e-04
+Iter 149:     prox_L1: ||A x-y||_1 = 5.287208e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.162051e-02, MAX_IT, iter = 10
+  f(x^*) = 5.302097e-01, rel_eval = 7.237766e-04
+Iter 150:     prox_L1: ||A x-y||_1 = 5.283459e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.139353e-02, MAX_IT, iter = 10
+  f(x^*) = 5.298286e-01, rel_eval = 7.193810e-04
+Iter 151:     prox_L1: ||A x-y||_1 = 5.279733e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.116975e-02, MAX_IT, iter = 10
+  f(x^*) = 5.294497e-01, rel_eval = 7.155425e-04
+Iter 152:     prox_L1: ||A x-y||_1 = 5.276023e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.094891e-02, MAX_IT, iter = 10
+  f(x^*) = 5.290726e-01, rel_eval = 7.127643e-04
+Iter 153:     prox_L1: ||A x-y||_1 = 5.272327e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.073082e-02, MAX_IT, iter = 10
+  f(x^*) = 5.286970e-01, rel_eval = 7.105244e-04
+Iter 154:     prox_L1: ||A x-y||_1 = 5.268643e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.051525e-02, MAX_IT, iter = 10
+  f(x^*) = 5.283224e-01, rel_eval = 7.089574e-04
+Iter 155:     prox_L1: ||A x-y||_1 = 5.264974e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.030204e-02, MAX_IT, iter = 10
+  f(x^*) = 5.279495e-01, rel_eval = 7.062685e-04
+Iter 156:     prox_L1: ||A x-y||_1 = 5.261327e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 9.009102e-02, MAX_IT, iter = 10
+  f(x^*) = 5.275789e-01, rel_eval = 7.025537e-04
+Iter 157:     prox_L1: ||A x-y||_1 = 5.257709e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.988262e-02, MAX_IT, iter = 10
+  f(x^*) = 5.272114e-01, rel_eval = 6.970284e-04
+Iter 158:     prox_L1: ||A x-y||_1 = 5.254118e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.967665e-02, MAX_IT, iter = 10
+  f(x^*) = 5.268466e-01, rel_eval = 6.924602e-04
+Iter 159:     prox_L1: ||A x-y||_1 = 5.250541e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.947308e-02, MAX_IT, iter = 10
+  f(x^*) = 5.264833e-01, rel_eval = 6.900710e-04
+Iter 160:     prox_L1: ||A x-y||_1 = 5.246984e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.927222e-02, MAX_IT, iter = 10
+  f(x^*) = 5.261219e-01, rel_eval = 6.869507e-04
+Iter 161:     prox_L1: ||A x-y||_1 = 5.243449e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.907406e-02, MAX_IT, iter = 10
+  f(x^*) = 5.257627e-01, rel_eval = 6.830599e-04
+Iter 162:     prox_L1: ||A x-y||_1 = 5.239930e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.887834e-02, MAX_IT, iter = 10
+  f(x^*) = 5.254053e-01, rel_eval = 6.802484e-04
+Iter 163:     prox_L1: ||A x-y||_1 = 5.236434e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.868476e-02, MAX_IT, iter = 10
+  f(x^*) = 5.250499e-01, rel_eval = 6.769633e-04
+Iter 164:     prox_L1: ||A x-y||_1 = 5.232949e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.849324e-02, MAX_IT, iter = 10
+  f(x^*) = 5.246959e-01, rel_eval = 6.746975e-04
+Iter 165:     prox_L1: ||A x-y||_1 = 5.229483e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.830360e-02, MAX_IT, iter = 10
+  f(x^*) = 5.243438e-01, rel_eval = 6.714764e-04
+Iter 166:     prox_L1: ||A x-y||_1 = 5.226033e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.811574e-02, MAX_IT, iter = 10
+  f(x^*) = 5.239934e-01, rel_eval = 6.687587e-04
+Iter 167:     prox_L1: ||A x-y||_1 = 5.222601e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.792966e-02, MAX_IT, iter = 10
+  f(x^*) = 5.236449e-01, rel_eval = 6.654672e-04
+Iter 168:     prox_L1: ||A x-y||_1 = 5.219195e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.774566e-02, MAX_IT, iter = 10
+  f(x^*) = 5.232992e-01, rel_eval = 6.605555e-04
+Iter 169:     prox_L1: ||A x-y||_1 = 5.215807e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.756429e-02, MAX_IT, iter = 10
+  f(x^*) = 5.229554e-01, rel_eval = 6.574893e-04
+Iter 170:     prox_L1: ||A x-y||_1 = 5.212443e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.738512e-02, MAX_IT, iter = 10
+  f(x^*) = 5.226135e-01, rel_eval = 6.541067e-04
+Iter 171:     prox_L1: ||A x-y||_1 = 5.209094e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.720808e-02, MAX_IT, iter = 10
+  f(x^*) = 5.222735e-01, rel_eval = 6.511517e-04
+Iter 172:     prox_L1: ||A x-y||_1 = 5.205771e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.703343e-02, MAX_IT, iter = 10
+  f(x^*) = 5.219364e-01, rel_eval = 6.457813e-04
+Iter 173:     prox_L1: ||A x-y||_1 = 5.202466e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.686078e-02, MAX_IT, iter = 10
+  f(x^*) = 5.216008e-01, rel_eval = 6.433258e-04
+Iter 174:     prox_L1: ||A x-y||_1 = 5.199175e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.668995e-02, MAX_IT, iter = 10
+  f(x^*) = 5.212668e-01, rel_eval = 6.407940e-04
+Iter 175:     prox_L1: ||A x-y||_1 = 5.195900e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.652097e-02, MAX_IT, iter = 10
+  f(x^*) = 5.209343e-01, rel_eval = 6.383119e-04
+Iter 176:     prox_L1: ||A x-y||_1 = 5.192643e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.635398e-02, MAX_IT, iter = 10
+  f(x^*) = 5.206038e-01, rel_eval = 6.348108e-04
+Iter 177:     prox_L1: ||A x-y||_1 = 5.189402e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.618880e-02, MAX_IT, iter = 10
+  f(x^*) = 5.202749e-01, rel_eval = 6.322820e-04
+Iter 178:     prox_L1: ||A x-y||_1 = 5.186178e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.602558e-02, MAX_IT, iter = 10
+  f(x^*) = 5.199476e-01, rel_eval = 6.293197e-04
+Iter 179:     prox_L1: ||A x-y||_1 = 5.182973e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.586403e-02, MAX_IT, iter = 10
+  f(x^*) = 5.196224e-01, rel_eval = 6.259108e-04
+Iter 180:     prox_L1: ||A x-y||_1 = 5.179785e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.570438e-02, MAX_IT, iter = 10
+  f(x^*) = 5.192991e-01, rel_eval = 6.225425e-04
+Iter 181:     prox_L1: ||A x-y||_1 = 5.176615e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.554645e-02, MAX_IT, iter = 10
+  f(x^*) = 5.189777e-01, rel_eval = 6.193018e-04
+Iter 182:     prox_L1: ||A x-y||_1 = 5.173464e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.539008e-02, MAX_IT, iter = 10
+  f(x^*) = 5.186581e-01, rel_eval = 6.162696e-04
+Iter 183:     prox_L1: ||A x-y||_1 = 5.170328e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.523538e-02, MAX_IT, iter = 10
+  f(x^*) = 5.183399e-01, rel_eval = 6.138390e-04
+Iter 184:     prox_L1: ||A x-y||_1 = 5.167212e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.508224e-02, MAX_IT, iter = 10
+  f(x^*) = 5.180239e-01, rel_eval = 6.100852e-04
+Iter 185:     prox_L1: ||A x-y||_1 = 5.164113e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.493048e-02, MAX_IT, iter = 10
+  f(x^*) = 5.177096e-01, rel_eval = 6.070693e-04
+Iter 186:     prox_L1: ||A x-y||_1 = 5.161031e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.478028e-02, MAX_IT, iter = 10
+  f(x^*) = 5.173971e-01, rel_eval = 6.038618e-04
+Iter 187:     prox_L1: ||A x-y||_1 = 5.157966e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.463175e-02, MAX_IT, iter = 10
+  f(x^*) = 5.170864e-01, rel_eval = 6.009665e-04
+Iter 188:     prox_L1: ||A x-y||_1 = 5.154916e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.448515e-02, MAX_IT, iter = 10
+  f(x^*) = 5.167773e-01, rel_eval = 5.982023e-04
+Iter 189:     prox_L1: ||A x-y||_1 = 5.151881e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.434002e-02, MAX_IT, iter = 10
+  f(x^*) = 5.164692e-01, rel_eval = 5.965434e-04
+Iter 190:     prox_L1: ||A x-y||_1 = 5.148865e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.419658e-02, MAX_IT, iter = 10
+  f(x^*) = 5.161634e-01, rel_eval = 5.924072e-04
+Iter 191:     prox_L1: ||A x-y||_1 = 5.145862e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.405454e-02, MAX_IT, iter = 10
+  f(x^*) = 5.158590e-01, rel_eval = 5.900794e-04
+Iter 192:     prox_L1: ||A x-y||_1 = 5.142883e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.391398e-02, MAX_IT, iter = 10
+  f(x^*) = 5.155569e-01, rel_eval = 5.859679e-04
+Iter 193:     prox_L1: ||A x-y||_1 = 5.139918e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.377484e-02, MAX_IT, iter = 10
+  f(x^*) = 5.152563e-01, rel_eval = 5.833138e-04
+Iter 194:     prox_L1: ||A x-y||_1 = 5.136969e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.363702e-02, MAX_IT, iter = 10
+  f(x^*) = 5.149573e-01, rel_eval = 5.806249e-04
+Iter 195:     prox_L1: ||A x-y||_1 = 5.134035e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.350066e-02, MAX_IT, iter = 10
+  f(x^*) = 5.146598e-01, rel_eval = 5.780951e-04
+Iter 196:     prox_L1: ||A x-y||_1 = 5.131113e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.336568e-02, MAX_IT, iter = 10
+  f(x^*) = 5.143635e-01, rel_eval = 5.760398e-04
+Iter 197:     prox_L1: ||A x-y||_1 = 5.128209e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.323186e-02, MAX_IT, iter = 10
+  f(x^*) = 5.140693e-01, rel_eval = 5.723479e-04
+Iter 198:     prox_L1: ||A x-y||_1 = 5.125326e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.309921e-02, MAX_IT, iter = 10
+  f(x^*) = 5.137772e-01, rel_eval = 5.685793e-04
+Iter 199:     prox_L1: ||A x-y||_1 = 5.122454e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.296788e-02, MAX_IT, iter = 10
+  f(x^*) = 5.134860e-01, rel_eval = 5.669603e-04
+Iter 200:     prox_L1: ||A x-y||_1 = 5.119594e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.283798e-02, MAX_IT, iter = 10
+  f(x^*) = 5.131962e-01, rel_eval = 5.647990e-04
+Iter 201:     prox_L1: ||A x-y||_1 = 5.116749e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.270920e-02, MAX_IT, iter = 10
+  f(x^*) = 5.129077e-01, rel_eval = 5.623608e-04
+Iter 202:     prox_L1: ||A x-y||_1 = 5.113917e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.258156e-02, MAX_IT, iter = 10
+  f(x^*) = 5.126208e-01, rel_eval = 5.598361e-04
+Iter 203:     prox_L1: ||A x-y||_1 = 5.111096e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.245507e-02, MAX_IT, iter = 10
+  f(x^*) = 5.123350e-01, rel_eval = 5.577414e-04
+Iter 204:     prox_L1: ||A x-y||_1 = 5.108288e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.232977e-02, MAX_IT, iter = 10
+  f(x^*) = 5.120505e-01, rel_eval = 5.556228e-04
+Iter 205:     prox_L1: ||A x-y||_1 = 5.105496e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.220576e-02, MAX_IT, iter = 10
+  f(x^*) = 5.117676e-01, rel_eval = 5.528709e-04
+Iter 206:     prox_L1: ||A x-y||_1 = 5.102720e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.208297e-02, MAX_IT, iter = 10
+  f(x^*) = 5.114864e-01, rel_eval = 5.497431e-04
+Iter 207:     prox_L1: ||A x-y||_1 = 5.099963e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.196108e-02, MAX_IT, iter = 10
+  f(x^*) = 5.112074e-01, rel_eval = 5.458146e-04
+Iter 208:     prox_L1: ||A x-y||_1 = 5.097226e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.184023e-02, MAX_IT, iter = 10
+  f(x^*) = 5.109300e-01, rel_eval = 5.428575e-04
+Iter 209:     prox_L1: ||A x-y||_1 = 5.094503e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.172047e-02, MAX_IT, iter = 10
+  f(x^*) = 5.106541e-01, rel_eval = 5.401844e-04
+Iter 210:     prox_L1: ||A x-y||_1 = 5.091792e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.160168e-02, MAX_IT, iter = 10
+  f(x^*) = 5.103794e-01, rel_eval = 5.384116e-04
+Iter 211:     prox_L1: ||A x-y||_1 = 5.089091e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.148373e-02, MAX_IT, iter = 10
+  f(x^*) = 5.101057e-01, rel_eval = 5.363899e-04
+Iter 212:     prox_L1: ||A x-y||_1 = 5.086400e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.136686e-02, MAX_IT, iter = 10
+  f(x^*) = 5.098333e-01, rel_eval = 5.344596e-04
+Iter 213:     prox_L1: ||A x-y||_1 = 5.083721e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.125101e-02, MAX_IT, iter = 10
+  f(x^*) = 5.095619e-01, rel_eval = 5.324515e-04
+Iter 214:     prox_L1: ||A x-y||_1 = 5.081055e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.113613e-02, MAX_IT, iter = 10
+  f(x^*) = 5.092918e-01, rel_eval = 5.304286e-04
+Iter 215:     prox_L1: ||A x-y||_1 = 5.078399e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.102228e-02, MAX_IT, iter = 10
+  f(x^*) = 5.090227e-01, rel_eval = 5.285981e-04
+Iter 216:     prox_L1: ||A x-y||_1 = 5.075753e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.090947e-02, MAX_IT, iter = 10
+  f(x^*) = 5.087548e-01, rel_eval = 5.266104e-04
+Iter 217:     prox_L1: ||A x-y||_1 = 5.073118e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.079750e-02, MAX_IT, iter = 10
+  f(x^*) = 5.084880e-01, rel_eval = 5.247557e-04
+Iter 218:     prox_L1: ||A x-y||_1 = 5.070496e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.068634e-02, MAX_IT, iter = 10
+  f(x^*) = 5.082224e-01, rel_eval = 5.225519e-04
+Iter 219:     prox_L1: ||A x-y||_1 = 5.067888e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.057621e-02, MAX_IT, iter = 10
+  f(x^*) = 5.079584e-01, rel_eval = 5.196703e-04
+Iter 220:     prox_L1: ||A x-y||_1 = 5.065295e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.046700e-02, MAX_IT, iter = 10
+  f(x^*) = 5.076958e-01, rel_eval = 5.173407e-04
+Iter 221:     prox_L1: ||A x-y||_1 = 5.062716e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.035890e-02, MAX_IT, iter = 10
+  f(x^*) = 5.074346e-01, rel_eval = 5.146175e-04
+Iter 222:     prox_L1: ||A x-y||_1 = 5.060148e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.025166e-02, MAX_IT, iter = 10
+  f(x^*) = 5.071750e-01, rel_eval = 5.119947e-04
+Iter 223:     prox_L1: ||A x-y||_1 = 5.057594e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.014554e-02, MAX_IT, iter = 10
+  f(x^*) = 5.069164e-01, rel_eval = 5.101316e-04
+Iter 224:     prox_L1: ||A x-y||_1 = 5.055052e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 8.004038e-02, MAX_IT, iter = 10
+  f(x^*) = 5.066591e-01, rel_eval = 5.077651e-04
+Iter 225:     prox_L1: ||A x-y||_1 = 5.052522e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.993603e-02, MAX_IT, iter = 10
+  f(x^*) = 5.064029e-01, rel_eval = 5.059528e-04
+Iter 226:     prox_L1: ||A x-y||_1 = 5.050007e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.983258e-02, MAX_IT, iter = 10
+  f(x^*) = 5.061484e-01, rel_eval = 5.028358e-04
+Iter 227:     prox_L1: ||A x-y||_1 = 5.047506e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.973018e-02, MAX_IT, iter = 10
+  f(x^*) = 5.058953e-01, rel_eval = 5.002695e-04
+Iter 228:     prox_L1: ||A x-y||_1 = 5.045020e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.962866e-02, MAX_IT, iter = 10
+  f(x^*) = 5.056437e-01, rel_eval = 4.976247e-04
+Iter 229:     prox_L1: ||A x-y||_1 = 5.042547e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.952796e-02, MAX_IT, iter = 10
+  f(x^*) = 5.053934e-01, rel_eval = 4.953158e-04
+Iter 230:     prox_L1: ||A x-y||_1 = 5.040085e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.942793e-02, MAX_IT, iter = 10
+  f(x^*) = 5.051442e-01, rel_eval = 4.933330e-04
+Iter 231:     prox_L1: ||A x-y||_1 = 5.037635e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.932860e-02, MAX_IT, iter = 10
+  f(x^*) = 5.048962e-01, rel_eval = 4.911173e-04
+Iter 232:     prox_L1: ||A x-y||_1 = 5.035192e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.923001e-02, MAX_IT, iter = 10
+  f(x^*) = 5.046489e-01, rel_eval = 4.900229e-04
+Iter 233:     prox_L1: ||A x-y||_1 = 5.032759e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.913220e-02, MAX_IT, iter = 10
+  f(x^*) = 5.044026e-01, rel_eval = 4.882050e-04
+Iter 234:     prox_L1: ||A x-y||_1 = 5.030335e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.903525e-02, MAX_IT, iter = 10
+  f(x^*) = 5.041574e-01, rel_eval = 4.864664e-04
+Iter 235:     prox_L1: ||A x-y||_1 = 5.027923e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.893892e-02, MAX_IT, iter = 10
+  f(x^*) = 5.039134e-01, rel_eval = 4.841552e-04
+Iter 236:     prox_L1: ||A x-y||_1 = 5.025524e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.884334e-02, MAX_IT, iter = 10
+  f(x^*) = 5.036705e-01, rel_eval = 4.822377e-04
+Iter 237:     prox_L1: ||A x-y||_1 = 5.023135e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.874882e-02, MAX_IT, iter = 10
+  f(x^*) = 5.034289e-01, rel_eval = 4.800520e-04
+Iter 238:     prox_L1: ||A x-y||_1 = 5.020760e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.865515e-02, MAX_IT, iter = 10
+  f(x^*) = 5.031888e-01, rel_eval = 4.770512e-04
+Iter 239:     prox_L1: ||A x-y||_1 = 5.018399e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.856215e-02, MAX_IT, iter = 10
+  f(x^*) = 5.029499e-01, rel_eval = 4.750039e-04
+Iter 240:     prox_L1: ||A x-y||_1 = 5.016048e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.847005e-02, MAX_IT, iter = 10
+  f(x^*) = 5.027119e-01, rel_eval = 4.733803e-04
+Iter 241:     prox_L1: ||A x-y||_1 = 5.013704e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.837874e-02, MAX_IT, iter = 10
+  f(x^*) = 5.024746e-01, rel_eval = 4.723298e-04
+Iter 242:     prox_L1: ||A x-y||_1 = 5.011366e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.828824e-02, MAX_IT, iter = 10
+  f(x^*) = 5.022381e-01, rel_eval = 4.709082e-04
+Iter 243:     prox_L1: ||A x-y||_1 = 5.009039e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.819843e-02, MAX_IT, iter = 10
+  f(x^*) = 5.020027e-01, rel_eval = 4.689035e-04
+Iter 244:     prox_L1: ||A x-y||_1 = 5.006727e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.810954e-02, MAX_IT, iter = 10
+  f(x^*) = 5.017688e-01, rel_eval = 4.661014e-04
+Iter 245:     prox_L1: ||A x-y||_1 = 5.004422e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.802136e-02, MAX_IT, iter = 10
+  f(x^*) = 5.015356e-01, rel_eval = 4.649639e-04
+Iter 246:     prox_L1: ||A x-y||_1 = 5.002125e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.793383e-02, MAX_IT, iter = 10
+  f(x^*) = 5.013033e-01, rel_eval = 4.633563e-04
+Iter 247:     prox_L1: ||A x-y||_1 = 4.999842e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.784718e-02, MAX_IT, iter = 10
+  f(x^*) = 5.010722e-01, rel_eval = 4.612257e-04
+Iter 248:     prox_L1: ||A x-y||_1 = 4.997567e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.776153e-02, MAX_IT, iter = 10
+  f(x^*) = 5.008420e-01, rel_eval = 4.596346e-04
+Iter 249:     prox_L1: ||A x-y||_1 = 4.995301e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.767659e-02, MAX_IT, iter = 10
+  f(x^*) = 5.006129e-01, rel_eval = 4.577517e-04
+Iter 250:     prox_L1: ||A x-y||_1 = 4.993047e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.759234e-02, MAX_IT, iter = 10
+  f(x^*) = 5.003850e-01, rel_eval = 4.554915e-04
+Iter 251:     prox_L1: ||A x-y||_1 = 4.990801e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.750875e-02, MAX_IT, iter = 10
+  f(x^*) = 5.001577e-01, rel_eval = 4.543533e-04
+Iter 252:     prox_L1: ||A x-y||_1 = 4.988565e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.742588e-02, MAX_IT, iter = 10
+  f(x^*) = 4.999316e-01, rel_eval = 4.522745e-04
+Iter 253:     prox_L1: ||A x-y||_1 = 4.986335e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.734369e-02, MAX_IT, iter = 10
+  f(x^*) = 4.997061e-01, rel_eval = 4.512936e-04
+Iter 254:     prox_L1: ||A x-y||_1 = 4.984110e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.726224e-02, MAX_IT, iter = 10
+  f(x^*) = 4.994810e-01, rel_eval = 4.506093e-04
+Iter 255:     prox_L1: ||A x-y||_1 = 4.981895e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.718144e-02, MAX_IT, iter = 10
+  f(x^*) = 4.992567e-01, rel_eval = 4.493353e-04
+Iter 256:     prox_L1: ||A x-y||_1 = 4.979692e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.710127e-02, MAX_IT, iter = 10
+  f(x^*) = 4.990339e-01, rel_eval = 4.464579e-04
+Iter 257:     prox_L1: ||A x-y||_1 = 4.977501e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.702181e-02, MAX_IT, iter = 10
+  f(x^*) = 4.988122e-01, rel_eval = 4.444440e-04
+Iter 258:     prox_L1: ||A x-y||_1 = 4.975323e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.694290e-02, MAX_IT, iter = 10
+  f(x^*) = 4.985918e-01, rel_eval = 4.419855e-04
+Iter 259:     prox_L1: ||A x-y||_1 = 4.973154e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.686444e-02, MAX_IT, iter = 10
+  f(x^*) = 4.983724e-01, rel_eval = 4.401910e-04
+Iter 260:     prox_L1: ||A x-y||_1 = 4.970994e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.678654e-02, MAX_IT, iter = 10
+  f(x^*) = 4.981541e-01, rel_eval = 4.382607e-04
+Iter 261:     prox_L1: ||A x-y||_1 = 4.968848e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.670952e-02, MAX_IT, iter = 10
+  f(x^*) = 4.979370e-01, rel_eval = 4.359474e-04
+Iter 262:     prox_L1: ||A x-y||_1 = 4.966711e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.663331e-02, MAX_IT, iter = 10
+  f(x^*) = 4.977208e-01, rel_eval = 4.344283e-04
+Iter 263:     prox_L1: ||A x-y||_1 = 4.964585e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.655766e-02, MAX_IT, iter = 10
+  f(x^*) = 4.975057e-01, rel_eval = 4.323587e-04
+Iter 264:     prox_L1: ||A x-y||_1 = 4.962465e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.648240e-02, MAX_IT, iter = 10
+  f(x^*) = 4.972914e-01, rel_eval = 4.310337e-04
+Iter 265:     prox_L1: ||A x-y||_1 = 4.960355e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.640785e-02, MAX_IT, iter = 10
+  f(x^*) = 4.970779e-01, rel_eval = 4.294387e-04
+Iter 266:     prox_L1: ||A x-y||_1 = 4.958248e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.633404e-02, MAX_IT, iter = 10
+  f(x^*) = 4.968648e-01, rel_eval = 4.288284e-04
+Iter 267:     prox_L1: ||A x-y||_1 = 4.956153e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.626097e-02, MAX_IT, iter = 10
+  f(x^*) = 4.966531e-01, rel_eval = 4.262705e-04
+Iter 268:     prox_L1: ||A x-y||_1 = 4.954068e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.618874e-02, MAX_IT, iter = 10
+  f(x^*) = 4.964423e-01, rel_eval = 4.247453e-04
+Iter 269:     prox_L1: ||A x-y||_1 = 4.951988e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.611711e-02, MAX_IT, iter = 10
+  f(x^*) = 4.962318e-01, rel_eval = 4.240864e-04
+Iter 270:     prox_L1: ||A x-y||_1 = 4.949915e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.604603e-02, MAX_IT, iter = 10
+  f(x^*) = 4.960221e-01, rel_eval = 4.228872e-04
+Iter 271:     prox_L1: ||A x-y||_1 = 4.947852e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.597552e-02, MAX_IT, iter = 10
+  f(x^*) = 4.958136e-01, rel_eval = 4.205448e-04
+Iter 272:     prox_L1: ||A x-y||_1 = 4.945799e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.590559e-02, MAX_IT, iter = 10
+  f(x^*) = 4.956060e-01, rel_eval = 4.186961e-04
+Iter 273:     prox_L1: ||A x-y||_1 = 4.943755e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.583613e-02, MAX_IT, iter = 10
+  f(x^*) = 4.953994e-01, rel_eval = 4.170465e-04
+Iter 274:     prox_L1: ||A x-y||_1 = 4.941724e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.576688e-02, MAX_IT, iter = 10
+  f(x^*) = 4.951940e-01, rel_eval = 4.148525e-04
+Iter 275:     prox_L1: ||A x-y||_1 = 4.939700e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.569820e-02, MAX_IT, iter = 10
+  f(x^*) = 4.949894e-01, rel_eval = 4.134033e-04
+Iter 276:     prox_L1: ||A x-y||_1 = 4.937682e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.563021e-02, MAX_IT, iter = 10
+  f(x^*) = 4.947855e-01, rel_eval = 4.121248e-04
+Iter 277:     prox_L1: ||A x-y||_1 = 4.935674e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.556292e-02, MAX_IT, iter = 10
+  f(x^*) = 4.945826e-01, rel_eval = 4.102141e-04
+Iter 278:     prox_L1: ||A x-y||_1 = 4.933679e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.549634e-02, MAX_IT, iter = 10
+  f(x^*) = 4.943809e-01, rel_eval = 4.079855e-04
+Iter 279:     prox_L1: ||A x-y||_1 = 4.931692e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.543018e-02, MAX_IT, iter = 10
+  f(x^*) = 4.941801e-01, rel_eval = 4.063786e-04
+Iter 280:     prox_L1: ||A x-y||_1 = 4.929713e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.536440e-02, MAX_IT, iter = 10
+  f(x^*) = 4.939800e-01, rel_eval = 4.049199e-04
+Iter 281:     prox_L1: ||A x-y||_1 = 4.927746e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.529888e-02, MAX_IT, iter = 10
+  f(x^*) = 4.937813e-01, rel_eval = 4.024687e-04
+Iter 282:     prox_L1: ||A x-y||_1 = 4.925788e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.523377e-02, MAX_IT, iter = 10
+  f(x^*) = 4.935835e-01, rel_eval = 4.007209e-04
+Iter 283:     prox_L1: ||A x-y||_1 = 4.923837e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.516909e-02, MAX_IT, iter = 10
+  f(x^*) = 4.933862e-01, rel_eval = 3.998157e-04
+Iter 284:     prox_L1: ||A x-y||_1 = 4.921894e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.510486e-02, MAX_IT, iter = 10
+  f(x^*) = 4.931899e-01, rel_eval = 3.981401e-04
+Iter 285:     prox_L1: ||A x-y||_1 = 4.919961e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.504130e-02, MAX_IT, iter = 10
+  f(x^*) = 4.929946e-01, rel_eval = 3.962049e-04
+Iter 286:     prox_L1: ||A x-y||_1 = 4.918033e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.497821e-02, MAX_IT, iter = 10
+  f(x^*) = 4.927998e-01, rel_eval = 3.952989e-04
+Iter 287:     prox_L1: ||A x-y||_1 = 4.916116e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.491556e-02, MAX_IT, iter = 10
+  f(x^*) = 4.926060e-01, rel_eval = 3.933596e-04
+Iter 288:     prox_L1: ||A x-y||_1 = 4.914207e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.485362e-02, MAX_IT, iter = 10
+  f(x^*) = 4.924131e-01, rel_eval = 3.917249e-04
+Iter 289:     prox_L1: ||A x-y||_1 = 4.912304e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.479208e-02, MAX_IT, iter = 10
+  f(x^*) = 4.922209e-01, rel_eval = 3.904821e-04
+Iter 290:     prox_L1: ||A x-y||_1 = 4.910408e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.473087e-02, MAX_IT, iter = 10
+  f(x^*) = 4.920294e-01, rel_eval = 3.891504e-04
+Iter 291:     prox_L1: ||A x-y||_1 = 4.908521e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.467025e-02, MAX_IT, iter = 10
+  f(x^*) = 4.918389e-01, rel_eval = 3.873381e-04
+Iter 292:     prox_L1: ||A x-y||_1 = 4.906644e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.461025e-02, MAX_IT, iter = 10
+  f(x^*) = 4.916494e-01, rel_eval = 3.855304e-04
+Iter 293:     prox_L1: ||A x-y||_1 = 4.904774e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.455065e-02, MAX_IT, iter = 10
+  f(x^*) = 4.914605e-01, rel_eval = 3.841995e-04
+Iter 294:     prox_L1: ||A x-y||_1 = 4.902912e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.449137e-02, MAX_IT, iter = 10
+  f(x^*) = 4.912725e-01, rel_eval = 3.827315e-04
+Iter 295:     prox_L1: ||A x-y||_1 = 4.901057e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.443251e-02, MAX_IT, iter = 10
+  f(x^*) = 4.910851e-01, rel_eval = 3.815521e-04
+Iter 296:     prox_L1: ||A x-y||_1 = 4.899208e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.437412e-02, MAX_IT, iter = 10
+  f(x^*) = 4.908985e-01, rel_eval = 3.802682e-04
+Iter 297:     prox_L1: ||A x-y||_1 = 4.897366e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.431605e-02, MAX_IT, iter = 10
+  f(x^*) = 4.907126e-01, rel_eval = 3.788275e-04
+Iter 298:     prox_L1: ||A x-y||_1 = 4.895532e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.425832e-02, MAX_IT, iter = 10
+  f(x^*) = 4.905275e-01, rel_eval = 3.773882e-04
+Iter 299:     prox_L1: ||A x-y||_1 = 4.893709e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.420108e-02, MAX_IT, iter = 10
+  f(x^*) = 4.903435e-01, rel_eval = 3.752375e-04
+Iter 300:     prox_L1: ||A x-y||_1 = 4.891889e-01, REL_OBJ, iter = 1
+  Proj. B2: epsilon = 0.000000e+00, ||y-Ax||_2 = 7.414419e-02, MAX_IT, iter = 10
+  f(x^*) = 4.901597e-01, rel_eval = 3.749331e-04
+
+ DOUGLAS_RACHFORD:
+  f(x^*) = 4.901597e-01, rel_eval = 3.749331e-04
+ 300 iterations
+ Stopping criterion: MAX_IT 

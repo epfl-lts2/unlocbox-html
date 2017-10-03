@@ -1,0 +1,634 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">DEMO_UNLOCBOX - Simple tutorial for the UNLocBoX</h1>
+<h2>Program code:</h2>
+<div class="highlight"><pre><span></span><span class="c">%DEMO_UNLOCBOX  Simple tutorial for the UNLocBoX</span>
+<span class="c">%</span>
+<span class="c">%   Welcome to the tutorial of the UNLocBoX. In this document, we provide</span>
+<span class="c">%   an example application that uses the basic concepts of the toolbox.</span>
+<span class="c">%   Here you will also find some tricks that may be very useful. You can</span>
+<span class="c">%   find an introduction and more detailed documentation in the userguide,</span>
+<span class="c">%   available at</span>
+<span class="c">%   http://unlocbox.sourceforge.net/notes/unlocbox-note-002.pdf</span>
+<span class="c">%</span>
+<span class="c">%   This toolbox is designed to solve convex optimization problems of the</span>
+<span class="c">%   form:</span>
+<span class="c">%</span>
+<span class="c">%               argmin_x  (f1(x) + f2(x)),</span>
+<span class="c">%</span>
+<span class="c">%   or more generally</span>
+<span class="c">%   </span>
+<span class="c">%               argmin_x sum_{n=1}^K f_n(x), </span>
+<span class="c">%</span>
+<span class="c">%   where the f_i are  lower semi-continuous convex functions and x the</span>
+<span class="c">%   optimization variables. For more details about the problems, please</span>
+<span class="c">%   refer to the userguide (UNLocBoX-note-002) available on</span>
+<span class="c">%   https://lts2.epfl.ch/unlocbox/notes/unlocbox-note-002.pdf .</span>
+<span class="c">%</span>
+<span class="c">%   This toolbox is based on proximal splitting methods. Those methods cut</span>
+<span class="c">%   the problem into smaller (and easier) subproblems that can be solved in</span>
+<span class="c">%   an iterative fashion. The UNLocBoX essentially consists of three</span>
+<span class="c">%   families of functions: </span>
+<span class="c">%   </span>
+<span class="c">%    Proximity operators: they solve small minimization problems and </span>
+<span class="c">%     allow a quick implementation of many composite problems. </span>
+<span class="c">%</span>
+<span class="c">%    Solvers: generic minimization algorithms that can work with different</span>
+<span class="c">%     combinations of proximity operators in order to minimize complex</span>
+<span class="c">%     objective functions</span>
+<span class="c">%</span>
+<span class="c">%    Demonstration files: examples to help you to use the toolbox</span>
+<span class="c">%</span>
+<span class="c">%   This toolbox is provided for free. We would be happy to receive</span>
+<span class="c">%   comments, information about bugs or any other kind of help in order to</span>
+<span class="c">%   improve the toolbox.</span>
+<span class="c">%</span>
+<span class="c">%   A simple example: Image in-painting</span>
+<span class="c">%   -----------------------------------</span>
+<span class="c">%</span>
+<span class="c">%   Let&#39;s suppose we have a noisy image with missing pixels. Our goal is</span>
+<span class="c">%   simply to fill the unknown values in order to reconstruct an image</span>
+<span class="c">%   close to the original one. We first begin by setting up some</span>
+<span class="c">%   assumptions about the problem.</span>
+<span class="c">%</span>
+<span class="c">%   Figure 1: The original image provided by the toolbox. Use cameraman() function to access.</span>
+<span class="c">%</span>
+<span class="c">%      </span>
+<span class="c">%</span>
+<span class="c">%   Assumptions</span>
+<span class="c">%   -----------</span>
+<span class="c">%</span>
+<span class="c">%   In this particular example, we firstly assume that we know the position</span>
+<span class="c">%   of the missing pixels. This happens when we know that a specific</span>
+<span class="c">%   part of a photo is destroyed, or when we have sampled some of the</span>
+<span class="c">%   pixels in known positions and we wish to recover the rest of the image.</span>
+<span class="c">%   Secondly, we assume that the image follows some standard distribution.</span>
+<span class="c">%   For example, many natural images are known to have sharp edges and</span>
+<span class="c">%   almost flat regions (the extreme case would be the cartoon images with</span>
+<span class="c">%   completely flat regions). Thirdly, we suppose that known pixels are</span>
+<span class="c">%   subject to some Gaussian noise with a variance of epsilon.</span>
+<span class="c">%</span>
+<span class="c">%   Figure 2: Noisy image.</span>
+<span class="c">%</span>
+<span class="c">%</span>
+<span class="c">%</span>
+<span class="c">%   Figure 3: Measurements. 50 percent of the pixels have been removed.</span>
+<span class="c">%</span>
+<span class="c">%       </span>
+<span class="c">%</span>
+<span class="c">%   Formulation of the problem</span>
+<span class="c">%   --------------------------</span>
+<span class="c">%   At this point, the problem can be expressed in a mathematical form. We</span>
+<span class="c">%   will simulate the masking operation with an operator A. This first</span>
+<span class="c">%   assumption leads to a constraint.</span>
+<span class="c">%</span>
+<span class="c">%              Ax = y</span>
+<span class="c">%</span>
+<span class="c">%   where x is the vectorized image we want to recover, y are the</span>
+<span class="c">%   observed noisy pixels and A a linear operator selecting the known</span>
+<span class="c">%   pixels. However due to the addition of noise this constraint can be a</span>
+<span class="c">%   little bit relaxed and we rewrite it in the following form</span>
+<span class="c">%</span>
+<span class="c">%      .       || Ax - y ||_2  &lt;=  sqrt{N} epsilon</span>
+<span class="c">%</span>
+<span class="c">%   where N is the number of known pixels.</span>
+<span class="c">%   Note that epsilon can be chosen to be equal to 0 so that the</span>
+<span class="c">%   equality y=Ax is satisfied. In our case, as the measurements are</span>
+<span class="c">%   noisy, we set epsilon to be the expected value of the norm of the</span>
+<span class="c">%   noise (standard deviation times square root of number of measurements).</span>
+<span class="c">%</span>
+<span class="c">%   We use as a prior assumption that the image has a small total variation</span>
+<span class="c">%   norm (TV-norm). (The TV-norm is the l^1-norm of the gradient of x.)</span>
+<span class="c">%   On images, this norm is low when the image is composed of patches of</span>
+<span class="c">%   color and few &quot;degradee&quot; (gradients). This is the case for most of</span>
+<span class="c">%   natural images.  To summarize, we express the problem as</span>
+<span class="c">%</span>
+<span class="c">%       argmin ||x||_TV s.t ||Ax-y||_2 &lt; sqrt{N} epsilon  (Problem I)</span>
+<span class="c">%</span>
+<span class="c">%   Note that if the amount of noise is not known, epsilon is considered</span>
+<span class="c">%   as a free parameter that tunes the confidence to the measurements.</span>
+<span class="c">%   However, this is not the only way to define the problem. We could also</span>
+<span class="c">%   write:</span>
+<span class="c">%</span>
+<span class="c">%       argmin ||Ax-y||_2^2 + lambda  ||x||_TV            (Problem II)</span>
+<span class="c">%</span>
+<span class="c">%   with the first function playing the role of a data fidelity term and</span>
+<span class="c">%   the second a prior assumption on the signal. lambda adjusts the</span>
+<span class="c">%   tradeoff between measurement fidelity and prior assumption. We call it</span>
+<span class="c">%   the regularization parameter. The smaller it is, the more we trust</span>
+<span class="c">%   the measurements and conversely. epsilon plays a similar role as</span>
+<span class="c">%   lambda.</span>
+<span class="c">%   </span>
+<span class="c">%   We have presented two ways to formulate the problem. The reader should</span>
+<span class="c">%   keep in mind that choosing between one or the other problem will affect</span>
+<span class="c">%   the choice of the solver and the convergence rate. With experience, one</span>
+<span class="c">%   should be able to know in advance which problem will lead to the best</span>
+<span class="c">%   solver.</span>
+<span class="c">%</span>
+<span class="c">%   Note that there exists a bijection between the parameters lambda and</span>
+<span class="c">%   epsilon leading both problems to the same solution. Unfortunately,</span>
+<span class="c">%   the bijection function is not trivial to determine.</span>
+<span class="c">%</span>
+<span class="c">%   Once your problem is well defined, we need to provide a list of</span>
+<span class="c">%   functions to the UNLocBoX solver. (For example, in Problem 2, the</span>
+<span class="c">%   functions are AX-Y_2^2 and  lambda X_{TV}.) Every function</span>
+<span class="c">%   is modeled by a MATLAB structure containing some special fields. We</span>
+<span class="c">%   separate the functions in two different types: differentiable and non</span>
+<span class="c">%   differentiable. For differentiable function, the user needs to fill the</span>
+<span class="c">%   following fields:      </span>
+<span class="c">%    func.eval : An anonymous function that evaluate the function</span>
+<span class="c">%    func.grad : An anonymous function that evaluate the gradient</span>
+<span class="c">%    func.beta : An upper bound on the Lipschitz constant of the gradient</span>
+<span class="c">%</span>
+<span class="c">%   For instance, the function AX-Y_2^2 is defined in MATLAB by:</span>
+<span class="c">%</span>
+<span class="c">%           fsmooth.grad = @(x) 2  A&#39;  (A*x - y);</span>
+<span class="c">%           fsmooth.eval = @(x) norm(A*x - y)^2;</span>
+<span class="c">%           fsmooth.beta = 2  norm(A)^2;</span>
+<span class="c">%</span>
+<span class="c">%   The Lipschitz constant of a the gradient is defined as:</span>
+<span class="c">%</span>
+<span class="c">%        min_beta  such that for all x_1, x_2, we have </span>
+<span class="c">%                `|| grad_f(x_1) - grad_f(x_2) ||_2 &lt; beta || x_1-x_2 ||_2</span>
+<span class="c">%   </span>
+<span class="c">%   When the function is not differentiable, the field .beta is dropped</span>
+<span class="c">%   and .grad is replaced by the field .prox that contains an anonymous</span>
+<span class="c">%   function for the proximity operator (They will be explained in more</span>
+<span class="c">%   details the following section.</span>
+<span class="c">%</span>
+<span class="c">%           ftv.prox = @(x, T) prox_tv(x, T  lambda, paramtv);</span>
+<span class="c">%           ftv.eval = @(x) lambda  tv_norm(x);   </span>
+<span class="c">%</span>
+<span class="c">%   Proximity operators</span>
+<span class="c">%   -------------------</span>
+<span class="c">%</span>
+<span class="c">%   The proximity operator of a lower semi-continuous convex function f</span>
+<span class="c">%   is defined by:</span>
+<span class="c">%</span>
+<span class="c">%        prox_{lambda f} (z) = argmin_{x} 1/2 ||x-z||_2^2  +  lambda f(x)</span>
+<span class="c">%</span>
+<span class="c">%   Proximity operators minimize a function without going too far</span>
+<span class="c">%   from a initial point. They can be thought or assimilated as de-noising</span>
+<span class="c">%   operators. Because of the l2-term in the minimization problem, proximity</span>
+<span class="c">%   operators perform a regularized minimization of the function f.</span>
+<span class="c">%   However, applied iteratively, they lead to the minimization of this</span>
+<span class="c">%   function. For x^ the minimizer of the function f, it is obvious</span>
+<span class="c">%   that:</span>
+<span class="c">%</span>
+<span class="c">%               x^* = prox_{f}(x^*)  = argmin_{x} 1/2 ||x-x^*||_2^2  + f(x)  </span>
+<span class="c">%</span>
+<span class="c">%   In a sense, proximity operators perform a regularized minimization of</span>
+<span class="c">%   the function f. However, they also provide a framework to handle</span>
+<span class="c">%   constraints. Those can be inserted into the problem thanks to indicative</span>
+<span class="c">%   functions. These functions assert if x belong to a set C. They only</span>
+<span class="c">%   have two output values: 0 if x is in the set and infty</span>
+<span class="c">%   otherwise:</span>
+<span class="c">%</span>
+<span class="c">%                  /   0       if   x in C   </span>
+<span class="c">%         i_C(x) = |</span>
+<span class="c">%                  \  inf      otherwise</span>
+<span class="c">%</span>
+<span class="c">%   The solution of the proximity operator of this function has to be in</span>
+<span class="c">%   the set C, otherwise the i_C(x)=infty. Moreover, since it also</span>
+<span class="c">%   minimizes X-Z_2^2, it will select the closest point to z. As a</span>
+<span class="c">%   result the proximity operators of indicator functions are projections.</span>
+<span class="c">%</span>
+<span class="c">%   It is important to keep in mind the equivalence between constraints and</span>
+<span class="c">%   indicative functions. This is the trick that allows to use hard</span>
+<span class="c">%   constraint with the UNLocBoX as it cannot directly handle them. The</span>
+<span class="c">%   constraints will thus be inserted in the form of indicative functions.</span>
+<span class="c">%</span>
+<span class="c">%   Solving problem I</span>
+<span class="c">%   -----------------</span>
+<span class="c">%</span>
+<span class="c">%   The UNLocBoX is based on proximal splitting techniques for solving</span>
+<span class="c">%   convex optimization problems. These techniques divide the problem into</span>
+<span class="c">%   smaller problems that are easier to solve. Topically, each function</span>
+<span class="c">%   will compose a sub-problem that will be solved by its proximity</span>
+<span class="c">%   operator (or gradient step). In the particular case of problem (I), the</span>
+<span class="c">%   solver will iteratively, first minimize a little bit the TV norm and</span>
+<span class="c">%   second perform the projection on the fidelity term B2-ball. (The</span>
+<span class="c">%   B2-ball is the space of point x satisfying</span>
+<span class="c">%   AX-Y&lt;=sqrt{N}epsilon). To solve problem (I), we minimize two</span>
+<span class="c">%   functions:</span>
+<span class="c">%</span>
+<span class="c">%    The TV norm: f_1(x)= lambda x||_{TV}</span>
+<span class="c">%     The proximity operator of f_1 is given by: </span>
+<span class="c">%</span>
+<span class="c">%        prox_{f1,lambda} (x) = argmin_{z} 1/2 ||x-z||_2^2  +  lambda ||z||_TV</span>
+<span class="c">%</span>
+<span class="c">%     In MATLAB, the function is defined by the following code:</span>
+<span class="c">%</span>
+<span class="c">%           paramtv.verbose = 1;</span>
+<span class="c">%           paramtv.maxit = 50;</span>
+<span class="c">%           f1.prox = @(x, T) prox_tv(x, T  lambda, paramtv);</span>
+<span class="c">%           f1.eval = @(x) lambda  tv_norm(x);   </span>
+<span class="c">%</span>
+<span class="c">%     This function is a structure with two fields. First, f1.prox is an</span>
+<span class="c">%     operator taking as input x and T and evaluating the proximity</span>
+<span class="c">%     operator of the function (T has be stay a free weight for the</span>
+<span class="c">%     solver. it is going to be replaced by the timestep later). Second,</span>
+<span class="c">%     f1.eval is also an  operator evaluating the function at x.</span>
+<span class="c">%</span>
+<span class="c">%     The proximal operator of the TV norm is already implemented in the</span>
+<span class="c">%     UNLocBoX by the function prox_tv. We tune it by setting the maximum</span>
+<span class="c">%     number of iterations and a verbosity level. Other parameters are also</span>
+<span class="c">%     available (see documentation).</span>
+<span class="c">%</span>
+<span class="c">%      paramtv.verbose selects the display level (0 no log, 1 summary at</span>
+<span class="c">%       convergence and 2 display all steps).</span>
+<span class="c">%</span>
+<span class="c">%      paramtv.maxit defines the maximum number of iteration for this</span>
+<span class="c">%       proximity operator.</span>
+<span class="c">%</span>
+<span class="c">%     Not that for problem (I), lambda can be dropped or set to 1. This</span>
+<span class="c">%     parameter will be used when solving problem (II).</span>
+<span class="c">%</span>
+<span class="c">%    f_2 is the indicator function of the set S defined by Ax-y||_2 &lt; epsilon </span>
+<span class="c">%     The proximity operator of f_2 is: </span>
+<span class="c">%</span>
+<span class="c">%        prox_{f2,gamma} (z) = argmin_{x} 1/2 ||x-z||_2^2  +  gamma i_S( x ),</span>
+<span class="c">%</span>
+<span class="c">%     with i_S(x) is zero if x is in the set S and infinite otherwise.</span>
+<span class="c">%     Under some technical assumption, this previous problem has an</span>
+<span class="c">%     identical solution as:</span>
+<span class="c">%</span>
+<span class="c">%        argmin_{z} ||x - z||_2^2   s.t.  || A z - y||_2 &lt; epsilon</span>
+<span class="c">%</span>
+<span class="c">%     It is simply a projection on the B2-ball (The B2-ball is the set of</span>
+<span class="c">%     all points satisfying  A X - Y_2 &lt; epsilon ). In MATLAB, we</span>
+<span class="c">%     write:</span>
+<span class="c">%</span>
+<span class="c">%           param_proj.epsilon = epsilon;</span>
+<span class="c">%           param_proj.A = A;</span>
+<span class="c">%           param_proj.At = A;</span>
+<span class="c">%           param_proj.y = y;</span>
+<span class="c">%           f2.prox=@(x,T) proj_b2(x,T,param_proj);</span>
+<span class="c">%           f2.eval=@(x) eps;</span>
+<span class="c">%</span>
+<span class="c">%     The prox field of f2 is in that case the operator</span>
+<span class="c">%     computing the projection. Since we suppose that the constraint is</span>
+<span class="c">%     satisfied, the value of the indicator function is 0. For</span>
+<span class="c">%     implementation reasons, it is better to set the value of the operator</span>
+<span class="c">%     f2.eval to eps than to 0. Note that this hypothesis could lead</span>
+<span class="c">%     to strange evolution of the objective function. Here the parameter</span>
+<span class="c">%     A and At are mandatory. Please notice here the two following</span>
+<span class="c">%     lines: </span>
+<span class="c">%</span>
+<span class="c">%           param_proj.A = A;</span>
+<span class="c">%           param_proj.At = A;</span>
+<span class="c">%</span>
+<span class="c">%     In fact we consider here the masking operator A as a diagonal</span>
+<span class="c">%     matrix containing 1&#39;s for observed pixels and 0&#39;s for hidden pixels.</span>
+<span class="c">%     As a consequence: A = At. In MATLAB, one easy way to implement</span>
+<span class="c">%     this operator is to use:</span>
+<span class="c">%</span>
+<span class="c">%           A = @(x) matA . x;</span>
+<span class="c">%</span>
+<span class="c">%     with matA the mask. In a compressed sensing problem for instance,</span>
+<span class="c">%     you would define:</span>
+<span class="c">%</span>
+<span class="c">%           param_proj.A = @(x) Phi  x;</span>
+<span class="c">%           param_proj.At = @(x) Phi&#39;  x;</span>
+<span class="c">%</span>
+<span class="c">%     where Phi is the sensing matrix!</span>
+<span class="c">%</span>
+<span class="c">%   At this point, we are ready to solve the problem. The UNLocBoX contains</span>
+<span class="c">%   many different solvers and also a universal one that will select a</span>
+<span class="c">%   suitable method for the problem. To use it, just write:</span>
+<span class="c">%</span>
+<span class="c">%           sol = solvep(y,{f1,f2});</span>
+<span class="c">%</span>
+<span class="c">%   You can also use a specific solver for your problem. In this tutorial,</span>
+<span class="c">%   we present two of them forward_backward and douglas_rachford. Both</span>
+<span class="c">%   of them take as input two functions (they have generalization taking</span>
+<span class="c">%   more functions), a starting point and some optional parameters.</span>
+<span class="c">%</span>
+<span class="c">%   In our problem, both functions are not smooth on all points of the</span>
+<span class="c">%   domain leading to the impossibility to compute the gradient. In that</span>
+<span class="c">%   case, solvers (such as forward_backward) using gradient descent</span>
+<span class="c">%   cannot be used. As a consequence, we will use douglas_rachford</span>
+<span class="c">%   instead. In MATLAB, we write:</span>
+<span class="c">%</span>
+<span class="c">%           param.verbose = 2;    </span>
+<span class="c">%           param.maxit = 50;    </span>
+<span class="c">%           param.tol = 10e-5;</span>
+<span class="c">%           param.gamma = 0.1;</span>
+<span class="c">%           fig = figure(100);</span>
+<span class="c">%           param.do_sol=@(x) plot_image(x,fig); </span>
+<span class="c">%           sol = douglas_rachford(y,f1,f2,param); </span>
+<span class="c">%</span>
+<span class="c">%   Or in an equivalent manner (this second way is recommended):</span>
+<span class="c">%</span>
+<span class="c">%           param.method = &quot;douglas_rachford&quot;     </span>
+<span class="c">%           sol = solvep(y,{f1,f2},param); </span>
+<span class="c">%</span>
+<span class="c">%    param.verbose selects the display level (0 no log, 1 summary at</span>
+<span class="c">%       convergence and 2 display all steps).</span>
+<span class="c">%</span>
+<span class="c">%    param.maxit defines the maximum number of iteration.</span>
+<span class="c">%</span>
+<span class="c">%    param.tol is stopping criterion for the loop. The algorithm stops if</span>
+<span class="c">%</span>
+<span class="c">%         (  n(t) - n(t-1) )  / n(t) &lt; tol,</span>
+<span class="c">%      </span>
+<span class="c">%     where  n(t) is the objective function at iteration t*</span>
+<span class="c">%</span>
+<span class="c">%    param.gamma defines the step-size. It is a compromise between</span>
+<span class="c">%     convergence speed and precision. Note that if gamma is too big, the</span>
+<span class="c">%     algorithm might not converge. By default, this parameter is computed</span>
+<span class="c">%     automatically.</span>
+<span class="c">%</span>
+<span class="c">%    Finally, the following line allows to display the current</span>
+<span class="c">%     reconstruction of the image at each iteration:</span>
+<span class="c">%</span>
+<span class="c">%           param.do_sol=@(x) plot_image(x,fig); </span>
+<span class="c">%</span>
+<span class="c">%</span>
+<span class="c">%   Figure 4: This figure shows the reconstructed image by solving problem I using Douglas Rachford algorithm.</span>
+<span class="c">%</span>
+<span class="c">%          </span>
+<span class="c">%</span>
+<span class="c">%   You can stop the simulation by typing &quot;ctrl + d&quot; in the consol. At the</span>
+<span class="c">%   end of the next iteration, the algorithm will stop and return the</span>
+<span class="c">%   current solution.</span>
+<span class="c">%</span>
+<span class="c">%   Solving problem II</span>
+<span class="c">%   ------------------</span>
+<span class="c">%</span>
+<span class="c">%   Solving problem II instead of problem I can be done with a small</span>
+<span class="c">%   modification of the previous code. First we define another function as</span>
+<span class="c">%   follow:</span>
+<span class="c">%</span>
+<span class="c">%           f3.grad = @(x) 2*A(A(x) - y);</span>
+<span class="c">%           f3.eval = @(x) norm(A(x) - y, &#39;fro&#39;)^2;</span>
+<span class="c">%           f3.beta = 2;</span>
+<span class="c">%</span>
+<span class="c">%   The structure of f3 contains a field f3.grad. In fact, the l2-norm </span>
+<span class="c">%   is a smooth function. As a consequence the gradient is well defined on </span>
+<span class="c">%   the entire domain. This allows using the forward_backward solver that</span>
+<span class="c">%   can be called by: </span>
+<span class="c">%   </span>
+<span class="c">%           param.method = &quot;forward_backward&quot;     </span>
+<span class="c">%           sol21 = solvep(y,{f1,f2},param); </span>
+<span class="c">%</span>
+<span class="c">%   In this case, we can also use the douglas_rachford solver. To do so,</span>
+<span class="c">%   we need to define the field f3.prox. In general, this is not</span>
+<span class="c">%   recommended because a gradient step is usually less computationally</span>
+<span class="c">%   expensive than a proximal operator: </span>
+<span class="c">%</span>
+<span class="c">%           param_l2.A = A;</span>
+<span class="c">%           param_l2.At = A;</span>
+<span class="c">%           param_l2.y = y;</span>
+<span class="c">%           param_l2.verbose = 1;</span>
+<span class="c">%           f3.prox = @(x,T) prox_l2(x, T, param_l2);   </span>
+<span class="c">%           f3.eval = @(x) norm(A(x) - y, &#39;fro&#39;)^2;</span>
+<span class="c">%   </span>
+<span class="c">%           param.method = &quot;douglas_rachford&quot;     </span>
+<span class="c">%           sol22 = solvep(y, {f1,f3}, param); </span>
+<span class="c">%</span>
+<span class="c">%   We remind the user that forward_backward will not use the field</span>
+<span class="c">%   f3.prox and douglas_rachford will not use the field f3.grad.</span>
+<span class="c">%</span>
+<span class="c">%   These two solvers will converge (up to numerical error) to the same</span>
+<span class="c">%   solution. However, convergence speed might be different. As we perform</span>
+<span class="c">%   only 100 iterations with both of them, we do not obtain exactly the</span>
+<span class="c">%   same result.</span>
+<span class="c">%</span>
+<span class="c">%   Figure 5: This figure shows the reconstructed image by solving problem II using the Forward Backward algorithm.</span>
+<span class="c">%</span>
+<span class="c">%       </span>
+<span class="c">%</span>
+<span class="c">%   Figure 6: This figure shows the reconstructed image by solving problem II using the Douglas Rachford algorithm.</span>
+<span class="c">%</span>
+<span class="c">%       </span>
+<span class="c">%</span>
+<span class="c">%   Remark: The parameter lambda (the regularization parameter) and</span>
+<span class="c">%   epsilon (The radius of the l2 ball) can be chosen empirically.</span>
+<span class="c">%   Some methods allow to compute those parameters. However, this is far</span>
+<span class="c">%   beyond the scope of this tutorial.</span>
+<span class="c">%</span>
+<span class="c">%   </span>
+<span class="c">%   Conclusion</span>
+<span class="c">%   ----------</span>
+<span class="c">%</span>
+<span class="c">%   In this tutorial, the reader can observe that problem (II) is solved</span>
+<span class="c">%   much more efficiently than problem (I).However, writing the problem</span>
+<span class="c">%   with a constraint (like problem (I)) often allow a much easier tuning</span>
+<span class="c">%   of the parameters at the cost of using a slower solver.</span>
+<span class="c">%</span>
+<span class="c">%   Only experience helps to know which formulation of a problem will lead</span>
+<span class="c">%   to the best solver. Usually, forward backward (FISTA) and ADMM are</span>
+<span class="c">%   considered to be the best solvers. </span>
+<span class="c">%</span>
+<span class="c">%   Speed consideration are relative when using the UNLocBoX. Due to</span>
+<span class="c">%   general implementation of the toolbox, we estimate the overall speed</span>
+<span class="c">%   between one and two times slower than an optimal algorithm cooked and</span>
+<span class="c">%   optimized for a special problem (in MATLAB).</span>
+<span class="c">%</span>
+<span class="c">%   Thanks for reading this tutorial</span>
+<span class="c">%   </span>
+<span class="c">%</span>
+<span class="c">%   References:</span>
+<span class="c">%     P. Combettes and J. Pesquet. Proximal splitting methods in signal</span>
+<span class="c">%     processing. Fixed-Point Algorithms for Inverse Problems in Science and</span>
+<span class="c">%     Engineering, pages 185--212, 2011.</span>
+<span class="c">%     </span>
+<span class="c">%     N. Perraudin, D. Shuman, G. Puy, and P. Vandergheynst. UNLocBoX A</span>
+<span class="c">%     matlab convex optimization toolbox using proximal splitting methods.</span>
+<span class="c">%     ArXiv e-prints, Feb. 2014.</span>
+<span class="c">%     </span>
+<span class="c">%</span>
+<span class="c">%   Url: https://lts2.epfl.ch/unlocbox/doc/demos/demo_unlocbox.php</span>
+
+<span class="c">% Copyright (C) 2012-2016 Nathanael Perraudin.</span>
+<span class="c">% This file is part of UNLOCBOX version 1.7.3</span>
+<span class="c">%</span>
+<span class="c">% This program is free software: you can redistribute it and/or modify</span>
+<span class="c">% it under the terms of the GNU General Public License as published by</span>
+<span class="c">% the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">% (at your option) any later version.</span>
+<span class="c">%</span>
+<span class="c">% This program is distributed in the hope that it will be useful,</span>
+<span class="c">% but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">% GNU General Public License for more details.</span>
+<span class="c">%</span>
+<span class="c">% You should have received a copy of the GNU General Public License</span>
+<span class="c">% along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="c">% Author: Nathanael Perraudin</span>
+<span class="c">% Date: March 15 2015</span>
+<span class="c">%</span>
+
+<span class="c">%% Initialisation</span>
+<span class="n">clear</span><span class="p">;</span>
+<span class="n">close</span> <span class="n">all</span><span class="p">;</span>
+
+<span class="c">% Loading toolbox</span>
+<span class="n">init_unlocbox</span><span class="p">;</span>
+
+<span class="n">verbose</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c">% verbosity level</span>
+
+<span class="c">%% Load an image</span>
+
+<span class="c">% Original image</span>
+<span class="n">im_original</span> <span class="p">=</span> <span class="n">cameraman</span><span class="p">;</span> 
+
+<span class="c">% Displaying original image</span>
+<span class="n">imagesc_gray</span><span class="p">(</span><span class="n">im_original</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;Original image&#39;</span><span class="p">);</span>  
+
+<span class="c">%% Creation of the problem</span>
+
+<span class="n">sigma_noise</span> <span class="p">=</span> <span class="mi">10</span><span class="o">/</span><span class="mi">255</span><span class="p">;</span>
+<span class="n">im_noisy</span> <span class="p">=</span> <span class="n">im_original</span> <span class="o">+</span> <span class="n">sigma_noise</span> <span class="o">*</span> <span class="nb">randn</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">im_original</span><span class="p">));</span>
+
+<span class="c">% Create a matrix with randomly 50 % of zeros entry</span>
+<span class="n">p</span> <span class="p">=</span> <span class="mf">0.5</span><span class="p">;</span>
+<span class="n">matA</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">im_original</span><span class="p">));</span>
+<span class="n">matA</span> <span class="p">=</span> <span class="p">(</span><span class="n">matA</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">));</span>
+<span class="c">% Define the operator</span>
+<span class="n">A</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">matA</span> <span class="o">.*</span> <span class="n">x</span><span class="p">;</span>
+
+<span class="c">% Masked image</span>
+<span class="n">y</span> <span class="p">=</span> <span class="n">A</span><span class="p">(</span><span class="n">im_noisy</span><span class="p">);</span>
+
+<span class="c">% Displaying the noisy image</span>
+<span class="n">imagesc_gray</span><span class="p">(</span><span class="n">im_noisy</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;Noisy image&#39;</span><span class="p">);</span>
+
+<span class="c">% Displaying masked image</span>
+<span class="n">imagesc_gray</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&#39;Measurements&#39;</span><span class="p">);</span>
+
+<span class="c">%% Setting the proximity operator</span>
+
+<span class="n">lambda</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="c">% setting the function f1 (norm TV)</span>
+<span class="n">paramtv</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="n">verbose</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">paramtv</span><span class="p">.</span><span class="n">maxit</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="n">f1</span><span class="p">.</span><span class="n">prox</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="n">prox_tv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lambda</span><span class="o">*</span><span class="n">T</span><span class="p">,</span> <span class="n">paramtv</span><span class="p">);</span>
+<span class="n">f1</span><span class="p">.</span><span class="n">eval</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">lambda</span> <span class="o">*</span> <span class="n">norm_tv</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>   
+
+<span class="c">% setting the function f2 </span>
+<span class="n">param_proj</span><span class="p">.</span><span class="n">epsilon</span> <span class="p">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">sigma_noise</span>^<span class="mi">2</span> <span class="o">*</span> <span class="nb">numel</span><span class="p">(</span><span class="n">im_original</span><span class="p">)</span> <span class="o">*</span> <span class="n">p</span><span class="p">);</span>
+<span class="n">param_proj</span><span class="p">.</span><span class="n">A</span> <span class="p">=</span> <span class="n">A</span><span class="p">;</span>
+<span class="n">param_proj</span><span class="p">.</span><span class="n">At</span> <span class="p">=</span> <span class="n">A</span><span class="p">;</span>
+<span class="n">param_proj</span><span class="p">.</span><span class="n">y</span> <span class="p">=</span> <span class="n">y</span><span class="p">;</span>
+<span class="n">param_proj</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="n">verbose</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">f2</span><span class="p">.</span><span class="n">prox</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="n">proj_b2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">param_proj</span><span class="p">);</span>
+<span class="n">f2</span><span class="p">.</span><span class="n">eval</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="nb">eps</span><span class="p">;</span>
+
+
+
+<span class="c">%% Solving problem I</span>
+
+<span class="c">% setting different parameters for the simulation</span>
+<span class="n">paramdg</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="n">verbose</span><span class="p">;</span>    <span class="c">% display parameter</span>
+<span class="n">paramdg</span><span class="p">.</span><span class="n">maxit</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>    <span class="c">% maximum number of iterations</span>
+<span class="n">paramdg</span><span class="p">.</span><span class="n">tol</span> <span class="p">=</span> <span class="mf">1e-5</span><span class="p">;</span>    <span class="c">% tolerance to stop iterating</span>
+<span class="n">paramdg</span><span class="p">.</span><span class="nb">gamma</span> <span class="p">=</span> <span class="mf">0.1</span> <span class="p">;</span>     <span class="c">% Convergence parameter</span>
+<span class="n">fig</span> <span class="p">=</span> <span class="n">figure</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">paramdg</span><span class="p">.</span><span class="n">do_sol</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">plot_image</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fig</span><span class="p">);</span> <span class="c">% plotting plugin</span>
+
+<span class="c">% solving the problem with Douglas Rachord</span>
+<span class="n">paramdg</span><span class="p">.</span><span class="n">method</span> <span class="p">=</span> <span class="s">&#39;douglas_rachford&#39;</span><span class="p">;</span>
+<span class="n">sol</span> <span class="p">=</span> <span class="n">solvep</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">{</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">},</span> <span class="n">paramdg</span><span class="p">);</span>
+
+<span class="c">%% Displaying the result</span>
+<span class="n">imagesc_gray</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&#39;Problem I - Douglas Rachford&#39;</span><span class="p">);</span>
+
+
+<span class="c">%% Defining the function for problem II</span>
+
+<span class="n">lambda</span> <span class="p">=</span> <span class="mf">0.05</span><span class="p">;</span>
+<span class="c">% setting the function f1 (norm TV)</span>
+<span class="n">paramtv</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="n">verbose</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">paramtv</span><span class="p">.</span><span class="n">maxit</span> <span class="p">=</span> <span class="mi">50</span><span class="p">;</span>
+<span class="n">f1</span><span class="p">.</span><span class="n">prox</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="n">prox_tv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lambda</span> <span class="o">*</span> <span class="n">T</span><span class="p">,</span> <span class="n">paramtv</span><span class="p">);</span>
+<span class="n">f1</span><span class="p">.</span><span class="n">eval</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">lambda</span> <span class="o">*</span> <span class="n">norm_tv</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+
+<span class="c">% setting the function f3</span>
+<span class="n">f3</span><span class="p">.</span><span class="n">grad</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">A</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">);</span>
+<span class="n">f3</span><span class="p">.</span><span class="n">eval</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="s">&#39;fro&#39;</span><span class="p">)</span>^<span class="mi">2</span><span class="p">;</span>
+<span class="n">f3</span><span class="p">.</span><span class="nb">beta</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="c">% To be able to use also Douglas Rachford</span>
+<span class="n">param_l2</span><span class="p">.</span><span class="n">A</span> <span class="p">=</span> <span class="n">A</span><span class="p">;</span>
+<span class="n">param_l2</span><span class="p">.</span><span class="n">At</span> <span class="p">=</span> <span class="n">A</span><span class="p">;</span>
+<span class="n">param_l2</span><span class="p">.</span><span class="n">y</span> <span class="p">=</span> <span class="n">y</span><span class="p">;</span>
+<span class="n">param_l2</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="n">verbose</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">param_l2</span><span class="p">.</span><span class="n">tightT</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">param_l2</span><span class="p">.</span><span class="n">pcg</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">param_l2</span><span class="p">.</span><span class="n">nu</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">f3</span><span class="p">.</span><span class="n">prox</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="n">prox_l2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">param_l2</span><span class="p">);</span>
+
+<span class="c">%% Solving problem II (forward backward)</span>
+<span class="n">paramfw</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="n">verbose</span><span class="p">;</span>    <span class="c">% display parameter</span>
+<span class="n">paramfw</span><span class="p">.</span><span class="n">maxit</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>    <span class="c">% maximum number of iterations</span>
+<span class="n">paramfw</span><span class="p">.</span><span class="n">tol</span> <span class="p">=</span> <span class="mf">1e-5</span><span class="p">;</span>    <span class="c">% tolerance to stop iterating</span>
+<span class="n">fig</span> <span class="p">=</span> <span class="n">figure</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">paramfw</span><span class="p">.</span><span class="n">do_sol</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">plot_image</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fig</span><span class="p">);</span> <span class="c">% plotting plugin</span>
+<span class="n">paramfw</span><span class="p">.</span><span class="n">method</span> <span class="p">=</span> <span class="s">&#39;forward_backward&#39;</span><span class="p">;</span>
+<span class="n">sol21</span> <span class="p">=</span> <span class="n">solvep</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">{</span><span class="n">f1</span><span class="p">,</span> <span class="n">f3</span><span class="p">},</span> <span class="n">paramfw</span><span class="p">);</span>
+<span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">);</span>
+<span class="c">%% Displaying the result</span>
+<span class="n">imagesc_gray</span><span class="p">(</span><span class="n">sol21</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s">&#39;Problem II - Forward Backward&#39;</span> <span class="p">);</span>   
+
+<span class="c">%% Solving problem II (Douglas Rachford)</span>
+<span class="n">paramdg</span><span class="p">.</span><span class="n">method</span> <span class="p">=</span> <span class="s">&#39;douglas_rachford&#39;</span><span class="p">;</span>
+<span class="n">paramdg</span><span class="p">.</span><span class="nb">gamma</span> <span class="p">=</span> <span class="mf">0.5</span> <span class="p">;</span>     <span class="c">% Convergence parameter</span>
+<span class="n">fig</span> <span class="p">=</span> <span class="n">figure</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">paramdg</span><span class="p">.</span><span class="n">do_sol</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">plot_image</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fig</span><span class="p">);</span> <span class="c">% plotting plugin</span>
+<span class="n">sol22</span> <span class="p">=</span> <span class="n">douglas_rachford</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">f3</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">paramdg</span><span class="p">);</span>
+<span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">);</span>
+ <span class="c">%% Displaying the result</span>
+<span class="n">imagesc_gray</span><span class="p">(</span><span class="n">sol22</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s">&#39;Problem II - Douglas Rachford&#39;</span><span class="p">);</span>
+
+<span class="c">%% Close the UNLcoBoX</span>
+<span class="n">close_unlocbox</span><span class="p">;</span>
+</pre></div>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="demo_unlocbox.html">View the help</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p></p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,962 @@
+UnLocBoX version 1.7.3. Copyright 2012-2015 LTS2-EPFL, by Nathanael Perraudin
+LTFAT version 2.2.0. Copyright 2005-2016 Peter L. Søndergaard. For help, please type "ltfathelp". LTFAT is using the MEX backend.
+(Your global and persistent variables have just been cleared. Sorry.)
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec (line 166)] 
+Algorithm selected: DOUGLAS_RACHFORD 
+Iter 001:     prox_L1: ||A x-y||_1 = 7.298036e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 1.337704e-01
+Iter 002:     prox_L1: ||A x-y||_1 = 8.005235e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 1.185240e-01
+Iter 003:     prox_L1: ||A x-y||_1 = 7.090803e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 1.035527e-01
+Iter 004:     prox_L1: ||A x-y||_1 = 6.353862e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 8.699445e-02
+Iter 005:     prox_L1: ||A x-y||_1 = 5.834397e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 7.123742e-02
+Iter 006:     prox_L1: ||A x-y||_1 = 5.490156e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 5.719030e-02
+Iter 007:     prox_L1: ||A x-y||_1 = 5.268112e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 4.560000e-02
+Iter 008:     prox_L1: ||A x-y||_1 = 5.132364e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 3.594816e-02
+Iter 009:     prox_L1: ||A x-y||_1 = 5.051473e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 2.822411e-02
+Iter 010:     prox_L1: ||A x-y||_1 = 5.002683e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 2.248675e-02
+Iter 011:     prox_L1: ||A x-y||_1 = 4.971135e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 1.850960e-02
+Iter 012:     prox_L1: ||A x-y||_1 = 4.949818e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 1.560024e-02
+Iter 013:     prox_L1: ||A x-y||_1 = 4.935517e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 1.336083e-02
+Iter 014:     prox_L1: ||A x-y||_1 = 4.926459e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 1.147088e-02
+Iter 015:     prox_L1: ||A x-y||_1 = 4.920742e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 9.871468e-03
+Iter 016:     prox_L1: ||A x-y||_1 = 4.917532e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 8.451934e-03
+Iter 017:     prox_L1: ||A x-y||_1 = 4.916522e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 7.051521e-03
+Iter 018:     prox_L1: ||A x-y||_1 = 4.917005e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 5.745020e-03
+Iter 019:     prox_L1: ||A x-y||_1 = 4.918552e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 4.463255e-03
+Iter 020:     prox_L1: ||A x-y||_1 = 4.920669e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 3.287866e-03
+Iter 021:     prox_L1: ||A x-y||_1 = 4.922773e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 2.400452e-03
+Iter 022:     prox_L1: ||A x-y||_1 = 4.924658e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 1.848699e-03
+Iter 023:     prox_L1: ||A x-y||_1 = 4.926359e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 1.496417e-03
+Iter 024:     prox_L1: ||A x-y||_1 = 4.927874e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 1.252986e-03
+Iter 025:     prox_L1: ||A x-y||_1 = 4.929294e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 1.076339e-03
+Iter 026:     prox_L1: ||A x-y||_1 = 4.930637e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 9.422458e-04
+Iter 027:     prox_L1: ||A x-y||_1 = 4.931887e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 8.305345e-04
+Iter 028:     prox_L1: ||A x-y||_1 = 4.933051e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 7.342962e-04
+Iter 029:     prox_L1: ||A x-y||_1 = 4.934097e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 6.486445e-04
+Iter 030:     prox_L1: ||A x-y||_1 = 4.935062e+01, REL_OB, iter = 2
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec>@(x,T)Psi(Psit(x).*(1-Mask)+Mask.*sound_depleted)
+  In douglas_rachford_alg>douglas_rachford_algorithm (line 34)
+  In douglas_rachford_alg>@(x_0,fg,Fp,sol,s,param)douglas_rachford_algorithm(Fp,sol,s,param) (line 4)
+  In solvep (line 210)
+  In plotexec (line 166)] 
+   Relative norm of the primal variables: 5.766242e-04
+
+ DOUGLAS_RACHFORD:
+   Relative norm of the primal variables: 5.766242e-04
+ 30 iterations
+ Stopping criterion: MAX_IT 
+
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frsyn (line 34)
+  In plotexec>@(x)frsyn(F,x)
+  In plotexec (line 166)] 
+The SNR of the initial signal is 5.11872 dB 
+The SNR of the recovered (FB) signal is 28.5971 dB 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec (line 189)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec (line 193)] 
+[Warning: NARGCHK will be removed in a future release. Use NARGINCHK or
+NARGOUTCHK instead.] 
+[> In fir2long (line 18)
+  In gabtight (line 166)
+  In comp_window (line 109)
+  In gabwin (line 115)
+  In frameaccel (line 75)
+  In frana (line 48)
+  In plotexec>@(x)frana(F,x)
+  In plotexec (line 197)] 

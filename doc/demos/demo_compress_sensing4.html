@@ -1,0 +1,448 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">DEMO_COMPRESS_SENSING4 - Compress sensing example using grouped L1inf norm</h1>
+
+<div class="section" id="xxxdescription">
+<h2>Description</h2>
+<p>We present a compress sensing example solved with the douglas rachford
+solver. The particularity of this example is the use of a mixed norm. We
+do not only know that the signal is sparse, but we also know that the
+sparse coefficients are grouped.</p>
+<p>The problem can be expressed as this</p>
+<!-- argmin || x||_1inf s.t ||b-Ax||_2 < epsilon -->
+<div class="math">
+\begin{equation*}
+arg \min_x \| x\|_{1\infty} \hspace{1cm} such \hspace{0.25cm}  that \hspace{1cm} \|b-Ax\|_2 \leq \epsilon
+\end{equation*}
+</div>
+<p>Where b are the measurements and A the measurement matrix.</p>
+<p>We set</p>
+<ul>
+<li><p class="first"><span class="math">\(f_1(x)=||x||_{1\infty}\)</span>
+We define the prox of <span class="math">\(f_1\)</span> as:</p>
+<!-- prox_{f1,gamma} (z) = argmin_{x} 1/2 ||x-z||_2^2  +  gamma ||z||_1inf -->
+<div class="math">
+\begin{equation*}
+prox_{f1,\gamma} (z) = arg \min_{x} \frac{1}{2} \|x-z\|_2^2  +  \gamma \|z\|_{1\infty}
+\end{equation*}
+</div>
+</li>
+<li><p class="first"><span class="math">\(f_2\)</span> is the indicator function of the set S define by <span class="math">\(||Ax-b||_2 &lt; \epsilon\)</span>
+We define the prox of <span class="math">\(f_2\)</span> as</p>
+<!-- prox_{f2,gamma} (z) = argmin_{x} 1/2 ||x-z||_2^2  +  gamma i_S( x ), -->
+<div class="math">
+\begin{equation*}
+prox_{f2,\gamma} (z) = arg \min_{x} \frac{1}{2} \|x-z\|_2^2   + i_S(x) ,
+\end{equation*}
+</div>
+<p>with <span class="math">\(i_S(x)\)</span> is zero if x is in the set S and infinity otherwise.
+This previous problem has an identical solution as:</p>
+<!-- argmin_{z} ||x - z||_2^2   s.t.  ||b - A z||_2 < epsilon -->
+<div class="math">
+\begin{equation*}
+arg \min_{z} \|x - z\|_2^2   \hspace{1cm} such \hspace{0.25cm} that \hspace{1cm} \|Az-b\|_2 \leq \epsilon
+\end{equation*}
+</div>
+<p>It is simply a projection on the B2-ball.
+A is the measurement matrix (random Gaussian distribution)</p>
+</li>
+</ul>
+<p>The theoretical number of measurements <span class="math">\(M\)</span> is computed with respect of the size of the
+signal <span class="math">\(N\)</span> and the sparsity level <span class="math">\(K\)</span>:</p>
+<!-- M=K*max(4,ceil(log(N))) -->
+<div class="math">
+\begin{equation*}
+M=K \max\left( 4 , \text{ceil}(\log(N))\right).
+\end{equation*}
+</div>
+<p>Since we add some new information, we will try to reduce the number of
+measurements by a factor p:</p>
+<!-- M=K*max(4/p,ceil(log(N)/p)) -->
+<div class="math">
+\begin{equation*}
+M=K \max\left( \frac{4}{p} , \text{ceil}(\frac{\log(N)}{p})\right).
+\end{equation*}
+</div>
+<p>With this number of measurements, we hope that the algorithm will
+perform  a perfect reconstruction.</p>
+</div>
+<div class="section" id="results">
+<h2>Results</h2>
+<div class="figure align-center">
+<img alt="demo_compress_sensing4_1.png" src="demo_compress_sensing4_1.png" />
+<p class="caption">Results of the algorithm</p>
+<div class="legend">
+This figure shows the original signal and the reconstruction done
+thanks to the algorithm and the measurements. The number of
+measurements is M=900, the length of the signal N=5000, K=100, p=2. This is
+equivalent to a compression ratio of 10. The elements are grouped by
+10.</div>
+</div>
+<p><em>This code produces the following output</em>:</p>
+<pre class="literal-block">
+UnLocBoX version 1.7.3. Copyright 2012-2015 LTS2-EPFL, by Nathanael Perraudin
+The compression ratio is: 10
+The time step is set manually to : 0.01
+Algorithm selected: DOUGLAS_RACHFORD
+Iter 001:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.994116e-06, TOL_EPS, iter = 74
+  prox_L12: ||x||_12 = 4.057991e+00
+  f(x^*) = 4.088794e+02, rel_eval = 1.781593e-01
+Iter 002:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.997493e-06, TOL_EPS, iter = 79
+  prox_L12: ||x||_12 = 7.675901e+00
+  f(x^*) = 3.243171e+01, rel_eval = 1.160740e+01
+Iter 003:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.993637e-06, TOL_EPS, iter = 74
+  prox_L12: ||x||_12 = 8.396808e+00
+  f(x^*) = 7.770888e+00, rel_eval = 3.173488e+00
+Iter 004:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000824e-05, TOL_EPS, iter = 68
+  prox_L12: ||x||_12 = 8.159955e+00
+  f(x^*) = 7.617541e+00, rel_eval = 2.013071e-02
+Iter 005:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000835e-05, TOL_EPS, iter = 68
+  prox_L12: ||x||_12 = 7.878491e+00
+  f(x^*) = 6.539248e+00, rel_eval = 1.648955e-01
+Iter 006:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000999e-05, TOL_EPS, iter = 68
+  prox_L12: ||x||_12 = 7.668143e+00
+  f(x^*) = 5.740260e+00, rel_eval = 1.391903e-01
+Iter 007:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000492e-05, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 7.514608e+00
+  f(x^*) = 5.187276e+00, rel_eval = 1.066040e-01
+Iter 008:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000127e-05, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 7.401788e+00
+  f(x^*) = 4.769245e+00, rel_eval = 8.765138e-02
+Iter 009:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.999409e-06, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 7.288881e+00
+  f(x^*) = 4.440405e+00, rel_eval = 7.405633e-02
+Iter 010:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.999590e-06, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 7.183902e+00
+  f(x^*) = 4.201301e+00, rel_eval = 5.691184e-02
+Iter 011:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000109e-05, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 7.091804e+00
+  f(x^*) = 4.036812e+00, rel_eval = 4.074719e-02
+Iter 012:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000297e-05, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 7.010526e+00
+  f(x^*) = 3.857461e+00, rel_eval = 4.649466e-02
+Iter 013:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000566e-05, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 6.924535e+00
+  f(x^*) = 3.672311e+00, rel_eval = 5.041772e-02
+Iter 014:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000855e-05, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 6.836480e+00
+  f(x^*) = 3.488839e+00, rel_eval = 5.258838e-02
+Iter 015:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000985e-05, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 6.752441e+00
+  f(x^*) = 3.327770e+00, rel_eval = 4.840136e-02
+Iter 016:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000904e-05, TOL_EPS, iter = 68
+  prox_L12: ||x||_12 = 6.673596e+00
+  f(x^*) = 3.204742e+00, rel_eval = 3.838951e-02
+Iter 017:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000961e-05, TOL_EPS, iter = 68
+  prox_L12: ||x||_12 = 6.595522e+00
+  f(x^*) = 3.108405e+00, rel_eval = 3.099247e-02
+Iter 018:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000949e-05, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 6.528105e+00
+  f(x^*) = 3.018890e+00, rel_eval = 2.965141e-02
+Iter 019:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000657e-05, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 6.469749e+00
+  f(x^*) = 2.932182e+00, rel_eval = 2.957133e-02
+Iter 020:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000178e-05, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 6.414923e+00
+  f(x^*) = 2.846986e+00, rel_eval = 2.992488e-02
+Iter 021:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.996449e-06, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 6.360614e+00
+  f(x^*) = 2.764851e+00, rel_eval = 2.970706e-02
+Iter 022:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.991450e-06, TOL_EPS, iter = 62
+  prox_L12: ||x||_12 = 6.303388e+00
+  f(x^*) = 2.673929e+00, rel_eval = 3.400305e-02
+Iter 023:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.997680e-06, TOL_EPS, iter = 67
+  prox_L12: ||x||_12 = 6.246015e+00
+  f(x^*) = 2.575538e+00, rel_eval = 3.820188e-02
+Iter 024:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000217e-05, TOL_EPS, iter = 52
+  prox_L12: ||x||_12 = 6.183942e+00
+  f(x^*) = 2.491690e+00, rel_eval = 3.365130e-02
+Iter 025:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.995298e-06, TOL_EPS, iter = 52
+  prox_L12: ||x||_12 = 6.119755e+00
+  f(x^*) = 2.432335e+00, rel_eval = 2.440252e-02
+Iter 026:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000142e-05, TOL_EPS, iter = 67
+  prox_L12: ||x||_12 = 6.057542e+00
+  f(x^*) = 2.387870e+00, rel_eval = 1.862109e-02
+Iter 027:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000201e-05, TOL_EPS, iter = 67
+  prox_L12: ||x||_12 = 5.997365e+00
+  f(x^*) = 2.338752e+00, rel_eval = 2.100160e-02
+Iter 028:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000249e-05, TOL_EPS, iter = 67
+  prox_L12: ||x||_12 = 5.934521e+00
+  f(x^*) = 2.292302e+00, rel_eval = 2.026347e-02
+Iter 029:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000273e-05, TOL_EPS, iter = 67
+  prox_L12: ||x||_12 = 5.866035e+00
+  f(x^*) = 2.242711e+00, rel_eval = 2.211224e-02
+Iter 030:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000291e-05, TOL_EPS, iter = 67
+  prox_L12: ||x||_12 = 5.795628e+00
+  f(x^*) = 2.200600e+00, rel_eval = 1.913616e-02
+Iter 031:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000361e-05, TOL_EPS, iter = 67
+  prox_L12: ||x||_12 = 5.719383e+00
+  f(x^*) = 2.179609e+00, rel_eval = 9.630793e-03
+Iter 032:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000474e-05, TOL_EPS, iter = 67
+  prox_L12: ||x||_12 = 5.633324e+00
+  f(x^*) = 2.180530e+00, rel_eval = 4.223179e-04
+Iter 033:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000595e-05, TOL_EPS, iter = 67
+  prox_L12: ||x||_12 = 5.543395e+00
+  f(x^*) = 2.207610e+00, rel_eval = 1.226672e-02
+Iter 034:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000719e-05, TOL_EPS, iter = 67
+  prox_L12: ||x||_12 = 5.448649e+00
+  f(x^*) = 2.291655e+00, rel_eval = 3.667472e-02
+Iter 035:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000625e-05, TOL_EPS, iter = 51
+  prox_L12: ||x||_12 = 5.345037e+00
+  f(x^*) = 2.375582e+00, rel_eval = 3.532887e-02
+Iter 036:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000329e-05, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 5.235090e+00
+  f(x^*) = 2.445694e+00, rel_eval = 2.866752e-02
+Iter 037:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.996595e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 5.121583e+00
+  f(x^*) = 2.469077e+00, rel_eval = 9.470343e-03
+Iter 038:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.995381e-06, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 5.011574e+00
+  f(x^*) = 2.438768e+00, rel_eval = 1.242816e-02
+Iter 039:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.993789e-06, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.914154e+00
+  f(x^*) = 2.367207e+00, rel_eval = 3.022996e-02
+Iter 040:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.993539e-06, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.833446e+00
+  f(x^*) = 2.269232e+00, rel_eval = 4.317539e-02
+Iter 041:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.994388e-06, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.773455e+00
+  f(x^*) = 2.162585e+00, rel_eval = 4.931462e-02
+Iter 042:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.996073e-06, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.734292e+00
+  f(x^*) = 2.062973e+00, rel_eval = 4.828554e-02
+Iter 043:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.998328e-06, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.713258e+00
+  f(x^*) = 1.981646e+00, rel_eval = 4.104040e-02
+Iter 044:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000091e-05, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.709228e+00
+  f(x^*) = 1.924279e+00, rel_eval = 2.981223e-02
+Iter 045:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000362e-05, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.719176e+00
+  f(x^*) = 1.891104e+00, rel_eval = 1.754239e-02
+Iter 046:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000630e-05, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.740090e+00
+  f(x^*) = 1.878054e+00, rel_eval = 6.948892e-03
+Iter 047:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000885e-05, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.769194e+00
+  f(x^*) = 1.878535e+00, rel_eval = 2.562705e-04
+Iter 048:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.990547e-06, TOL_EPS, iter = 66
+  prox_L12: ||x||_12 = 4.803768e+00
+  f(x^*) = 1.885366e+00, rel_eval = 3.623156e-03
+Iter 049:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.992936e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.841221e+00
+  f(x^*) = 1.892408e+00, rel_eval = 3.720848e-03
+Iter 050:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.998064e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.879116e+00
+  f(x^*) = 1.895575e+00, rel_eval = 1.671006e-03
+Iter 051:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000233e-05, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.915759e+00
+  f(x^*) = 1.893122e+00, rel_eval = 1.295706e-03
+Iter 052:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000563e-05, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.948760e+00
+  f(x^*) = 1.885298e+00, rel_eval = 4.150221e-03
+Iter 053:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000790e-05, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.977412e+00
+  f(x^*) = 1.873628e+00, rel_eval = 6.228203e-03
+Iter 054:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000915e-05, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 5.001991e+00
+  f(x^*) = 1.861170e+00, rel_eval = 6.693848e-03
+Iter 055:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000943e-05, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 5.020888e+00
+  f(x^*) = 1.848460e+00, rel_eval = 6.875943e-03
+Iter 056:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000883e-05, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 5.033241e+00
+  f(x^*) = 1.836746e+00, rel_eval = 6.377520e-03
+Iter 057:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000746e-05, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 5.039165e+00
+  f(x^*) = 1.826723e+00, rel_eval = 5.486903e-03
+Iter 058:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000546e-05, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 5.039317e+00
+  f(x^*) = 1.818539e+00, rel_eval = 4.500348e-03
+Iter 059:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000296e-05, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 5.034554e+00
+  f(x^*) = 1.811959e+00, rel_eval = 3.631619e-03
+Iter 060:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000013e-05, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 5.026093e+00
+  f(x^*) = 1.806568e+00, rel_eval = 2.984032e-03
+Iter 061:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.997132e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 5.015071e+00
+  f(x^*) = 1.801952e+00, rel_eval = 2.561644e-03
+Iter 062:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.994151e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 5.002285e+00
+  f(x^*) = 1.797809e+00, rel_eval = 2.304560e-03
+Iter 063:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.991356e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.988498e+00
+  f(x^*) = 1.793986e+00, rel_eval = 2.131029e-03
+Iter 064:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.990796e-06, TOL_EPS, iter = 66
+  prox_L12: ||x||_12 = 4.974416e+00
+  f(x^*) = 1.790454e+00, rel_eval = 1.972552e-03
+Iter 065:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.991050e-06, TOL_EPS, iter = 66
+  prox_L12: ||x||_12 = 4.960873e+00
+  f(x^*) = 1.787247e+00, rel_eval = 1.794127e-03
+Iter 066:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000963e-05, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.948683e+00
+  f(x^*) = 1.784408e+00, rel_eval = 1.591392e-03
+Iter 067:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000919e-05, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.939064e+00
+  f(x^*) = 1.782548e+00, rel_eval = 1.043385e-03
+Iter 068:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000903e-05, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.931220e+00
+  f(x^*) = 1.780881e+00, rel_eval = 9.359565e-04
+Iter 069:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000912e-05, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.925364e+00
+  f(x^*) = 1.779263e+00, rel_eval = 9.096250e-04
+Iter 070:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000942e-05, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.921699e+00
+  f(x^*) = 1.777553e+00, rel_eval = 9.616508e-04
+Iter 071:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 1.000988e-05, TOL_EPS, iter = 61
+  prox_L12: ||x||_12 = 4.919723e+00
+  f(x^*) = 1.775653e+00, rel_eval = 1.070132e-03
+Iter 072:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.990956e-06, TOL_EPS, iter = 66
+  prox_L12: ||x||_12 = 4.919197e+00
+  f(x^*) = 1.773529e+00, rel_eval = 1.197393e-03
+Iter 073:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.990460e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.919770e+00
+  f(x^*) = 1.771228e+00, rel_eval = 1.299315e-03
+Iter 074:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.991841e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.921325e+00
+  f(x^*) = 1.768862e+00, rel_eval = 1.337606e-03
+Iter 075:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.993021e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.923418e+00
+  f(x^*) = 1.766582e+00, rel_eval = 1.290711e-03
+Iter 076:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.993938e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.925824e+00
+  f(x^*) = 1.764536e+00, rel_eval = 1.159671e-03
+Iter 077:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.994561e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.928265e+00
+  f(x^*) = 1.762831e+00, rel_eval = 9.671135e-04
+Iter 078:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.994895e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.930578e+00
+  f(x^*) = 1.761509e+00, rel_eval = 7.500611e-04
+Iter 079:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.994965e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.932682e+00
+  f(x^*) = 1.760543e+00, rel_eval = 5.492619e-04
+Iter 080:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.994818e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.934598e+00
+  f(x^*) = 1.759841e+00, rel_eval = 3.985436e-04
+Iter 081:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.994507e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.936338e+00
+  f(x^*) = 1.759283e+00, rel_eval = 3.172155e-04
+Iter 082:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.994091e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.937924e+00
+  f(x^*) = 1.758743e+00, rel_eval = 3.071377e-04
+Iter 083:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.993626e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.939377e+00
+  f(x^*) = 1.758120e+00, rel_eval = 3.544487e-04
+Iter 084:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.993161e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.940821e+00
+  f(x^*) = 1.757356e+00, rel_eval = 4.346878e-04
+Iter 085:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.992734e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.942311e+00
+  f(x^*) = 1.756561e+00, rel_eval = 4.526117e-04
+Iter 086:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.992374e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.943843e+00
+  f(x^*) = 1.755695e+00, rel_eval = 4.930302e-04
+Iter 087:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.992097e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.945205e+00
+  f(x^*) = 1.754738e+00, rel_eval = 5.455618e-04
+Iter 088:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.991912e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.946397e+00
+  f(x^*) = 1.753773e+00, rel_eval = 5.499717e-04
+Iter 089:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.991814e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.947328e+00
+  f(x^*) = 1.752885e+00, rel_eval = 5.066643e-04
+Iter 090:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.991796e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.948016e+00
+  f(x^*) = 1.752142e+00, rel_eval = 4.242131e-04
+Iter 091:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.991844e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.948478e+00
+  f(x^*) = 1.751588e+00, rel_eval = 3.162113e-04
+Iter 092:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.991940e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.948701e+00
+  f(x^*) = 1.751241e+00, rel_eval = 1.982413e-04
+Iter 093:     Proj. B2: epsilon = 1.000000e-05, ||y-Ax||_2 = 9.992066e-06, TOL_EPS, iter = 53
+  prox_L12: ||x||_12 = 4.948733e+00
+  f(x^*) = 1.751119e+00, rel_eval = 6.980775e-05
+
+ DOUGLAS_RACHFORD:
+  f(x^*) = 1.751119e+00, rel_eval = 6.980775e-05
+ 93 iterations
+ Stopping criterion: REL_NORM_OBJ
+</pre>
+</div>
+<H2>References:</H2>
+
+
+
+<p><a name="combettes2011proximal"></a>
+
+P.&nbsp;Combettes and J.&nbsp;Pesquet.
+ Proximal splitting methods in signal processing.
+ <em>Fixed-Point Algorithms for Inverse Problems in Science and
+  Engineering</em>, pages 185--212, 2011.
+
+</p>
+
+<p><a name="combettes2007douglas"></a>
+
+P.&nbsp;Combettes and J.&nbsp;Pesquet.
+ A douglas--rachford splitting approach to nonsmooth convex
+  variational signal recovery.
+ <em>Selected Topics in Signal Processing, IEEE Journal of</em>,
+  1(4):564--574, 2007.
+
+</p>
+
+<p><a name="bach2011optimization"></a>
+
+F.&nbsp;Bach, R.&nbsp;Jenatton, J.&nbsp;Mairal, and G.&nbsp;Obozinski.
+ Optimization with sparsity-inducing penalties.
+ <em>arXiv preprint arXiv:1108.0775</em>, 2011.
+
+</p>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="demo_compress_sensing4_code.html">View the code</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p></p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

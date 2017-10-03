@@ -1,0 +1,359 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">PPXA - Parallel Proximal algorithm</h1>
+<h2>Program code:</h2>
+<div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>[sol, info] <span class="p">=</span><span class="w"> </span><span class="nf">ppxa</span><span class="p">(</span>x_0, F, param<span class="p">)</span><span class="w"></span>
+<span class="c">%PPXA Parallel Proximal algorithm</span>
+<span class="c">%   Usage: sol = ppxa(x_0, F, param);</span>
+<span class="c">%          sol = ppxa(x_0, F);</span>
+<span class="c">%          [sol, infos] = ppxa(...); </span>
+<span class="c">%</span>
+<span class="c">%   Input parameters:</span>
+<span class="c">%         x_0   : Starting point of the algorithm</span>
+<span class="c">%         F     : Array of function to minimize</span>
+<span class="c">%         param : Optional parameter</span>
+<span class="c">%   Output parameters:</span>
+<span class="c">%         sol   : Solution</span>
+<span class="c">%         info  : Structure summarizing informations at convergence</span>
+<span class="c">%</span>
+<span class="c">%   PPXA, derived from the Douglas-Rachford algorithm, solves</span>
+<span class="c">% </span>
+<span class="c">%      sol = argmin sum(W_i*f_i(x))</span>
+<span class="c">%</span>
+<span class="c">%   for x in R^N, where x is the variable and x_0 is the starting point.</span>
+<span class="c">%</span>
+<span class="c">%   F is a cellarray of structures representing functions. All of them</span>
+<span class="c">%   should contains at least two fields. F{ii}.eval to evaluate the</span>
+<span class="c">%   function and F{ii}.prox to compute the proximal operator of the</span>
+<span class="c">%   function.</span>
+<span class="c">%</span>
+<span class="c">%   param a Matlab structure containing solver paremeters. See the</span>
+<span class="c">%   function SOLVEP for more information. Additionally it contains those</span>
+<span class="c">%   aditional fields:  </span>
+<span class="c">%</span>
+<span class="c">%    param.W : the weight (all equal by default)</span>
+<span class="c">%</span>
+<span class="c">%    param.lambda*: is the weight of the update term. It is kind of a</span>
+<span class="c">%     timestep for the proximal operators. (Warning it should not be confused</span>
+<span class="c">%     with gamma, the time step for gradient descent part). By default it</span>
+<span class="c">%     is set to 0.99. Do not change this parameter unless you know what you</span>
+<span class="c">%     do.</span>
+<span class="c">%</span>
+<span class="c">%   See also:  solvep sdmm admm generalized_forward_backward</span>
+<span class="c">%</span>
+<span class="c">%   References:</span>
+<span class="c">%     P. Combettes and J. Pesquet. Proximal splitting methods in signal</span>
+<span class="c">%     processing. Fixed-Point Algorithms for Inverse Problems in Science and</span>
+<span class="c">%     Engineering, pages 185--212, 2011.</span>
+<span class="c">%     </span>
+<span class="c">%</span>
+<span class="c">%   Url: https://lts2.epfl.ch/unlocbox/doc/solver/ppxa.php</span>
+
+<span class="c">% Copyright (C) 2012-2016 Nathanael Perraudin.</span>
+<span class="c">% This file is part of UNLOCBOX version 1.7.3</span>
+<span class="c">%</span>
+<span class="c">% This program is free software: you can redistribute it and/or modify</span>
+<span class="c">% it under the terms of the GNU General Public License as published by</span>
+<span class="c">% the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">% (at your option) any later version.</span>
+<span class="c">%</span>
+<span class="c">% This program is distributed in the hope that it will be useful,</span>
+<span class="c">% but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">% GNU General Public License for more details.</span>
+<span class="c">%</span>
+<span class="c">% You should have received a copy of the GNU General Public License</span>
+<span class="c">% along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="c">% Author:  Nathanael Perraudin</span>
+<span class="c">% Date: Oct 19 2012</span>
+<span class="c">% Testing : test_solver</span>
+
+<span class="n">param</span><span class="p">.</span><span class="n">algo</span> <span class="p">=</span> <span class="s">&#39;PPXA&#39;</span><span class="p">;</span>
+<span class="p">[</span><span class="n">sol</span><span class="p">,</span> <span class="n">info</span><span class="p">]</span> <span class="p">=</span> <span class="n">solvep</span><span class="p">(</span><span class="n">x_0</span><span class="p">,</span><span class="n">F</span><span class="p">,</span><span class="n">param</span><span class="p">);</span>
+
+<span class="k">end</span>
+
+
+<span class="c">% function [sol, info, objective] = ppxa(x_0, F, param)</span>
+<span class="c">% %PPXA Parallel Proximal algorithm</span>
+<span class="c">% %   Usage: sol = ppxa(x_0, F, param);</span>
+<span class="c">% %          sol = ppxa(x_0, F);</span>
+<span class="c">% %          [sol, infos, objective] = ppxa(...); </span>
+<span class="c">% %</span>
+<span class="c">% %   Input parameters:</span>
+<span class="c">% %         x_0   : Starting point of the algorithm</span>
+<span class="c">% %         F     : Array of function to minimize</span>
+<span class="c">% %         param : Optional parameter</span>
+<span class="c">% %   Output parameters:</span>
+<span class="c">% %         sol   : Solution</span>
+<span class="c">% %         info  : Structure summarizing informations at convergence</span>
+<span class="c">% %         objective: vector (evaluation of the objective function each iteration)</span>
+<span class="c">% %</span>
+<span class="c">% %   `ppxa`, derived from the Douglas-Rachford algorithm, solves</span>
+<span class="c">% % </span>
+<span class="c">% %   .. sol = argmin sum(W_i*f_i(x))</span>
+<span class="c">% %</span>
+<span class="c">% %   .. math::  sol = \min_x \sum_i W_i f_i(x)</span>
+<span class="c">% %</span>
+<span class="c">% %   for *x* in $R^N$, where *x* is the variable and *x_0* is the starting point.</span>
+<span class="c">% %</span>
+<span class="c">% %   * *F* is a cellarray of structures representing functions containing </span>
+<span class="c">% %     operators inside and eventually the norm. The prox: *F{i}.prox* and </span>
+<span class="c">% %     the function: *F{i}.eval* are defined in the same way as in the </span>
+<span class="c">% %     Forward-backward and Douglas-Rachford algorithms</span>
+<span class="c">% %</span>
+<span class="c">% %   * *param* a Matlab structure containing the following fields:</span>
+<span class="c">% %</span>
+<span class="c">% %     General parameters:</span>
+<span class="c">% %</span>
+<span class="c">% %     * *param.W* : the weight (all equal by default)</span>
+<span class="c">% %</span>
+<span class="c">% %     * *param.tol* : is stop criterion for the loop. The algorithm stops if</span>
+<span class="c">% %</span>
+<span class="c">% %       ..  (  n(t) - n(t-1) )  / n(t) &lt; tol,</span>
+<span class="c">% %      </span>
+<span class="c">% %       .. math:: \frac{  n(t) - n(t-1) }{ n(t)} &lt; tol,</span>
+<span class="c">% %</span>
+<span class="c">% %       where  $n(t) = \sum W_i*f_i(x)$ is the objective function at iteration *t*</span>
+<span class="c">% %       by default, `tol=10e-4`.</span>
+<span class="c">% %</span>
+<span class="c">% %     * *param.maxit* : is the maximum number of iteration. By default, it is 200.</span>
+<span class="c">% % </span>
+<span class="c">% %     * *param.verbose* : 0 no log, 1 print main steps, 2 print all steps.</span>
+<span class="c">% %</span>
+<span class="c">% %     * *param.lambda* : is the weight of the update term.</span>
+<span class="c">% %</span>
+<span class="c">% %     * *param.gamma* : convergence parameter (default 1)</span>
+<span class="c">% %</span>
+<span class="c">% %     * *param.abs_tol* : If activated, this stopping critterion is the</span>
+<span class="c">% %       objective function smaller than *param.tol*. By default 0.</span>
+<span class="c">% %</span>
+<span class="c">% %</span>
+<span class="c">% %   info is a Matlab structure containing the following fields:</span>
+<span class="c">% %</span>
+<span class="c">% %   * *info.algo* : Algorithm used</span>
+<span class="c">% %</span>
+<span class="c">% %   * *info.iter* : Number of iteration</span>
+<span class="c">% %</span>
+<span class="c">% %   * *info.time* : Time of exectution of the function in sec.</span>
+<span class="c">% %</span>
+<span class="c">% %   * *info.final_eval* : Final evaluation of the objectivs functions</span>
+<span class="c">% %</span>
+<span class="c">% %   * *info.crit* : Stopping critterion used </span>
+<span class="c">% %</span>
+<span class="c">% %   * *info.rel_norm* : Relative norm at convergence </span>
+<span class="c">% %</span>
+<span class="c">% %</span>
+<span class="c">% %   See also:  sdmm, admm, generalized_forward_backward</span>
+<span class="c">% %</span>
+<span class="c">% %   Demos:  demo_ppxa</span>
+<span class="c">% %</span>
+<span class="c">% %   References:  combettes2011proximal</span>
+<span class="c">% </span>
+<span class="c">% % Author:  Nathanael Perraudin</span>
+<span class="c">% % Date: Oct 19 2012</span>
+<span class="c">% </span>
+<span class="c">% % Start the time counter</span>
+<span class="c">% t1 = tic;</span>
+<span class="c">% </span>
+<span class="c">% % test the evaluate function</span>
+<span class="c">% [F] = test_eval(F);</span>
+<span class="c">% </span>
+<span class="c">% % number of functions</span>
+<span class="c">% m = size(F, 2);</span>
+<span class="c">% </span>
+<span class="c">%     % Optional input arguments</span>
+<span class="c">%     if nargin &lt; 3, param = struct; end</span>
+<span class="c">% </span>
+<span class="c">%     if ~isfield(param, &#39;gamma&#39;), param.gamma = 1; end</span>
+<span class="c">%     if ~isfield(param, &#39;tol&#39;), param.tol = 10e-4; end</span>
+<span class="c">%     if ~isfield(param, &#39;abs_tol&#39;), param.abs_tol = 0; end</span>
+<span class="c">%     if ~isfield(param, &#39;maxit&#39;), param.maxit = 200; end</span>
+<span class="c">%     if ~isfield(param, &#39;verbose&#39;), param.verbose = 1; end</span>
+<span class="c">%     if ~isfield(param, &#39;lambda&#39;), param.lambda = 0.99; end</span>
+<span class="c">%     if ~isfield(param, &#39;W&#39;), param.W = ones(m, 1) / m; end</span>
+<span class="c">% </span>
+<span class="c">%     </span>
+<span class="c">%     W=param.W;</span>
+<span class="c">%     </span>
+<span class="c">%     </span>
+<span class="c">%    % Reshape x if vector line</span>
+<span class="c">%     if (size(W, 2) &gt; size(W, 1))</span>
+<span class="c">%         W = W&#39;;</span>
+<span class="c">%     end</span>
+<span class="c">%     </span>
+<span class="c">%     test_gamma_ppxa(param.gamma);</span>
+<span class="c">%     test_sum(W);</span>
+<span class="c">%     </span>
+<span class="c">%     % Create a table of scructure containing data</span>
+<span class="c">%     data = [];</span>
+<span class="c">%     for ii = 1:m</span>
+<span class="c">%         data(ii).y = x_0;     %#ok&lt;AGROW&gt;</span>
+<span class="c">%         data(ii).p = zeros(size(x_0));     %#ok&lt;AGROW&gt;</span>
+<span class="c">%     end</span>
+<span class="c">%     </span>
+<span class="c">% </span>
+<span class="c">%     x = w_sum(W, data, &#39;y&#39;);</span>
+<span class="c">% </span>
+<span class="c">%     </span>
+<span class="c">%     % outerloop</span>
+<span class="c">%     curr_norm = 0;</span>
+<span class="c">%     for ii = 1:m</span>
+<span class="c">%        curr_norm = F{ii}.eval(x) + curr_norm;</span>
+<span class="c">%     end</span>
+<span class="c">%     [~, ~, prev_norm, iter, objective, ~] = convergence_test(curr_norm);</span>
+<span class="c">%     </span>
+<span class="c">%     while 1</span>
+<span class="c">%         </span>
+<span class="c">%         if param.verbose &gt;= 2</span>
+<span class="c">%             fprintf(&#39;Iteration %i:\n&#39;, iter);</span>
+<span class="c">%         end</span>
+<span class="c">%         </span>
+<span class="c">%         % parallel proximal</span>
+<span class="c">%         % compute updated prox</span>
+<span class="c">%         for ii = 1:m</span>
+<span class="c">%             data(ii).p = F{ii}.prox(data(ii).y, param.gamma);%#ok&lt;AGROW&gt;</span>
+<span class="c">%         end</span>
+<span class="c">%         pn = w_sum(W,data,&#39;p&#39;);</span>
+<span class="c">% </span>
+<span class="c">% </span>
+<span class="c">% </span>
+<span class="c">%         % update y</span>
+<span class="c">%         </span>
+<span class="c">%         for ii = 1:m</span>
+<span class="c">%             data(ii).y  = data(ii).y + param.lambda * (2*pn - x - data(ii).p); %#ok&lt;AGROW&gt;</span>
+<span class="c">%         end</span>
+<span class="c">% </span>
+<span class="c">%         % update x</span>
+<span class="c">%         x = x + param.lambda * (pn - x);</span>
+<span class="c">%         </span>
+<span class="c">%         % update solution &amp; relative norm</span>
+<span class="c">%         sol = x;</span>
+<span class="c">%         curr_norm = 0;</span>
+<span class="c">%         for ii = 1:m</span>
+<span class="c">%             curr_norm = F{ii}.eval(sol) + curr_norm;</span>
+<span class="c">%         end</span>
+<span class="c">%                 </span>
+<span class="c">%         [stop, rel_norm, prev_norm, iter, objective, crit] = convergence_test(curr_norm, prev_norm, iter, objective, param);</span>
+<span class="c">%         [x,param] = post_process(sol, iter, curr_norm, prev_norm, objective, param);</span>
+<span class="c">%         if stop</span>
+<span class="c">%             break;</span>
+<span class="c">%         end</span>
+<span class="c">%         if param.verbose &gt;= 2</span>
+<span class="c">%             fprintf(&#39;Current objective function : %e \t relative norm : %e \n&#39;, curr_norm, rel_norm);</span>
+<span class="c">%         end</span>
+<span class="c">%         </span>
+<span class="c">%     end</span>
+<span class="c">%     </span>
+<span class="c">%     if param.verbose&gt;=2</span>
+<span class="c">%         % Print norm</span>
+<span class="c">%         fprintf(&#39;\n Solution found:\n&#39;);</span>
+<span class="c">%         if param.abs_tol</span>
+<span class="c">%             fprintf(&#39; Final norm: %e\n&#39;, curr_norm );</span>
+<span class="c">%         else</span>
+<span class="c">%             fprintf(&#39; Final relative norm: %e\n&#39;, rel_norm );</span>
+<span class="c">%         end</span>
+<span class="c">%     </span>
+<span class="c">%     </span>
+<span class="c">%         % Stopping criterion</span>
+<span class="c">%         fprintf(&#39; %i iterations\n&#39;, iter);</span>
+<span class="c">%         fprintf(&#39; Stopping criterion: %s \n\n&#39;, crit);</span>
+<span class="c">%     elseif param.verbose&gt;=1</span>
+<span class="c">%         fprintf(&#39;  Solution found: ||f|| = %e, rel_norm = %e, %s\n&#39;, ...</span>
+<span class="c">%                     curr_norm, rel_norm,crit);</span>
+<span class="c">%     end</span>
+<span class="c">%     </span>
+<span class="c">% info.algo = mfilename;</span>
+<span class="c">% info.iter = iter;</span>
+<span class="c">% info.final_eval = curr_norm;</span>
+<span class="c">% info.crit = crit;</span>
+<span class="c">% info.time = toc(t1);</span>
+<span class="c">% info.rel_norm = rel_norm;</span>
+<span class="c">% </span>
+<span class="c">% end</span>
+<span class="c">% </span>
+<span class="c">% </span>
+<span class="c">% </span>
+<span class="c">% function test_gamma_ppxa(gamma)</span>
+<span class="c">%     if gamma &lt;= 0 </span>
+<span class="c">%         fprintf(&#39;Warning : gamma is not &gt; 0\n&#39;);</span>
+<span class="c">%     end</span>
+<span class="c">% end</span>
+<span class="c">% </span>
+<span class="c">% </span>
+<span class="c">% function test_sum(W)</span>
+<span class="c">%     if (sum(W) &gt; 1+eps) || (sum(W) &lt; 1-eps)</span>
+<span class="c">%         fprintf(&#39;Warning : sum W is not equal to 1&#39;);</span>
+<span class="c">%     end</span>
+<span class="c">% end</span>
+<span class="c">% </span>
+<span class="c">% function s = w_sum(w, data, l)</span>
+<span class="c">%     s = zeros(size(data(1)));</span>
+<span class="c">%     </span>
+<span class="c">%     if l == &#39;p&#39;</span>
+<span class="c">%         for ii = 1:length(data)</span>
+<span class="c">%             s = s + w(ii) * data(ii).p;</span>
+<span class="c">%         end</span>
+<span class="c">%     elseif l == &#39;y&#39;</span>
+<span class="c">%         for ii = 1:length(data)</span>
+<span class="c">%             s = s + w(ii) * data(ii).y;</span>
+<span class="c">%         end</span>
+<span class="c">%     else</span>
+<span class="c">%         error(&#39;Fatal error! Unknown field in data!&#39;)</span>
+<span class="c">%     end</span>
+<span class="c">% end</span>
+</pre></div>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="ppxa.html">View the help</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p><div id="menutitle">See also:</div>
+<ul>
+<li><a href="#BASEURL#/doc/solver/solvep.html">solvep</a></li>
+<li><a href="#BASEURL#/doc/solver/sdmm.html">sdmm</a></li>
+<li><a href="#BASEURL#/doc/solver/admm.html">admm</a></li>
+<li><a href="#BASEURL#/doc/solver/generalized_forward_backward.html">generalized_forward_backward</a></li>
+</ul>
+</p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

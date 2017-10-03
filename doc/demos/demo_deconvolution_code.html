@@ -1,0 +1,204 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">DEMO_DECONVOLUTION - Deconvolution demonstration (Debluring)</h1>
+<h2>Program code:</h2>
+<div class="highlight"><pre><span></span><span class="c">%DEMO_DECONVOLUTION Deconvolution demonstration (Debluring)</span>
+<span class="c">%</span>
+<span class="c">%   Here we try to deblur an image through a deconvolution problem. The</span>
+<span class="c">%   convolution operator is the blur</span>
+<span class="c">%   The problem can be expressed as this</span>
+<span class="c">%</span>
+<span class="c">%        argmin  ||Ax-b||^2 + tau*||H(x)||_1</span>
+<span class="c">%</span>
+<span class="c">%   Where b is the degraded image, I the identity and A an operator representing the blur.</span>
+<span class="c">%</span>
+<span class="c">%   H is a linear operator projecting the signal in a sparse</span>
+<span class="c">%   representation. Here we worked with wavelet. </span>
+<span class="c">%</span>
+<span class="c">%   Warning! Note that this demo require the LTFAT toolbox to work.</span>
+<span class="c">%</span>
+<span class="c">%   We set </span>
+<span class="c">%</span>
+<span class="c">%    f_1(x)=||H(x)||_{1}</span>
+<span class="c">%     We define the prox of f_1 as: </span>
+<span class="c">%</span>
+<span class="c">%        prox_{f1,gamma} (z) = argmin_{x} 1/2 ||x-z||_2^2  +  gamma  ||H(z)||_1</span>
+<span class="c">%</span>
+<span class="c">%    f_2(x)=||Ax-b||_2^2</span>
+<span class="c">%     We define the gradient as: </span>
+<span class="c">%</span>
+<span class="c">%        grad_f(x) = 2 A^*(Ax-b)</span>
+<span class="c">%</span>
+<span class="c">%   Results</span>
+<span class="c">%   -------</span>
+<span class="c">%</span>
+<span class="c">%   Figure 1: Original image</span>
+<span class="c">%</span>
+<span class="c">%      This figure shows the original lena image. </span>
+<span class="c">%</span>
+<span class="c">%   Figure 2: Depleted image</span>
+<span class="c">%</span>
+<span class="c">%      This figure shows the image after the application of the blur.</span>
+<span class="c">%</span>
+<span class="c">%   Figure 3: Reconstructed image</span>
+<span class="c">%</span>
+<span class="c">%      This figure shows the reconstructed image thanks to the algorithm.</span>
+<span class="c">%</span>
+<span class="c">%   References:</span>
+<span class="c">%     P. Combettes and J. Pesquet. Proximal splitting methods in signal</span>
+<span class="c">%     processing. Fixed-Point Algorithms for Inverse Problems in Science and</span>
+<span class="c">%     Engineering, pages 185--212, 2011.</span>
+<span class="c">%     </span>
+<span class="c">%</span>
+<span class="c">%   Url: https://lts2.epfl.ch/unlocbox/doc/demos/demo_deconvolution.php</span>
+
+<span class="c">% Copyright (C) 2012-2016 Nathanael Perraudin.</span>
+<span class="c">% This file is part of UNLOCBOX version 1.7.3</span>
+<span class="c">%</span>
+<span class="c">% This program is free software: you can redistribute it and/or modify</span>
+<span class="c">% it under the terms of the GNU General Public License as published by</span>
+<span class="c">% the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">% (at your option) any later version.</span>
+<span class="c">%</span>
+<span class="c">% This program is distributed in the hope that it will be useful,</span>
+<span class="c">% but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">% GNU General Public License for more details.</span>
+<span class="c">%</span>
+<span class="c">% You should have received a copy of the GNU General Public License</span>
+<span class="c">% along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="c">% Author: Nathanael Perraudin</span>
+<span class="c">% Date: sept 30 2013</span>
+<span class="c">%</span>
+
+<span class="c">%% Initialisation</span>
+
+<span class="n">clear</span><span class="p">;</span>
+<span class="n">close</span> <span class="n">all</span><span class="p">;</span>
+
+<span class="n">init_unlocbox</span><span class="p">;</span>
+
+<span class="n">verbose</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>    <span class="c">% verbosity level</span>
+<span class="n">clim</span> <span class="p">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">];</span>   <span class="c">% limits for colors</span>
+
+<span class="c">%% Define the problem</span>
+
+<span class="c">% Original image</span>
+<span class="n">im_original</span> <span class="p">=</span> <span class="n">cameraman</span><span class="p">();</span>
+
+<span class="c">% Create a blur</span>
+<span class="n">sigma</span> <span class="p">=</span> <span class="mf">0.1</span><span class="p">;</span>
+<span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="p">=</span> <span class="nb">meshgrid</span><span class="p">(</span><span class="nb">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">length</span><span class="p">(</span><span class="n">im_original</span><span class="p">)));</span>
+<span class="n">r</span> <span class="p">=</span> <span class="n">x</span><span class="o">.^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">.^</span><span class="mi">2</span><span class="p">;</span>
+<span class="n">G</span> <span class="p">=</span> <span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">r</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sigma</span>^<span class="mi">2</span><span class="p">));</span>
+
+<span class="n">A</span><span class="p">=@(</span><span class="n">x</span><span class="p">)</span> <span class="nb">real</span><span class="p">(</span><span class="n">ifft2</span><span class="p">(</span><span class="n">fftshift</span><span class="p">(</span><span class="n">G</span><span class="p">)</span><span class="o">.*</span><span class="p">(</span><span class="n">fft2</span><span class="p">(</span><span class="n">x</span><span class="p">))));</span>
+<span class="n">At</span><span class="p">=@(</span><span class="n">x</span><span class="p">)</span> <span class="nb">real</span><span class="p">(</span><span class="n">ifft2</span><span class="p">(</span><span class="nb">conj</span><span class="p">(</span><span class="n">fftshift</span><span class="p">(</span><span class="n">G</span><span class="p">))</span><span class="o">.*</span><span class="p">(</span><span class="n">fft2</span><span class="p">(</span><span class="n">x</span><span class="p">))));</span>
+
+<span class="c">% Depleted image</span>
+<span class="n">b</span><span class="p">=</span><span class="n">A</span><span class="p">(</span><span class="n">im_original</span><span class="p">);</span>
+
+<span class="c">%% Define proximity operators</span>
+
+<span class="c">% to deblur with wavelet</span>
+<span class="n">tau</span> <span class="p">=</span> <span class="mf">0.0003</span><span class="p">;</span> <span class="c">%parameter for the problem</span>
+
+
+<span class="c">% Use LTFAT</span>
+<span class="n">L</span><span class="p">=</span><span class="mi">8</span><span class="p">;</span>
+<span class="n">W</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">fwt2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s">&#39;db1&#39;</span><span class="p">,</span><span class="n">L</span><span class="p">);</span>
+<span class="n">Wt</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">ifwt2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="s">&#39;db1&#39;</span><span class="p">,</span><span class="n">L</span><span class="p">);</span>
+
+<span class="n">param_l1</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="n">verbose</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">param_l1</span><span class="p">.</span><span class="n">tight</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">param_l1</span><span class="p">.</span><span class="n">At</span> <span class="p">=</span> <span class="n">Wt</span><span class="p">;</span>
+<span class="n">param_l1</span><span class="p">.</span><span class="n">A</span> <span class="p">=</span> <span class="n">W</span><span class="p">;</span>
+
+<span class="n">f</span><span class="p">.</span><span class="n">prox</span><span class="p">=@(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="n">prox_l1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">*</span><span class="n">tau</span><span class="p">,</span> <span class="n">param_l1</span><span class="p">);</span>
+<span class="n">f</span><span class="p">.</span><span class="n">eval</span><span class="p">=@(</span><span class="n">x</span><span class="p">)</span> <span class="n">tau</span><span class="o">*</span><span class="n">sum</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">W</span><span class="p">(</span><span class="n">x</span><span class="p">))));</span>   
+
+<span class="c">% % to deblur with TV</span>
+<span class="c">% tau = 0.001;</span>
+<span class="c">% param_tv.verbose = verbose-1;</span>
+<span class="c">% f.prox=@(x, T) prox_tv(x, T*tau, param_tv);</span>
+<span class="c">% f.eval=@(x) tau*tv_norm(x);   </span>
+
+<span class="n">param_proj</span><span class="p">.</span><span class="n">maxit</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">param_proj</span><span class="p">.</span><span class="n">epsilon</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">param_proj</span><span class="p">.</span><span class="n">tight</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">param_proj</span><span class="p">.</span><span class="n">nu</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">param_proj</span><span class="p">.</span><span class="n">A</span> <span class="p">=</span> <span class="n">A</span><span class="p">;</span>
+<span class="n">param_proj</span><span class="p">.</span><span class="n">At</span> <span class="p">=</span> <span class="n">At</span><span class="p">;</span>
+<span class="n">param_proj</span><span class="p">.</span><span class="n">y</span> <span class="p">=</span> <span class="n">b</span><span class="p">;</span>
+<span class="n">param_proj</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="n">verbose</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">f2</span><span class="p">.</span><span class="n">eval</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="p">;</span>
+<span class="n">f2</span><span class="p">.</span><span class="n">prox</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="n">proj_b2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">param_proj</span><span class="p">);</span>
+
+
+<span class="c">%% Solve the problem</span>
+
+<span class="c">% setting different parameter for the simulation</span>
+<span class="n">param_solver</span><span class="p">.</span><span class="n">verbose</span><span class="p">=</span><span class="n">verbose</span><span class="p">;</span> <span class="c">% display parameter</span>
+<span class="n">param_solver</span><span class="p">.</span><span class="n">maxit</span><span class="p">=</span><span class="mi">300</span><span class="p">;</span> <span class="c">% maximum iteration</span>
+<span class="n">param_solver</span><span class="p">.</span><span class="n">tol</span><span class="p">=</span><span class="mf">10e-9</span><span class="p">;</span> <span class="c">% tolerance to stop iterating</span>
+<span class="n">fig</span> <span class="p">=</span> <span class="n">figure</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">param_solver</span><span class="p">.</span><span class="n">do_sol</span><span class="p">=@(</span><span class="n">x</span><span class="p">)</span> <span class="n">plot_image</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">fig</span><span class="p">);</span> <span class="c">% plotting plugin</span>
+<span class="c">% solving the problem</span>
+<span class="n">sol</span><span class="p">=</span><span class="n">solvep</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">{</span><span class="n">f</span><span class="p">,</span> <span class="n">f2</span><span class="p">},</span> <span class="n">param_solver</span><span class="p">);</span>
+<span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="c">%% displaying the result</span>
+<span class="n">imagesc_gray</span><span class="p">(</span><span class="n">im_original</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;Original image&#39;</span><span class="p">,</span><span class="mi">111</span><span class="p">,</span><span class="n">clim</span><span class="p">)</span> 
+<span class="n">imagesc_gray</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;Depleted image&#39;</span><span class="p">,</span><span class="mi">111</span><span class="p">,</span><span class="n">clim</span><span class="p">)</span> 
+<span class="n">imagesc_gray</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">&#39;Reconstructed image&#39;</span><span class="p">,</span><span class="mi">111</span><span class="p">,</span><span class="n">clim</span><span class="p">)</span> 
+    
+
+<span class="c">%% Closing the toolbox</span>
+<span class="n">close_unlocbox</span><span class="p">();</span>
+</pre></div>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="demo_deconvolution.html">View the help</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p></p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

@@ -1,0 +1,287 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">DEMO_SDMM - Example of use of the sdmm solver</h1>
+
+<div class="section" id="xxxdescription">
+<h2>Description</h2>
+<p>We present an example of the solver through an image denoising problem.
+We express the problem cas</p>
+<!-- argmin_x,y,z ||x-b||_2^2 + tau1*||y||_TV + tau2 * ||H(z)||_1 such that  x = y = Hz -->
+<div class="math">
+\begin{equation*}
+arg \min_x \|x-b\|_2^2 + \tau_1 \|y\|_{TV} + \tau_2 \|H(z)\|_1 \hspace{1cm} such \hspace{0.25cm} that \hspace{1cm}  x = y = Hz
+\end{equation*}
+</div>
+<p>Where b is the degraded image, <span class="math">\(\tau_1\)</span> and <span class="math">\(\tau_2\)</span> two real positive constant and H a linear operator on x.
+H is a wavelet operator. We set:</p>
+<ul>
+<li><p class="first"><span class="math">\(g_1(x)=||x||_{TV}\)</span>
+We define the prox of <span class="math">\(g_1\)</span> as:</p>
+<!-- prox_{f1,gamma} (z) = argmin_{x} 1/2 ||x-z||_2^2  +  gamma ||z||_TV -->
+<div class="math">
+\begin{equation*}
+prox_{f1,\gamma} (z) = arg \min_{x} \frac{1}{2} \|x-z\|_2^2  +  \gamma \|z\|_{TV}
+\end{equation*}
+</div>
+</li>
+<li><p class="first"><span class="math">\(g_2(x)=||H(x)||_1\)</span>
+We define the prox of <span class="math">\(g_2\)</span> as:</p>
+<!-- prox_{f1,gamma} (z) = argmin_{x} 1/2 ||x-z||_2^2  +  gamma ||H(z)||_1 -->
+<div class="math">
+\begin{equation*}
+prox_{f1,\gamma} (z) = arg \min_{x} \frac{1}{2} \|x-z\|_2^2  +  \|H(z)\|_1
+\end{equation*}
+</div>
+</li>
+<li><p class="first"><span class="math">\(f(x)=||x-b||_2^2\)</span>
+We define the gradient as:</p>
+<!-- grad_f(x) = 2 * (x-b) -->
+<div class="math">
+\begin{equation*}
+\nabla_f(x) = 2 (x-b)
+\end{equation*}
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="results">
+<h2>Results</h2>
+<div class="figure align-center">
+<img alt="demo_sdmm_1.png" src="demo_sdmm_1.png" />
+<p class="caption">Original image</p>
+<div class="legend">
+This figure shows the original image (The cameraman).</div>
+</div>
+<div class="figure align-center">
+<img alt="demo_sdmm_2.png" src="demo_sdmm_2.png" />
+<p class="caption">Depleted image</p>
+<div class="legend">
+This figure shows the image after addition of the noise</div>
+</div>
+<div class="figure align-center">
+<img alt="demo_sdmm_3.png" src="demo_sdmm_3.png" />
+<p class="caption">Reconstruted image</p>
+<div class="legend">
+This figure shows the reconstructed image thanks to the algorithm.</div>
+</div>
+<p>The rwt toolbox is needed to run this demo.</p>
+<p><em>This code produces the following output</em>:</p>
+<pre class="literal-block">
+UnLocBoX version 1.7.3. Copyright 2012-2015 LTS2-EPFL, by Nathanael Perraudin
+Algorithm selected: SDMM
+Iter 001:     prox_L1: ||A x-y||_1 = 7.356471e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.563990e+04, rel_obj = 9.661959e-04, TOL_EPS, iter = 15
+  prox_L2: ||w (A x- y) ||_2^2 = 1.711176e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 6.100666e-01
+   Relative norm of the dual variables: 1.000000e+00
+Iter 002:     prox_L1: ||A x-y||_1 = 9.713671e+02, REL_OB, iter = 2
+  Prox_TV: obj = 9.142331e+03, rel_obj = 9.572185e-04, TOL_EPS, iter = 21
+  prox_L2: ||w (A x- y) ||_2^2 = 1.724227e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 1.629779e-01
+   Relative norm of the dual variables: 1.205978e+00
+Iter 003:     prox_L1: ||A x-y||_1 = 1.007596e+03, REL_OB, iter = 2
+  Prox_TV: obj = 6.967372e+03, rel_obj = 8.852838e-04, TOL_EPS, iter = 24
+  prox_L2: ||w (A x- y) ||_2^2 = 2.120895e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 9.238560e-02
+   Relative norm of the dual variables: 6.078933e-01
+Iter 004:     prox_L1: ||A x-y||_1 = 1.246376e+03, REL_OB, iter = 2
+  Prox_TV: obj = 7.755926e+03, rel_obj = 9.147120e-04, TOL_EPS, iter = 23
+  prox_L2: ||w (A x- y) ||_2^2 = 2.300749e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 3.477922e-02
+   Relative norm of the dual variables: 2.523035e-01
+Iter 005:     prox_L1: ||A x-y||_1 = 1.428088e+03, REL_OB, iter = 2
+  Prox_TV: obj = 8.956817e+03, rel_obj = 9.528187e-04, TOL_EPS, iter = 21
+  prox_L2: ||w (A x- y) ||_2^2 = 2.465826e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 1.363729e-02
+   Relative norm of the dual variables: 2.001132e-01
+Iter 006:     prox_L1: ||A x-y||_1 = 1.552437e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.004076e+04, rel_obj = 9.638438e-04, TOL_EPS, iter = 20
+  prox_L2: ||w (A x- y) ||_2^2 = 2.671092e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 7.624455e-03
+   Relative norm of the dual variables: 1.432226e-01
+Iter 007:     prox_L1: ||A x-y||_1 = 1.632181e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.091914e+04, rel_obj = 9.095044e-04, TOL_EPS, iter = 19
+  prox_L2: ||w (A x- y) ||_2^2 = 2.870515e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 8.605576e-03
+   Relative norm of the dual variables: 9.122122e-02
+Iter 008:     prox_L1: ||A x-y||_1 = 1.681470e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.159215e+04, rel_obj = 9.375659e-04, TOL_EPS, iter = 18
+  prox_L2: ||w (A x- y) ||_2^2 = 3.031448e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 8.413579e-03
+   Relative norm of the dual variables: 5.268656e-02
+Iter 009:     prox_L1: ||A x-y||_1 = 1.710353e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.209387e+04, rel_obj = 9.920883e-04, TOL_EPS, iter = 17
+  prox_L2: ||w (A x- y) ||_2^2 = 3.149389e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 6.914191e-03
+   Relative norm of the dual variables: 4.447323e-02
+Iter 010:     prox_L1: ||A x-y||_1 = 1.724948e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.245361e+04, rel_obj = 8.709784e-04, TOL_EPS, iter = 17
+  prox_L2: ||w (A x- y) ||_2^2 = 3.233605e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 4.865816e-03
+   Relative norm of the dual variables: 3.848879e-02
+Iter 011:     prox_L1: ||A x-y||_1 = 1.728121e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.271618e+04, rel_obj = 8.235714e-04, TOL_EPS, iter = 17
+  prox_L2: ||w (A x- y) ||_2^2 = 3.295445e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 3.145487e-03
+   Relative norm of the dual variables: 3.291662e-02
+Iter 012:     prox_L1: ||A x-y||_1 = 1.725248e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.290795e+04, rel_obj = 7.548355e-04, TOL_EPS, iter = 17
+  prox_L2: ||w (A x- y) ||_2^2 = 3.342877e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 2.040044e-03
+   Relative norm of the dual variables: 2.876481e-02
+Iter 013:     prox_L1: ||A x-y||_1 = 1.719806e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.305904e+04, rel_obj = 9.738840e-04, TOL_EPS, iter = 16
+  prox_L2: ||w (A x- y) ||_2^2 = 3.380582e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 2.741311e-03
+   Relative norm of the dual variables: 2.537509e-02
+Iter 014:     prox_L1: ||A x-y||_1 = 1.715409e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.316667e+04, rel_obj = 9.181824e-04, TOL_EPS, iter = 16
+  prox_L2: ||w (A x- y) ||_2^2 = 3.411063e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 1.533292e-03
+   Relative norm of the dual variables: 2.425611e-02
+Iter 015:     prox_L1: ||A x-y||_1 = 1.711153e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.325053e+04, rel_obj = 8.856728e-04, TOL_EPS, iter = 16
+  prox_L2: ||w (A x- y) ||_2^2 = 3.435648e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 1.170500e-03
+   Relative norm of the dual variables: 2.099385e-02
+Iter 016:     prox_L1: ||A x-y||_1 = 1.707867e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.331725e+04, rel_obj = 8.498366e-04, TOL_EPS, iter = 16
+  prox_L2: ||w (A x- y) ||_2^2 = 3.455382e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 1.012535e-03
+   Relative norm of the dual variables: 1.908216e-02
+Iter 017:     prox_L1: ||A x-y||_1 = 1.705508e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.337185e+04, rel_obj = 8.116760e-04, TOL_EPS, iter = 16
+  prox_L2: ||w (A x- y) ||_2^2 = 3.471170e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 8.605663e-04
+   Relative norm of the dual variables: 1.755088e-02
+Iter 018:     prox_L1: ||A x-y||_1 = 1.704010e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.341767e+04, rel_obj = 7.866061e-04, TOL_EPS, iter = 16
+  prox_L2: ||w (A x- y) ||_2^2 = 3.483797e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 7.345836e-04
+   Relative norm of the dual variables: 1.624759e-02
+Iter 019:     prox_L1: ||A x-y||_1 = 1.703163e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.345662e+04, rel_obj = 7.694277e-04, TOL_EPS, iter = 16
+  prox_L2: ||w (A x- y) ||_2^2 = 3.493890e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 6.445896e-04
+   Relative norm of the dual variables: 1.514168e-02
+Iter 020:     prox_L1: ||A x-y||_1 = 1.702726e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.350039e+04, rel_obj = 9.891754e-04, TOL_EPS, iter = 15
+  prox_L2: ||w (A x- y) ||_2^2 = 3.501966e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 2.856130e-03
+   Relative norm of the dual variables: 1.476054e-02
+Iter 021:     prox_L1: ||A x-y||_1 = 1.702552e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.352510e+04, rel_obj = 5.167799e-04, TOL_EPS, iter = 16
+  prox_L2: ||w (A x- y) ||_2^2 = 3.508975e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 3.131017e-03
+   Relative norm of the dual variables: 1.652279e-02
+Iter 022:     prox_L1: ||A x-y||_1 = 1.701987e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.355700e+04, rel_obj = 9.928110e-04, TOL_EPS, iter = 15
+  prox_L2: ||w (A x- y) ||_2^2 = 3.514000e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 2.967346e-03
+   Relative norm of the dual variables: 1.413229e-02
+Iter 023:     prox_L1: ||A x-y||_1 = 1.702636e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.358252e+04, rel_obj = 9.787855e-04, TOL_EPS, iter = 15
+  prox_L2: ||w (A x- y) ||_2^2 = 3.518744e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 9.947901e-04
+   Relative norm of the dual variables: 1.479076e-02
+Iter 024:     prox_L1: ||A x-y||_1 = 1.703404e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.360516e+04, rel_obj = 9.977004e-04, TOL_EPS, iter = 15
+  prox_L2: ||w (A x- y) ||_2^2 = 3.522381e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 5.606141e-04
+   Relative norm of the dual variables: 1.245205e-02
+Iter 025:     prox_L1: ||A x-y||_1 = 1.704116e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.362645e+04, rel_obj = 9.813362e-04, TOL_EPS, iter = 15
+  prox_L2: ||w (A x- y) ||_2^2 = 3.525130e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 4.896847e-04
+   Relative norm of the dual variables: 1.162017e-02
+Iter 026:     prox_L1: ||A x-y||_1 = 1.704768e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.364620e+04, rel_obj = 9.644979e-04, TOL_EPS, iter = 15
+  prox_L2: ||w (A x- y) ||_2^2 = 3.527261e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 4.337014e-04
+   Relative norm of the dual variables: 1.105698e-02
+Iter 027:     prox_L1: ||A x-y||_1 = 1.705340e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.366459e+04, rel_obj = 9.489951e-04, TOL_EPS, iter = 15
+  prox_L2: ||w (A x- y) ||_2^2 = 3.528972e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 3.857721e-04
+   Relative norm of the dual variables: 1.056054e-02
+Iter 028:     prox_L1: ||A x-y||_1 = 1.705892e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.368175e+04, rel_obj = 9.452538e-04, TOL_EPS, iter = 15
+  prox_L2: ||w (A x- y) ||_2^2 = 3.530380e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 3.512476e-04
+   Relative norm of the dual variables: 1.011294e-02
+Iter 029:     prox_L1: ||A x-y||_1 = 1.706422e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.369790e+04, rel_obj = 9.500117e-04, TOL_EPS, iter = 15
+  prox_L2: ||w (A x- y) ||_2^2 = 3.531558e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 3.248535e-04
+   Relative norm of the dual variables: 9.712679e-03
+Iter 030:     prox_L1: ||A x-y||_1 = 1.706903e+03, REL_OB, iter = 2
+  Prox_TV: obj = 1.371335e+04, rel_obj = 9.496767e-04, TOL_EPS, iter = 15
+  prox_L2: ||w (A x- y) ||_2^2 = 3.532564e+04, REL_OB, iter = 1
+   Relative norm of the primal variables: 3.004735e-04
+   Relative norm of the dual variables: 9.347693e-03
+
+ SDMM:
+   Relative norm of the primal variables: 3.004735e-04
+   Relative norm of the dual variables: 9.347693e-03
+ 30 iterations
+ Stopping criterion: MAX_IT
+</pre>
+</div>
+<H2>References:</H2>
+
+
+
+<p><a name="combettes2011proximal"></a>
+
+P.&nbsp;Combettes and J.&nbsp;Pesquet.
+ Proximal splitting methods in signal processing.
+ <em>Fixed-Point Algorithms for Inverse Problems in Science and
+  Engineering</em>, pages 185--212, 2011.
+
+</p>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="demo_sdmm_code.html">View the code</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p></p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

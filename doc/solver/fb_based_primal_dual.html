@@ -1,0 +1,201 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">FB_BASED_PRIMAL_DUAL - forward backward based primal dual</h1>
+
+<div class="section" id="usage">
+<h2>Usage</h2>
+<pre class="literal-block">
+sol = fb_based_primal_dual(x_0,f1,f2, f3,param);
+sol = fb_based_primal_dual(x_0,f1,f2,f3);
+[sol,info] = fb_based_primal_dual(...);
+</pre>
+</div>
+<div class="section" id="input-parameters">
+<h2>Input parameters</h2>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option"><var>x_0</var></span></kbd></td>
+<td>Starting point of the algorithm</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option"><var>f1</var></span></kbd></td>
+<td>First function to minimize</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option"><var>f2</var></span></kbd></td>
+<td>Second function to minimize</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option"><var>f3</var></span></kbd></td>
+<td>Third function to minimize</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option"><var>param</var></span></kbd></td>
+<td>Optional parameter</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="output-parameters">
+<h2>Output parameters</h2>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option"><var>sol</var></span></kbd></td>
+<td>Solution</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option"><var>info</var></span></kbd></td>
+<td>Structure summarizing informations at convergence</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="xxxdescription">
+<h2>Description</h2>
+<p><tt class="docutils literal">fb_based_primal_dual</tt> solves:</p>
+<!-- sol = argmin f1(x) + f2(Lx) + f3(x) -->
+<div class="math">
+\begin{equation*}
+sol = \min_x f_1(x) + f_2( L x) + f_3(x)
+\end{equation*}
+</div>
+<p>where  <span class="math">\(x\)</span> is the optimization variable with <span class="math">\(f_1\)</span> or <span class="math">\(f_3\)</span> a smooth
+function and <span class="math">\(L\)</span> a linear operator. <span class="math">\(f_1\)</span> and <span class="math">\(f_3\)</span> are defined like
+other traditional functions.</p>
+<p>Note that <em>f2</em> is a structure of a functions with:</p>
+<ul class="simple">
+<li><tt class="docutils literal">f2.eval(x_i)</tt> : an operator to evaluate the function</li>
+<li><tt class="docutils literal">f2.prox(x_i, gamma)</tt> : an operator to evaluate the prox of the function</li>
+</ul>
+<p>Optionally you can define</p>
+<ul>
+<li><p class="first"><tt class="docutils literal">f2.L</tt>  : linear operator, matrix or operator (default identity)</p>
+</li>
+<li><p class="first"><tt class="docutils literal">f2.Lt</tt> : adjoint of linear operator, matrix or operator (default identity)</p>
+</li>
+<li><p class="first"><tt class="docutils literal">f2.norm_L</tt> : bound on the norm of the operator L (default: 1), i.e.</p>
+<!-- ` ||L x||^2 <= nu * ||x||^2 -->
+<div class="math">
+\begin{equation*}
+\|L x\|^2 \leq \nu \|x\|^2
+\end{equation*}
+</div>
+</li>
+</ul>
+<p>The default choice for the time-step makes the following</p>
+<blockquote>
+<!-- 1/tau - sigma * nu = beta/2 -->
+<div class="math">
+\begin{equation*}
+\frac{1}{\tau} - \sigma \nu = \frac{\beta}{2}
+\end{equation*}
+</div>
+</blockquote>
+<p>with additionnaly</p>
+<blockquote>
+<!-- 1/(2*tau) = sigma * nu = beta/2 -->
+<div class="math">
+\begin{equation*}
+\frac{1}{2\tau} = \sigma \nu = \frac{\beta}{2}
+\end{equation*}
+</div>
+</blockquote>
+<p><em>param</em> a Matlab structure containing solver paremeters. See the
+function <span class="linkrole"><a href="#BASEURL#/doc/solver/solvep.html">solvep</a></span> for more information. Additionally it contains those
+aditional fields:</p>
+<ul>
+<li><p class="first"><em>param.tol</em> : is stop criterion for the loop. The algorithm stops if</p>
+<!-- max_i ||  y_i(t) - y_i(t-1) ||  / ||y(t) ||< tol, -->
+<div class="math">
+\begin{equation*}
+\max_i \frac{ \| y_i(t) - y_i(t-1)\| }{ \|y_i(t)\|} &lt; tol,
+\end{equation*}
+</div>
+<p>where  <span class="math">\(y_i(t)\)</span> are the dual variable of function <em>i</em> at itertion <em>t</em>
+by default, <tt class="docutils literal"><span class="pre">tol=10e-4</span></tt>.</p>
+<blockquote>
+<p>Warning! This stopping criterion is different from other solver!</p>
+</blockquote>
+</li>
+<li><p class="first"><em>param.tau</em> : first timestep.</p>
+</li>
+<li><p class="first"><em>param.sigma</em> : second timestep. The timesteps should satisfy the
+following relationship (beta is the lipschitz constant of the smooth
+term):</p>
+<!-- 1/tau - sigma * nu >= beta/2 -->
+<div class="math">
+\begin{equation*}
+\frac{1}{\tau} - \sigma \nu \geq \frac{\beta}{2}
+\end{equation*}
+</div>
+</li>
+<li><p class="first"><em>param.rescale</em> : Use the rescaled version of the algorithm (default 0)</p>
+</li>
+<li><p class="first"><em>param.method</em> : is the method used to solve the problem. It can be
+the fast version 'FISTA' or 'ISTA'. By default, it's 'ISTA'.</p>
+</li>
+</ul>
+</div>
+<H2>References:</H2>
+
+
+
+<p><a name="komodakis2014playing"></a>
+
+N.&nbsp;Komodakis and J.-C. Pesquet.
+ Playing with duality: An overview of recent primal-dual approaches
+  for solving large-scale optimization problems.
+ <em>arXiv preprint arXiv:1406.5429</em>, 2014.
+
+</p>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="fb_based_primal_dual_code.html">View the code</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p><div id="menutitle">See also:</div>
+<ul>
+<li><a href="#BASEURL#/doc/solver/solvep.html">solvep</a></li>
+<li><a href="#BASEURL#/doc/solver/sdmm.html">sdmm</a></li>
+<li><a href="#BASEURL#/doc/solver/admm.html">admm</a></li>
+</ul>
+</p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

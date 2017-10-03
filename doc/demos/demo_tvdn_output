@@ -1,0 +1,203 @@
+UnLocBoX version 1.7.3. Copyright 2012-2015 LTS2-EPFL, by Nathanael Perraudin
+The time step is set manually to : 0.1
+Algorithm selected: DOUGLAS_RACHFORD 
+Iter 001:     Prox_TV: obj = 1.548369e+03, rel_obj = 9.972292e-05, TOL_EPS, iter = 27
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 1.799730e+04, rel_eval = 2.920780e-01
+Iter 002:     Prox_TV: obj = 1.929736e+03, rel_obj = 9.575944e-05, TOL_EPS, iter = 24
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 1.338496e+04, rel_eval = 3.445914e-01
+Iter 003:     Prox_TV: obj = 1.580072e+03, rel_obj = 8.616462e-05, TOL_EPS, iter = 28
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 9.728734e+03, rel_eval = 3.758172e-01
+Iter 004:     Prox_TV: obj = 1.223460e+03, rel_obj = 9.722953e-05, TOL_EPS, iter = 31
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 7.061435e+03, rel_eval = 3.777276e-01
+Iter 005:     Prox_TV: obj = 9.284947e+02, rel_obj = 9.497473e-05, TOL_EPS, iter = 35
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 5.193887e+03, rel_eval = 3.595666e-01
+Iter 006:     Prox_TV: obj = 7.025041e+02, rel_obj = 9.854160e-05, TOL_EPS, iter = 40
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 4.082458e+03, rel_eval = 2.722451e-01
+Iter 007:     Prox_TV: obj = 5.451078e+02, rel_obj = 8.077908e-05, TOL_EPS, iter = 45
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 3.506190e+03, rel_eval = 1.643574e-01
+Iter 008:     Prox_TV: obj = 4.519616e+02, rel_obj = 6.725066e-05, TOL_EPS, iter = 45
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 3.258302e+03, rel_eval = 7.607884e-02
+Iter 009:     Prox_TV: obj = 4.107494e+02, rel_obj = 9.237340e-05, TOL_EPS, iter = 45
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 3.050673e+03, rel_eval = 6.806014e-02
+Iter 010:     Prox_TV: obj = 4.020129e+02, rel_obj = 9.272862e-05, TOL_EPS, iter = 42
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.778179e+03, rel_eval = 9.808356e-02
+Iter 011:     Prox_TV: obj = 4.057472e+02, rel_obj = 9.293790e-05, TOL_EPS, iter = 52
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.469886e+03, rel_eval = 1.248206e-01
+Iter 012:     Prox_TV: obj = 4.114501e+02, rel_obj = 9.628086e-05, TOL_EPS, iter = 49
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.254548e+03, rel_eval = 9.551282e-02
+Iter 013:     Prox_TV: obj = 4.174742e+02, rel_obj = 4.785276e-05, TOL_EPS, iter = 32
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.192759e+03, rel_eval = 2.817849e-02
+Iter 014:     Prox_TV: obj = 4.218848e+02, rel_obj = 7.351685e-05, TOL_EPS, iter = 38
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.184655e+03, rel_eval = 3.709725e-03
+Iter 015:     Prox_TV: obj = 4.279180e+02, rel_obj = 7.512913e-05, TOL_EPS, iter = 40
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.166268e+03, rel_eval = 8.487823e-03
+Iter 016:     Prox_TV: obj = 4.351441e+02, rel_obj = 4.890692e-05, TOL_EPS, iter = 41
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.124946e+03, rel_eval = 1.944630e-02
+Iter 017:     Prox_TV: obj = 4.423530e+02, rel_obj = 1.923801e-05, TOL_EPS, iter = 42
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.086495e+03, rel_eval = 1.842827e-02
+Iter 018:     Prox_TV: obj = 4.492159e+02, rel_obj = 7.888966e-05, TOL_EPS, iter = 39
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.069713e+03, rel_eval = 8.108311e-03
+Iter 019:     Prox_TV: obj = 4.555310e+02, rel_obj = 9.478262e-05, TOL_EPS, iter = 38
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.066192e+03, rel_eval = 1.704138e-03
+Iter 020:     Prox_TV: obj = 4.612940e+02, rel_obj = 5.683523e-05, TOL_EPS, iter = 40
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.062735e+03, rel_eval = 1.676085e-03
+Iter 021:     Prox_TV: obj = 4.667149e+02, rel_obj = 7.382436e-05, TOL_EPS, iter = 42
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.055057e+03, rel_eval = 3.735848e-03
+Iter 022:     Prox_TV: obj = 4.725518e+02, rel_obj = 9.999796e-05, TOL_EPS, iter = 34
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.051796e+03, rel_eval = 1.589457e-03
+Iter 023:     Prox_TV: obj = 4.772940e+02, rel_obj = 7.685275e-07, TOL_EPS, iter = 36
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.043493e+03, rel_eval = 4.063168e-03
+Iter 024:     Prox_TV: obj = 4.816549e+02, rel_obj = 6.430669e-05, TOL_EPS, iter = 40
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.035456e+03, rel_eval = 3.948540e-03
+Iter 025:     Prox_TV: obj = 4.857185e+02, rel_obj = 9.011518e-05, TOL_EPS, iter = 45
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.030748e+03, rel_eval = 2.318642e-03
+Iter 026:     Prox_TV: obj = 4.897303e+02, rel_obj = 8.190728e-05, TOL_EPS, iter = 48
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.028383e+03, rel_eval = 1.165867e-03
+Iter 027:     Prox_TV: obj = 4.935382e+02, rel_obj = 4.087712e-05, TOL_EPS, iter = 52
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.026733e+03, rel_eval = 8.141116e-04
+Iter 028:     Prox_TV: obj = 4.976400e+02, rel_obj = 6.079501e-05, TOL_EPS, iter = 46
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.023604e+03, rel_eval = 1.546216e-03
+Iter 029:     Prox_TV: obj = 5.010608e+02, rel_obj = 4.821890e-05, TOL_EPS, iter = 48
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.020955e+03, rel_eval = 1.310565e-03
+Iter 030:     Prox_TV: obj = 5.042480e+02, rel_obj = 9.141632e-05, TOL_EPS, iter = 49
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.019156e+03, rel_eval = 8.908334e-04
+Iter 031:     Prox_TV: obj = 5.080204e+02, rel_obj = 8.800046e-05, TOL_EPS, iter = 38
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.023745e+03, rel_eval = 2.267182e-03
+Iter 032:     Prox_TV: obj = 5.107511e+02, rel_obj = 8.772237e-05, TOL_EPS, iter = 39
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.022268e+03, rel_eval = 7.300514e-04
+Iter 033:     Prox_TV: obj = 5.137697e+02, rel_obj = 9.738846e-05, TOL_EPS, iter = 36
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.024833e+03, rel_eval = 1.266720e-03
+Iter 034:     Prox_TV: obj = 5.161563e+02, rel_obj = 4.888095e-05, TOL_EPS, iter = 39
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.018382e+03, rel_eval = 3.196077e-03
+Iter 035:     Prox_TV: obj = 5.190207e+02, rel_obj = 6.472776e-06, TOL_EPS, iter = 36
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.020269e+03, rel_eval = 9.338673e-04
+Iter 036:     Prox_TV: obj = 5.212596e+02, rel_obj = 6.258253e-05, TOL_EPS, iter = 39
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.014827e+03, rel_eval = 2.700881e-03
+Iter 037:     Prox_TV: obj = 5.240590e+02, rel_obj = 9.113022e-05, TOL_EPS, iter = 34
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.019237e+03, rel_eval = 2.183840e-03
+Iter 038:     Prox_TV: obj = 5.261957e+02, rel_obj = 1.911047e-05, TOL_EPS, iter = 36
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.015630e+03, rel_eval = 1.789421e-03
+Iter 039:     Prox_TV: obj = 5.287360e+02, rel_obj = 9.525122e-05, TOL_EPS, iter = 32
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.020900e+03, rel_eval = 2.607638e-03
+Iter 040:     Prox_TV: obj = 5.305261e+02, rel_obj = 5.890864e-05, TOL_EPS, iter = 34
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.016214e+03, rel_eval = 2.323873e-03
+Iter 041:     Prox_TV: obj = 5.328105e+02, rel_obj = 3.769208e-06, TOL_EPS, iter = 32
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.019410e+03, rel_eval = 1.582640e-03
+Iter 042:     Prox_TV: obj = 5.345092e+02, rel_obj = 2.837184e-05, TOL_EPS, iter = 34
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.014229e+03, rel_eval = 2.572130e-03
+Iter 043:     Prox_TV: obj = 5.367460e+02, rel_obj = 8.962033e-05, TOL_EPS, iter = 29
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.022649e+03, rel_eval = 4.162685e-03
+Iter 044:     Prox_TV: obj = 5.380552e+02, rel_obj = 6.274741e-05, TOL_EPS, iter = 31
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.017039e+03, rel_eval = 2.781230e-03
+Iter 045:     Prox_TV: obj = 5.399409e+02, rel_obj = 7.726363e-05, TOL_EPS, iter = 29
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.021127e+03, rel_eval = 2.022367e-03
+Iter 046:     Prox_TV: obj = 5.412921e+02, rel_obj = 2.053451e-05, TOL_EPS, iter = 31
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.014829e+03, rel_eval = 3.125888e-03
+Iter 047:     Prox_TV: obj = 5.413479e+02, rel_obj = 6.206920e-05, TOL_EPS, iter = 48
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.012241e+03, rel_eval = 1.286075e-03
+Iter 048:     Prox_TV: obj = 5.451452e+02, rel_obj = 8.583451e-05, TOL_EPS, iter = 29
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.016061e+03, rel_eval = 1.894948e-03
+Iter 049:     Prox_TV: obj = 5.463371e+02, rel_obj = 6.669560e-05, TOL_EPS, iter = 30
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.015284e+03, rel_eval = 3.857816e-04
+Iter 050:     Prox_TV: obj = 5.464885e+02, rel_obj = 6.139653e-05, TOL_EPS, iter = 40
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.008041e+03, rel_eval = 3.607044e-03
+Iter 051:     Prox_TV: obj = 5.494989e+02, rel_obj = 2.506761e-05, TOL_EPS, iter = 29
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.015661e+03, rel_eval = 3.780718e-03
+Iter 052:     Prox_TV: obj = 5.493441e+02, rel_obj = 4.582070e-05, TOL_EPS, iter = 40
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.007435e+03, rel_eval = 4.097758e-03
+Iter 053:     Prox_TV: obj = 5.521793e+02, rel_obj = 5.421691e-05, TOL_EPS, iter = 29
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.015939e+03, rel_eval = 4.218532e-03
+Iter 054:     Prox_TV: obj = 5.517228e+02, rel_obj = 5.304736e-05, TOL_EPS, iter = 39
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.006726e+03, rel_eval = 4.591061e-03
+Iter 055:     Prox_TV: obj = 5.543664e+02, rel_obj = 5.464330e-05, TOL_EPS, iter = 28
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.018080e+03, rel_eval = 5.625855e-03
+Iter 056:     Prox_TV: obj = 5.548553e+02, rel_obj = 8.587330e-05, TOL_EPS, iter = 29
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.017487e+03, rel_eval = 2.938946e-04
+Iter 057:     Prox_TV: obj = 5.542790e+02, rel_obj = 1.333113e-05, TOL_EPS, iter = 39
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.007093e+03, rel_eval = 5.178660e-03
+Iter 058:     Prox_TV: obj = 5.568978e+02, rel_obj = 3.316898e-05, TOL_EPS, iter = 28
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.015947e+03, rel_eval = 4.392041e-03
+Iter 059:     Prox_TV: obj = 5.574661e+02, rel_obj = 2.816721e-05, TOL_EPS, iter = 29
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.015457e+03, rel_eval = 2.432718e-04
+Iter 060:     Prox_TV: obj = 5.568523e+02, rel_obj = 1.044585e-05, TOL_EPS, iter = 39
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.007508e+03, rel_eval = 3.959562e-03
+Iter 061:     Prox_TV: obj = 5.594973e+02, rel_obj = 3.981603e-05, TOL_EPS, iter = 28
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.015015e+03, rel_eval = 3.725368e-03
+Iter 062:     Prox_TV: obj = 5.599792e+02, rel_obj = 6.482646e-06, TOL_EPS, iter = 29
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.014781e+03, rel_eval = 1.159292e-04
+Iter 063:     Prox_TV: obj = 5.591887e+02, rel_obj = 1.553131e-05, TOL_EPS, iter = 39
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.007653e+03, rel_eval = 3.550590e-03
+Iter 064:     Prox_TV: obj = 5.617796e+02, rel_obj = 9.804871e-05, TOL_EPS, iter = 28
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.014612e+03, rel_eval = 3.454389e-03
+Iter 065:     Prox_TV: obj = 5.621489e+02, rel_obj = 8.730449e-06, TOL_EPS, iter = 29
+  Proj. B2: epsilon = 1.153788e+00, ||y-Ax||_2 = 1.153788e+00, TOL_EPS, iter = 2
+  f(x^*) = 2.014432e+03, rel_eval = 8.941069e-05
+
+ DOUGLAS_RACHFORD:
+  f(x^*) = 2.014432e+03, rel_eval = 8.941069e-05
+ 65 iterations
+ Stopping criterion: REL_NORM_OBJ 

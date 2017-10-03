@@ -1,0 +1,171 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">DEMO_WEIGHTED_L1 - Demonstration of the use of the bpdn solver</h1>
+<h2>Program code:</h2>
+<div class="highlight"><pre><span></span><span class="c">%DEMO_WEIGHTED_L1 Demonstration of the use of the bpdn solver</span>
+<span class="c">%</span>
+<span class="c">%   We solve a compress sensing problem in 2 dimensions.</span>
+<span class="c">%</span>
+<span class="c">%      sol arg min ||x||_1   s.t.  ||y-A x||_2 &lt; epsilon</span>
+<span class="c">%</span>
+<span class="c">%   We first solve the problem very generally. Then using the first</span>
+<span class="c">%   solution, we define weight for the L1 norm and compute again the solution.</span>
+<span class="c">%</span>
+<span class="c">%   A is a mask operator in the Fourier domain. The measurements are done in</span>
+<span class="c">%   the Fourier domain.</span>
+<span class="c">% </span>
+<span class="c">%   Figure 1: Figure</span>
+<span class="c">%</span>
+<span class="c">%      Results of the code</span>
+<span class="c">%</span>
+<span class="c">%   Url: https://lts2.epfl.ch/unlocbox/doc/demos/demo_weighted_l1.php</span>
+
+<span class="c">% Copyright (C) 2012-2016 Nathanael Perraudin.</span>
+<span class="c">% This file is part of UNLOCBOX version 1.7.3</span>
+<span class="c">%</span>
+<span class="c">% This program is free software: you can redistribute it and/or modify</span>
+<span class="c">% it under the terms of the GNU General Public License as published by</span>
+<span class="c">% the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">% (at your option) any later version.</span>
+<span class="c">%</span>
+<span class="c">% This program is distributed in the hope that it will be useful,</span>
+<span class="c">% but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">% GNU General Public License for more details.</span>
+<span class="c">%</span>
+<span class="c">% You should have received a copy of the GNU General Public License</span>
+<span class="c">% along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="c">% Author: Gilles Puy, Nathanael Perraudin</span>
+<span class="c">% Date: Nov. 1, 2012 </span>
+
+
+<span class="n">clear</span><span class="p">;</span>
+<span class="n">close</span> <span class="n">all</span><span class="p">;</span>
+
+<span class="c">%%</span>
+<span class="c">% Loading toolbox</span>
+<span class="n">addpath</span> <span class="p">.</span><span class="o">./</span>
+<span class="n">init_unlocbox</span><span class="p">();</span>
+
+<span class="c">%% Parameters</span>
+<span class="n">N</span> <span class="p">=</span> <span class="mi">64</span><span class="p">;</span>
+<span class="n">input_snr</span> <span class="p">=</span> <span class="mi">30</span><span class="p">;</span> <span class="c">% Noise level (on the measurements)</span>
+<span class="nb">randn</span><span class="p">(</span><span class="s">&#39;seed&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> <span class="nb">rand</span><span class="p">(</span><span class="s">&#39;seed&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="c">%% Create an image with few spikes</span>
+<span class="n">im</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">);</span> <span class="n">ind</span> <span class="p">=</span> <span class="n">randperm</span><span class="p">(</span><span class="n">N</span>^<span class="mi">2</span><span class="p">);</span> <span class="n">im</span><span class="p">(</span><span class="n">ind</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">100</span><span class="p">))</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="c">%</span>
+<span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">),</span> <span class="n">imagesc</span><span class="p">(</span><span class="n">im</span><span class="p">);</span> <span class="n">axis</span> <span class="n">image</span><span class="p">;</span> <span class="n">axis</span> <span class="n">off</span><span class="p">;</span>
+<span class="n">colormap</span> <span class="n">gray</span><span class="p">;</span> <span class="n">title</span><span class="p">(</span><span class="s">&#39;Original image&#39;</span><span class="p">);</span> <span class="n">drawnow</span><span class="p">;</span>
+
+<span class="c">%% Create a mask</span>
+<span class="c">% Mask</span>
+<span class="n">mask</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">im</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">0.095</span><span class="p">;</span> <span class="n">ind</span> <span class="p">=</span> <span class="nb">find</span><span class="p">(</span><span class="n">mask</span><span class="o">==</span><span class="mi">1</span><span class="p">);</span>
+<span class="c">% Masking matrix (sparse matrix in matlab)</span>
+<span class="n">Ma</span> <span class="p">=</span> <span class="n">sparse</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="nb">numel</span><span class="p">(</span><span class="n">ind</span><span class="p">),</span> <span class="n">ind</span><span class="p">,</span> <span class="nb">ones</span><span class="p">(</span><span class="nb">numel</span><span class="p">(</span><span class="n">ind</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="nb">numel</span><span class="p">(</span><span class="n">ind</span><span class="p">),</span> <span class="nb">numel</span><span class="p">(</span><span class="n">im</span><span class="p">));</span>
+<span class="c">% Masking operator</span>
+<span class="c">% A = @(x) Ma*x(:);</span>
+<span class="c">% At = @(x) reshape(Ma&#39;*x(:), size(im));</span>
+
+<span class="c">%% Reconstruct from a few Fourier measurements</span>
+
+<span class="c">% Composition (Masking o Fourier)</span>
+<span class="n">A</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">Ma</span><span class="o">*</span><span class="nb">reshape</span><span class="p">(</span><span class="n">fft2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="nb">sqrt</span><span class="p">(</span><span class="nb">numel</span><span class="p">(</span><span class="n">im</span><span class="p">)),</span> <span class="nb">numel</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">At</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">ifft2</span><span class="p">(</span><span class="nb">reshape</span><span class="p">(</span><span class="n">Ma</span><span class="o">&#39;*</span><span class="n">x</span><span class="p">(:),</span> <span class="nb">size</span><span class="p">(</span><span class="n">im</span><span class="p">))</span><span class="o">*</span><span class="nb">sqrt</span><span class="p">(</span><span class="nb">numel</span><span class="p">(</span><span class="n">im</span><span class="p">)));</span>
+
+<span class="c">% Sparsity operator</span>
+<span class="n">Psit</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="p">;</span> <span class="n">Psi</span> <span class="p">=</span> <span class="n">Psit</span><span class="p">;</span>
+
+<span class="c">% Select 33% of Fourier coefficients</span>
+<span class="n">y</span> <span class="p">=</span> <span class="n">A</span><span class="p">(</span><span class="n">im</span><span class="p">);</span>
+
+<span class="c">% Add Gaussian i.i.d. noise</span>
+<span class="n">sigma_noise</span> <span class="p">=</span> <span class="mi">10</span>^<span class="p">(</span><span class="o">-</span><span class="n">input_snr</span><span class="o">/</span><span class="mi">20</span><span class="p">)</span><span class="o">*</span><span class="n">std</span><span class="p">(</span><span class="n">im</span><span class="p">(:));</span>
+<span class="n">y</span> <span class="p">=</span> <span class="n">y</span> <span class="o">+</span> <span class="p">(</span><span class="nb">randn</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="nb">i</span><span class="o">*</span><span class="nb">randn</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span><span class="o">*</span><span class="n">sigma_noise</span><span class="o">/</span><span class="nb">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+
+<span class="c">% Display the downsampled image</span>
+<span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">);</span> <span class="n">imagesc</span><span class="p">(</span><span class="nb">real</span><span class="p">(</span><span class="n">At</span><span class="p">(</span><span class="n">y</span><span class="p">)));</span> <span class="n">axis</span> <span class="n">image</span><span class="p">;</span> <span class="n">axis</span> <span class="n">off</span><span class="p">;</span>
+<span class="n">colormap</span> <span class="n">gray</span><span class="p">;</span> <span class="n">title</span><span class="p">(</span><span class="s">&#39;Measured image&#39;</span><span class="p">);</span> <span class="n">drawnow</span><span class="p">;</span>
+
+<span class="c">% Tolerance on noise</span>
+<span class="n">epsilon</span> <span class="p">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">chi2inv</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">numel</span><span class="p">(</span><span class="n">ind</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">sigma_noise</span><span class="p">;</span>
+
+<span class="c">% Parameters for BPDN</span>
+<span class="n">param</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c">% Print log or not</span>
+<span class="n">param</span><span class="p">.</span><span class="nb">gamma</span> <span class="p">=</span> <span class="mf">1e-1</span><span class="p">;</span> <span class="c">% Converge parameter</span>
+<span class="n">param</span><span class="p">.</span><span class="n">tol</span> <span class="p">=</span> <span class="mf">1e-4</span><span class="p">;</span> <span class="c">% Stopping criterion for the BPDN problem</span>
+<span class="n">param</span><span class="p">.</span><span class="n">maxit</span> <span class="p">=</span> <span class="mi">300</span><span class="p">;</span> <span class="c">% Max. number of iterations for the BPDN problem </span>
+<span class="n">param</span><span class="p">.</span><span class="n">nu_b2</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c">% Bound on the norm of the operator A</span>
+<span class="n">param</span><span class="p">.</span><span class="n">tol_b2</span> <span class="p">=</span> <span class="mf">1e-4</span><span class="p">;</span> <span class="c">% Tolerance for the projection onto the L2-ball</span>
+<span class="n">param</span><span class="p">.</span><span class="n">tight_b2</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c">% Indicate if A is a tight frame (1) or not (0)</span>
+<span class="n">param</span><span class="p">.</span><span class="n">tight_l1</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c">% Indicate if Psit is a tight frame (1) or not (0)</span>
+<span class="n">param</span><span class="p">.</span><span class="n">pos_l1</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c">%</span>
+
+<span class="c">% Solve BPDN problem (without weights)</span>
+<span class="n">sol</span> <span class="p">=</span> <span class="n">solve_bpdn</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">At</span><span class="p">,</span> <span class="n">Psi</span><span class="p">,</span> <span class="n">Psit</span><span class="p">,</span> <span class="n">param</span><span class="p">);</span>
+
+<span class="c">% Show reconstructed image</span>
+<span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">);</span> <span class="n">imagesc</span><span class="p">(</span><span class="nb">real</span><span class="p">(</span><span class="n">sol</span><span class="p">));</span> <span class="n">axis</span> <span class="n">image</span><span class="p">;</span> <span class="n">axis</span> <span class="n">off</span><span class="p">;</span>
+<span class="n">colormap</span> <span class="n">gray</span><span class="p">;</span> <span class="n">title</span><span class="p">([</span><span class="s">&#39;First estimate - &#39;</span><span class="p">,</span> <span class="c">...</span>
+    <span class="n">num2str</span><span class="p">(</span><span class="n">snr</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="nb">real</span><span class="p">(</span><span class="n">sol</span><span class="p">))),</span> <span class="s">&#39;dB&#39;</span><span class="p">]);</span> <span class="n">drawnow</span><span class="p">;</span>
+
+<span class="c">% Re-fine the estimate </span>
+<span class="n">param</span><span class="p">.</span><span class="n">weights</span> <span class="p">=</span> <span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span><span class="o">+</span><span class="mf">1e-5</span><span class="p">);</span>
+<span class="n">sol</span> <span class="p">=</span> <span class="n">solve_bpdn</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">At</span><span class="p">,</span> <span class="n">Psi</span><span class="p">,</span> <span class="n">Psit</span><span class="p">,</span> <span class="n">param</span><span class="p">);</span>
+
+<span class="c">% Show reconstructed image</span>
+<span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">subplot</span><span class="p">(</span><span class="mi">224</span><span class="p">);</span> <span class="n">imagesc</span><span class="p">(</span><span class="nb">real</span><span class="p">(</span><span class="n">sol</span><span class="p">));</span> <span class="n">axis</span> <span class="n">image</span><span class="p">;</span> <span class="n">axis</span> <span class="n">off</span><span class="p">;</span>
+<span class="n">colormap</span> <span class="n">gray</span><span class="p">;</span> <span class="n">title</span><span class="p">([</span><span class="s">&#39;Second estimate - &#39;</span><span class="p">,</span> <span class="c">...</span>
+    <span class="n">num2str</span><span class="p">(</span><span class="n">snr</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="nb">real</span><span class="p">(</span><span class="n">sol</span><span class="p">))),</span> <span class="s">&#39;dB&#39;</span><span class="p">]);</span> <span class="n">drawnow</span><span class="p">;</span>
+</pre></div>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="demo_weighted_l1.html">View the help</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p></p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

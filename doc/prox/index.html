@@ -1,0 +1,104 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">Unlocbox - Proximal operators</h1>
+
+<p>The proximal operator of function f evaluated in z is the solution of
+the folowing equation:</p>
+<!-- prox_{f, gamma }(x)=min_x  1/2 ||x-z||_2^2 + gamma f(z) -->
+<div class="math">
+\begin{equation*}
+prox_{f, \gamma }(z)=\min_z  \frac{1}{2} \|x-z\|_2^2 + \gamma f(z)
+\end{equation*}
+</div>
+<p>Here are a list of common usual proximal operators available in the
+UnLocBoX. We remember the reader that projections are particular cases of proximal
+operators.</p>
+<div class="section" id="general-proximal-operators">
+<h2>General Proximal operators</h2>
+<ul class="simple">
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_l0.html">prox_l0</a></span> - Proximal operator of the L0 norm</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_l1.html">prox_l1</a></span> - Proximal operator of the L1 norm</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_l2.html">prox_l2</a></span> - Proximal operator of the L2 norm</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_l2grad.html">prox_l2grad</a></span> - Proximal operator of the L2 norm of the gradient</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_l2gradfourier.html">prox_l2gradfourier</a></span> - Proximal operator of the L2 norm of the gradient in the Fourier domain</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_linf1.html">prox_linf1</a></span> - Proximal operator of the Linf1 norm</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_l21.html">prox_l21</a></span> - Proximal operator of the L21 norm</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_l12.html">prox_l12</a></span> - Proximal operator of the LP norm</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_nuclearnorm.html">prox_nuclearnorm</a></span> - Proximal operator of the nuclear norm</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_nuclearnorm_block.html">prox_nuclearnorm_block</a></span> - Proximal operator of the nuclear norm by block</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_tv.html">prox_tv</a></span> - Proximal operator of the TV norm</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_tv3d.html">prox_tv3d</a></span> - Proximal operator of the 3D TV norm</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_tv1d.html">prox_tv1d</a></span> - Proximal operator of the 1D TV norm</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_tv4d.html">prox_tv4d</a></span> - Proximal operator of the 4D TV norm</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_sum_log.html">prox_sum_log</a></span> - Proximal operor for the sum of logarithms.</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_sum_log_norm2.html">prox_sum_log_norm2</a></span> - Proximal operator of log-barrier  - sum(log(x))</li>
+</ul>
+</div>
+<div class="section" id="projection-operators">
+<h2>Projection operators</h2>
+<ul class="simple">
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/proj_b1.html">proj_b1</a></span> - Projection on a B1-Ball</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/proj_b2.html">proj_b2</a></span> - Projection on a B2-Ball</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/proj_box.html">proj_box</a></span> - Bound the value of x</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/proj_nuclearnorm.html">proj_nuclearnorm</a></span> - Projection operator of the nuclear norm</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/proj_spsd.html">proj_spsd</a></span> - Projection onto the semi definite symetric positive set</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/proj_linear_eq.html">proj_linear_eq</a></span> - Projection onto a linear set of equalities</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/proj_linear_ineq.html">proj_linear_ineq</a></span> - Projection onto a linear set of inequalities</li>
+</ul>
+</div>
+<div class="section" id="proximal-tools">
+<h2>Proximal tools</h2>
+<ul class="simple">
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_sumg.html">prox_sumg</a></span> - Proximal operator of a sum of function</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_adjoint.html">prox_adjoint</a></span> - Proximal operator of the adjoint of a function</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_add_2norm.html">prox_add_2norm</a></span> - Proximal operator</li>
+<li><span class="linkrole"><a href="#BASEURL#/doc/prox/prox_fax.html">prox_fax</a></span> - Proximal operator of f(Ax)</li>
+</ul>
+<p>For help, bug reports, suggestions etc. please send email to
+unlocbox (at) groupes (dot) epfl (dot) ch</p>
+<p>see also: solver solvep</p>
+</div>
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"></div>
+                    <br/>
+                    <div id="seealso"><p></p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

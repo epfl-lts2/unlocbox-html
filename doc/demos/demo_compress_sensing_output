@@ -1,0 +1,344 @@
+UnLocBoX version 1.7.3. Copyright 2012-2015 LTS2-EPFL, by Nathanael Perraudin
+The compression ratio is: 5.55556
+Algorithm selected: FORWARD_BACKWARD 
+Iter 001:     prox_L1: ||A x-y||_1 = 5.923621e-04, REL_OBJ, iter = 1
+  f(x^*) = 2.157636e+02, rel_eval = 3.160875e+00
+Iter 002:     prox_L1: ||A x-y||_1 = 8.013456e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.291304e+01, rel_eval = 1.322210e+00
+Iter 003:     prox_L1: ||A x-y||_1 = 9.339635e-04, REL_OBJ, iter = 1
+  f(x^*) = 4.586333e+01, rel_eval = 1.025868e+00
+Iter 004:     prox_L1: ||A x-y||_1 = 1.012370e-03, REL_OBJ, iter = 1
+  f(x^*) = 2.908033e+01, rel_eval = 5.771258e-01
+Iter 005:     prox_L1: ||A x-y||_1 = 1.054741e-03, REL_OBJ, iter = 1
+  f(x^*) = 2.373785e+01, rel_eval = 2.250615e-01
+Iter 006:     prox_L1: ||A x-y||_1 = 1.072537e-03, REL_OBJ, iter = 1
+  f(x^*) = 2.229052e+01, rel_eval = 6.493034e-02
+Iter 007:     prox_L1: ||A x-y||_1 = 1.074294e-03, REL_OBJ, iter = 1
+  f(x^*) = 2.191112e+01, rel_eval = 1.731559e-02
+Iter 008:     prox_L1: ||A x-y||_1 = 1.066605e-03, REL_OBJ, iter = 1
+  f(x^*) = 2.169951e+01, rel_eval = 9.751799e-03
+Iter 009:     prox_L1: ||A x-y||_1 = 1.053852e-03, REL_OBJ, iter = 1
+  f(x^*) = 2.145387e+01, rel_eval = 1.144942e-02
+Iter 010:     prox_L1: ||A x-y||_1 = 1.038942e-03, REL_OBJ, iter = 1
+  f(x^*) = 2.117592e+01, rel_eval = 1.312574e-02
+Iter 011:     prox_L1: ||A x-y||_1 = 1.023908e-03, REL_OBJ, iter = 1
+  f(x^*) = 2.090056e+01, rel_eval = 1.317486e-02
+Iter 012:     prox_L1: ||A x-y||_1 = 1.009614e-03, REL_OBJ, iter = 1
+  f(x^*) = 2.063935e+01, rel_eval = 1.265608e-02
+Iter 013:     prox_L1: ||A x-y||_1 = 9.963028e-04, REL_OBJ, iter = 1
+  f(x^*) = 2.039014e+01, rel_eval = 1.222198e-02
+Iter 014:     prox_L1: ||A x-y||_1 = 9.840516e-04, REL_OBJ, iter = 1
+  f(x^*) = 2.015080e+01, rel_eval = 1.187745e-02
+Iter 015:     prox_L1: ||A x-y||_1 = 9.723256e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.991184e+01, rel_eval = 1.200082e-02
+Iter 016:     prox_L1: ||A x-y||_1 = 9.607855e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.967051e+01, rel_eval = 1.226856e-02
+Iter 017:     prox_L1: ||A x-y||_1 = 9.496757e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.943526e+01, rel_eval = 1.210469e-02
+Iter 018:     prox_L1: ||A x-y||_1 = 9.385601e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.920142e+01, rel_eval = 1.217791e-02
+Iter 019:     prox_L1: ||A x-y||_1 = 9.276700e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.897450e+01, rel_eval = 1.195923e-02
+Iter 020:     prox_L1: ||A x-y||_1 = 9.168974e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.875233e+01, rel_eval = 1.184791e-02
+Iter 021:     prox_L1: ||A x-y||_1 = 9.061777e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.853375e+01, rel_eval = 1.179359e-02
+Iter 022:     prox_L1: ||A x-y||_1 = 8.957458e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.832203e+01, rel_eval = 1.155530e-02
+Iter 023:     prox_L1: ||A x-y||_1 = 8.855633e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.811544e+01, rel_eval = 1.140383e-02
+Iter 024:     prox_L1: ||A x-y||_1 = 8.757972e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.791597e+01, rel_eval = 1.113403e-02
+Iter 025:     prox_L1: ||A x-y||_1 = 8.663159e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.772191e+01, rel_eval = 1.095035e-02
+Iter 026:     prox_L1: ||A x-y||_1 = 8.569456e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.753058e+01, rel_eval = 1.091391e-02
+Iter 027:     prox_L1: ||A x-y||_1 = 8.477890e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.734402e+01, rel_eval = 1.075663e-02
+Iter 028:     prox_L1: ||A x-y||_1 = 8.386890e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.715973e+01, rel_eval = 1.073938e-02
+Iter 029:     prox_L1: ||A x-y||_1 = 8.299160e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.698179e+01, rel_eval = 1.047834e-02
+Iter 030:     prox_L1: ||A x-y||_1 = 8.213199e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.680660e+01, rel_eval = 1.042389e-02
+Iter 031:     prox_L1: ||A x-y||_1 = 8.130472e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.663698e+01, rel_eval = 1.019563e-02
+Iter 032:     prox_L1: ||A x-y||_1 = 8.048878e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.646984e+01, rel_eval = 1.014800e-02
+Iter 033:     prox_L1: ||A x-y||_1 = 7.969721e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.630793e+01, rel_eval = 9.928134e-03
+Iter 034:     prox_L1: ||A x-y||_1 = 7.895409e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.615501e+01, rel_eval = 9.465917e-03
+Iter 035:     prox_L1: ||A x-y||_1 = 7.823331e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.600669e+01, rel_eval = 9.266496e-03
+Iter 036:     prox_L1: ||A x-y||_1 = 7.749567e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.585569e+01, rel_eval = 9.523217e-03
+Iter 037:     prox_L1: ||A x-y||_1 = 7.676060e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.570624e+01, rel_eval = 9.515138e-03
+Iter 038:     prox_L1: ||A x-y||_1 = 7.605176e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.556296e+01, rel_eval = 9.206591e-03
+Iter 039:     prox_L1: ||A x-y||_1 = 7.534767e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.542100e+01, rel_eval = 9.205493e-03
+Iter 040:     prox_L1: ||A x-y||_1 = 7.467506e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.528525e+01, rel_eval = 8.881457e-03
+Iter 041:     prox_L1: ||A x-y||_1 = 7.400313e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.514900e+01, rel_eval = 8.994038e-03
+Iter 042:     prox_L1: ||A x-y||_1 = 7.335125e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.501649e+01, rel_eval = 8.823772e-03
+Iter 043:     prox_L1: ||A x-y||_1 = 7.271319e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.488627e+01, rel_eval = 8.747740e-03
+Iter 044:     prox_L1: ||A x-y||_1 = 7.209700e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.475999e+01, rel_eval = 8.555892e-03
+Iter 045:     prox_L1: ||A x-y||_1 = 7.149958e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.463790e+01, rel_eval = 8.340256e-03
+Iter 046:     prox_L1: ||A x-y||_1 = 7.090915e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.451791e+01, rel_eval = 8.265388e-03
+Iter 047:     prox_L1: ||A x-y||_1 = 7.033647e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.440116e+01, rel_eval = 8.107026e-03
+Iter 048:     prox_L1: ||A x-y||_1 = 6.978667e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.428750e+01, rel_eval = 7.954615e-03
+Iter 049:     prox_L1: ||A x-y||_1 = 6.927550e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.418022e+01, rel_eval = 7.565460e-03
+Iter 050:     prox_L1: ||A x-y||_1 = 6.876005e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.407265e+01, rel_eval = 7.644459e-03
+Iter 051:     prox_L1: ||A x-y||_1 = 6.825123e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.396853e+01, rel_eval = 7.453781e-03
+Iter 052:     prox_L1: ||A x-y||_1 = 6.773365e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.386423e+01, rel_eval = 7.523147e-03
+Iter 053:     prox_L1: ||A x-y||_1 = 6.721795e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.376016e+01, rel_eval = 7.562581e-03
+Iter 054:     prox_L1: ||A x-y||_1 = 6.669548e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.365431e+01, rel_eval = 7.752606e-03
+Iter 055:     prox_L1: ||A x-y||_1 = 6.618189e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.354955e+01, rel_eval = 7.731446e-03
+Iter 056:     prox_L1: ||A x-y||_1 = 6.567826e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.344576e+01, rel_eval = 7.718900e-03
+Iter 057:     prox_L1: ||A x-y||_1 = 6.519209e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.334481e+01, rel_eval = 7.564773e-03
+Iter 058:     prox_L1: ||A x-y||_1 = 6.472675e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.324826e+01, rel_eval = 7.288221e-03
+Iter 059:     prox_L1: ||A x-y||_1 = 6.425018e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.315045e+01, rel_eval = 7.437179e-03
+Iter 060:     prox_L1: ||A x-y||_1 = 6.376681e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.305256e+01, rel_eval = 7.499841e-03
+Iter 061:     prox_L1: ||A x-y||_1 = 6.330595e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.295944e+01, rel_eval = 7.185298e-03
+Iter 062:     prox_L1: ||A x-y||_1 = 6.285803e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.286847e+01, rel_eval = 7.069584e-03
+Iter 063:     prox_L1: ||A x-y||_1 = 6.242054e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.277934e+01, rel_eval = 6.974229e-03
+Iter 064:     prox_L1: ||A x-y||_1 = 6.199580e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.269242e+01, rel_eval = 6.848477e-03
+Iter 065:     prox_L1: ||A x-y||_1 = 6.156734e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.260634e+01, rel_eval = 6.828270e-03
+Iter 066:     prox_L1: ||A x-y||_1 = 6.116205e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.252495e+01, rel_eval = 6.498646e-03
+Iter 067:     prox_L1: ||A x-y||_1 = 6.076663e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.244586e+01, rel_eval = 6.354679e-03
+Iter 068:     prox_L1: ||A x-y||_1 = 6.036655e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.236644e+01, rel_eval = 6.422126e-03
+Iter 069:     prox_L1: ||A x-y||_1 = 5.996848e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.228693e+01, rel_eval = 6.471213e-03
+Iter 070:     prox_L1: ||A x-y||_1 = 5.956598e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.220594e+01, rel_eval = 6.634595e-03
+Iter 071:     prox_L1: ||A x-y||_1 = 5.918967e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.212897e+01, rel_eval = 6.346396e-03
+Iter 072:     prox_L1: ||A x-y||_1 = 5.882386e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.205338e+01, rel_eval = 6.271081e-03
+Iter 073:     prox_L1: ||A x-y||_1 = 5.845975e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.197768e+01, rel_eval = 6.320278e-03
+Iter 074:     prox_L1: ||A x-y||_1 = 5.810309e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.190328e+01, rel_eval = 6.250003e-03
+Iter 075:     prox_L1: ||A x-y||_1 = 5.775301e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.183048e+01, rel_eval = 6.154227e-03
+Iter 076:     prox_L1: ||A x-y||_1 = 5.740599e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.175850e+01, rel_eval = 6.121601e-03
+Iter 077:     prox_L1: ||A x-y||_1 = 5.706311e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.168783e+01, rel_eval = 6.045719e-03
+Iter 078:     prox_L1: ||A x-y||_1 = 5.671274e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.161626e+01, rel_eval = 6.161632e-03
+Iter 079:     prox_L1: ||A x-y||_1 = 5.635454e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.154305e+01, rel_eval = 6.342272e-03
+Iter 080:     prox_L1: ||A x-y||_1 = 5.598594e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.146817e+01, rel_eval = 6.529202e-03
+Iter 081:     prox_L1: ||A x-y||_1 = 5.562825e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.139484e+01, rel_eval = 6.435451e-03
+Iter 082:     prox_L1: ||A x-y||_1 = 5.528506e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.132420e+01, rel_eval = 6.238329e-03
+Iter 083:     prox_L1: ||A x-y||_1 = 5.495608e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.125609e+01, rel_eval = 6.050700e-03
+Iter 084:     prox_L1: ||A x-y||_1 = 5.463653e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.119003e+01, rel_eval = 5.903422e-03
+Iter 085:     prox_L1: ||A x-y||_1 = 5.431061e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.112293e+01, rel_eval = 6.032682e-03
+Iter 086:     prox_L1: ||A x-y||_1 = 5.397751e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.105499e+01, rel_eval = 6.145493e-03
+Iter 087:     prox_L1: ||A x-y||_1 = 5.364534e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.098772e+01, rel_eval = 6.122580e-03
+Iter 088:     prox_L1: ||A x-y||_1 = 5.331926e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.092204e+01, rel_eval = 6.013710e-03
+Iter 089:     prox_L1: ||A x-y||_1 = 5.299779e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.085730e+01, rel_eval = 5.962584e-03
+Iter 090:     prox_L1: ||A x-y||_1 = 5.268204e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.079387e+01, rel_eval = 5.876635e-03
+Iter 091:     prox_L1: ||A x-y||_1 = 5.236679e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.073032e+01, rel_eval = 5.921784e-03
+Iter 092:     prox_L1: ||A x-y||_1 = 5.206205e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.066789e+01, rel_eval = 5.852034e-03
+Iter 093:     prox_L1: ||A x-y||_1 = 5.176950e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.060771e+01, rel_eval = 5.673950e-03
+Iter 094:     prox_L1: ||A x-y||_1 = 5.147410e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.054770e+01, rel_eval = 5.688980e-03
+Iter 095:     prox_L1: ||A x-y||_1 = 5.117777e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.048808e+01, rel_eval = 5.684514e-03
+Iter 096:     prox_L1: ||A x-y||_1 = 5.089610e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.043026e+01, rel_eval = 5.543903e-03
+Iter 097:     prox_L1: ||A x-y||_1 = 5.060948e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.037233e+01, rel_eval = 5.584392e-03
+Iter 098:     prox_L1: ||A x-y||_1 = 5.031301e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.031364e+01, rel_eval = 5.691193e-03
+Iter 099:     prox_L1: ||A x-y||_1 = 5.001807e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.025538e+01, rel_eval = 5.680824e-03
+Iter 100:     prox_L1: ||A x-y||_1 = 4.973096e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.019816e+01, rel_eval = 5.610995e-03
+Iter 101:     prox_L1: ||A x-y||_1 = 4.945244e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.014257e+01, rel_eval = 5.480501e-03
+Iter 102:     prox_L1: ||A x-y||_1 = 4.918273e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.008743e+01, rel_eval = 5.466319e-03
+Iter 103:     prox_L1: ||A x-y||_1 = 4.892211e-04, REL_OBJ, iter = 1
+  f(x^*) = 1.003318e+01, rel_eval = 5.407364e-03
+Iter 104:     prox_L1: ||A x-y||_1 = 4.866756e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.980003e+00, rel_eval = 5.327945e-03
+Iter 105:     prox_L1: ||A x-y||_1 = 4.841273e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.926609e+00, rel_eval = 5.378884e-03
+Iter 106:     prox_L1: ||A x-y||_1 = 4.815822e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.873589e+00, rel_eval = 5.369865e-03
+Iter 107:     prox_L1: ||A x-y||_1 = 4.791314e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.822816e+00, rel_eval = 5.168925e-03
+Iter 108:     prox_L1: ||A x-y||_1 = 4.766435e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.771346e+00, rel_eval = 5.267402e-03
+Iter 109:     prox_L1: ||A x-y||_1 = 4.741755e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.721464e+00, rel_eval = 5.131140e-03
+Iter 110:     prox_L1: ||A x-y||_1 = 4.717053e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.672317e+00, rel_eval = 5.081256e-03
+Iter 111:     prox_L1: ||A x-y||_1 = 4.692146e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.622766e+00, rel_eval = 5.149256e-03
+Iter 112:     prox_L1: ||A x-y||_1 = 4.667156e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.573244e+00, rel_eval = 5.173020e-03
+Iter 113:     prox_L1: ||A x-y||_1 = 4.643569e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.525721e+00, rel_eval = 4.988914e-03
+Iter 114:     prox_L1: ||A x-y||_1 = 4.621204e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.479749e+00, rel_eval = 4.849475e-03
+Iter 115:     prox_L1: ||A x-y||_1 = 4.599644e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.434620e+00, rel_eval = 4.783339e-03
+Iter 116:     prox_L1: ||A x-y||_1 = 4.577950e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.389794e+00, rel_eval = 4.773911e-03
+Iter 117:     prox_L1: ||A x-y||_1 = 4.556465e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.345848e+00, rel_eval = 4.702159e-03
+Iter 118:     prox_L1: ||A x-y||_1 = 4.536060e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.303347e+00, rel_eval = 4.568444e-03
+Iter 119:     prox_L1: ||A x-y||_1 = 4.515903e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.260945e+00, rel_eval = 4.578582e-03
+Iter 120:     prox_L1: ||A x-y||_1 = 4.495304e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.218076e+00, rel_eval = 4.650545e-03
+Iter 121:     prox_L1: ||A x-y||_1 = 4.474198e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.175243e+00, rel_eval = 4.668319e-03
+Iter 122:     prox_L1: ||A x-y||_1 = 4.452331e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.130932e+00, rel_eval = 4.852817e-03
+Iter 123:     prox_L1: ||A x-y||_1 = 4.431530e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.087639e+00, rel_eval = 4.763976e-03
+Iter 124:     prox_L1: ||A x-y||_1 = 4.411062e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.044405e+00, rel_eval = 4.780154e-03
+Iter 125:     prox_L1: ||A x-y||_1 = 4.391159e-04, REL_OBJ, iter = 1
+  f(x^*) = 9.002482e+00, rel_eval = 4.656842e-03
+Iter 126:     prox_L1: ||A x-y||_1 = 4.371109e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.960588e+00, rel_eval = 4.675287e-03
+Iter 127:     prox_L1: ||A x-y||_1 = 4.350953e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.918352e+00, rel_eval = 4.735844e-03
+Iter 128:     prox_L1: ||A x-y||_1 = 4.331748e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.877580e+00, rel_eval = 4.592759e-03
+Iter 129:     prox_L1: ||A x-y||_1 = 4.312585e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.837535e+00, rel_eval = 4.531207e-03
+Iter 130:     prox_L1: ||A x-y||_1 = 4.293228e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.798088e+00, rel_eval = 4.483602e-03
+Iter 131:     prox_L1: ||A x-y||_1 = 4.273623e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.758826e+00, rel_eval = 4.482613e-03
+Iter 132:     prox_L1: ||A x-y||_1 = 4.253888e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.719376e+00, rel_eval = 4.524378e-03
+Iter 133:     prox_L1: ||A x-y||_1 = 4.235390e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.681718e+00, rel_eval = 4.337624e-03
+Iter 134:     prox_L1: ||A x-y||_1 = 4.217508e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.644694e+00, rel_eval = 4.282793e-03
+Iter 135:     prox_L1: ||A x-y||_1 = 4.199519e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.607002e+00, rel_eval = 4.379329e-03
+Iter 136:     prox_L1: ||A x-y||_1 = 4.182234e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.569715e+00, rel_eval = 4.351012e-03
+Iter 137:     prox_L1: ||A x-y||_1 = 4.164954e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.532349e+00, rel_eval = 4.379327e-03
+Iter 138:     prox_L1: ||A x-y||_1 = 4.148427e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.496779e+00, rel_eval = 4.186283e-03
+Iter 139:     prox_L1: ||A x-y||_1 = 4.132118e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.461985e+00, rel_eval = 4.111767e-03
+Iter 140:     prox_L1: ||A x-y||_1 = 4.116853e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.429070e+00, rel_eval = 3.904901e-03
+Iter 141:     prox_L1: ||A x-y||_1 = 4.102454e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.396524e+00, rel_eval = 3.876196e-03
+Iter 142:     prox_L1: ||A x-y||_1 = 4.088765e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.365159e+00, rel_eval = 3.749434e-03
+Iter 143:     prox_L1: ||A x-y||_1 = 4.075471e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.335188e+00, rel_eval = 3.595687e-03
+Iter 144:     prox_L1: ||A x-y||_1 = 4.063167e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.306961e+00, rel_eval = 3.398076e-03
+Iter 145:     prox_L1: ||A x-y||_1 = 4.054109e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.284605e+00, rel_eval = 2.698409e-03
+Iter 146:     prox_L1: ||A x-y||_1 = 4.050941e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.272425e+00, rel_eval = 1.472362e-03
+Iter 147:     prox_L1: ||A x-y||_1 = 4.050623e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.264814e+00, rel_eval = 9.209453e-04
+Iter 148:     prox_L1: ||A x-y||_1 = 4.054351e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.263807e+00, rel_eval = 1.218356e-04
+Iter 149:     prox_L1: ||A x-y||_1 = 4.061496e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.269872e+00, rel_eval = 7.333019e-04
+Iter 150:     prox_L1: ||A x-y||_1 = 4.070374e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.281055e+00, rel_eval = 1.350470e-03
+Iter 151:     prox_L1: ||A x-y||_1 = 4.081373e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.299936e+00, rel_eval = 2.274808e-03
+Iter 152:     prox_L1: ||A x-y||_1 = 4.093948e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.325132e+00, rel_eval = 3.026538e-03
+Iter 153:     prox_L1: ||A x-y||_1 = 4.106654e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.352880e+00, rel_eval = 3.321963e-03
+Iter 154:     prox_L1: ||A x-y||_1 = 4.116022e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.375357e+00, rel_eval = 2.683733e-03
+Iter 155:     prox_L1: ||A x-y||_1 = 4.121584e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.391042e+00, rel_eval = 1.869195e-03
+Iter 156:     prox_L1: ||A x-y||_1 = 4.122875e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.397475e+00, rel_eval = 7.660545e-04
+Iter 157:     prox_L1: ||A x-y||_1 = 4.119843e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.393615e+00, rel_eval = 4.598484e-04
+Iter 158:     prox_L1: ||A x-y||_1 = 4.112387e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.379372e+00, rel_eval = 1.699761e-03
+Iter 159:     prox_L1: ||A x-y||_1 = 4.101984e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.358263e+00, rel_eval = 2.525534e-03
+Iter 160:     prox_L1: ||A x-y||_1 = 4.089129e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.332333e+00, rel_eval = 3.111889e-03
+Iter 161:     prox_L1: ||A x-y||_1 = 4.073914e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.301701e+00, rel_eval = 3.689919e-03
+Iter 162:     prox_L1: ||A x-y||_1 = 4.057617e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.269074e+00, rel_eval = 3.945628e-03
+Iter 163:     prox_L1: ||A x-y||_1 = 4.041154e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.236391e+00, rel_eval = 3.968107e-03
+Iter 164:     prox_L1: ||A x-y||_1 = 4.026553e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.208215e+00, rel_eval = 3.432645e-03
+Iter 165:     prox_L1: ||A x-y||_1 = 4.013988e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.186205e+00, rel_eval = 2.688674e-03
+Iter 166:     prox_L1: ||A x-y||_1 = 4.005774e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.174741e+00, rel_eval = 1.402396e-03
+Iter 167:     prox_L1: ||A x-y||_1 = 4.000346e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.169650e+00, rel_eval = 6.231272e-04
+Iter 168:     prox_L1: ||A x-y||_1 = 3.997299e-04, REL_OBJ, iter = 1
+  f(x^*) = 8.169051e+00, rel_eval = 7.332539e-05
+
+ FORWARD_BACKWARD:
+  f(x^*) = 8.169051e+00, rel_eval = 7.332539e-05
+ 168 iterations
+ Stopping criterion: REL_NORM_OBJ 

@@ -1,0 +1,476 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">DEMO_ADMM - Example of use of the ADMM solver</h1>
+
+<div class="section" id="xxxdescription">
+<h2>Description</h2>
+<p>The demo file present an example of the ADMM (alternating direction
+method of multipliers) solver. Unfortunately, this method is not fully
+automatic and the user needs to define the functions in a particular
+way.</p>
+<p>Please read the paper of Boyd &quot;Distributed Optimization and Statistical
+Learning via the Alternating Direction Method of Multipliers&quot; to be
+able to understand this demonstration file.</p>
+<p>ADMM is used to solve problem of the form</p>
+<!-- sol = argmin f1(x) + f2(y) such that y=Lx -->
+<div class="math">
+\begin{equation*}
+sol = \min_x f_1(y) + f_2(x) \hspace{1cm} s.t. \hspace{1cm}  y=Lx
+\end{equation*}
+</div>
+<p>In this demonstration file, we tackle the following problem</p>
+<!-- argmin  tau || z - M x ||_2^2 + || L x ||_1 -->
+<div class="math">
+\begin{equation*}
+arg \min_x  \tau \|Mx-z\|_2^2 + \|Lx\|_1
+\end{equation*}
+</div>
+<p>where <span class="math">\(z\)</span> are the measurements, <span class="math">\(W\)</span> the discrete wavelet transform, <span class="math">\(M\)</span>
+a masking operator and <span class="math">\(\tau\)</span> a regularization parameter. Clearly,
+setting <span class="math">\(Lx=y\)</span> allows to recover the general form for ADMM problem.
+Contrarily to the other solvers of the UNLocBoX the solver require
+special proximal operators.</p>
+<p>Here <span class="math">\(f_1(x) = \tau \|Mx-z\|_2^2\)</span> would normally take the following
+proximal operator:</p>
+<pre class="literal-block">
+f1.prox = &#64;(x, t) ( 1 + tau * t * mask ).^(-1) .* ( x + tau * t * mask.*z);
+f1.eval = &#64;(x) tau * norm(mask .* x - z)^2;
+</pre>
+<p>which correspond to the solution of the following problem</p>
+<blockquote>
+<!-- prox_{f1,t} (z) = argmin_{x} 1/2 ||x-z||_2^2  +  t || M x - y ||_2^2 -->
+<div class="math">
+\begin{equation*}
+prox_{f1,t} (z) = arg \min_{x} \frac{1}{2} \| x - z \|_2^2  +  t \| M x - y \|_2^2
+\end{equation*}
+</div>
+</blockquote>
+<p>However, the ADMM algorithm requires to solve a special proximal
+operator instead:</p>
+<blockquote>
+<!-- prox_{f1,t}^L (z) = argmin_{x} 1/2 || L x - z ||_2^2  +  t || M x - y ||_2^2 -->
+<div class="math">
+\begin{equation*}
+prox_{f1,t}^L (z) = arg \min_{x} \frac{1}{2} \| L x - z \|_2^2  +  t \| M x - y \|_2^2
+\end{equation*}
+</div>
+</blockquote>
+<p>which is define in MATLAB as:</p>
+<pre class="literal-block">
+f1.proxL = &#64;(x, t) ( 1 + tau * t * mask ).^(-1) .* ( Lt(x) + tau * t * mask.*z);
+f1.prox = &#64;(x, t) ( 1 + tau * t * mask ).^(-1) .* ( x + tau * t * mask.*z);
+f1.eval = &#64;(x) tau * norm(mask .* x - z)^2;
+</pre>
+<p>where <em>Lt</em> it the adjoint of the <span class="math">\(L\)</span> ( here the inverse wavelet
+transform) Because the wavelet transform is an orthonormal basis.</p>
+<p>The function <span class="math">\(f_2(y) = \| y \|_1\)</span> is defined in MATLAB as:</p>
+<pre class="literal-block">
+param_l1.verbose = verbose - 1;
+f2.prox = &#64;(x, T) prox_l1(x, T, param_l1);
+f2.eval = &#64;(x) norm_l1(L(x));
+f2.L = L;
+f2.Lt = Lt;
+</pre>
+<p>Note the field <em>f2.L</em> and f2.Lt that indicate that the real function
+function is actually <span class="math">\(f_2(Ly) =\| Lx \|_1\)</span>.</p>
+</div>
+<div class="section" id="results">
+<h2>Results</h2>
+<div class="figure align-center">
+<img alt="demo_admm_1.png" src="demo_admm_1.png" />
+<p class="caption">Original image</p>
+<div class="legend">
+This figure shows the original Lena image.</div>
+</div>
+<div class="figure align-center">
+<img alt="demo_admm_2.png" src="demo_admm_2.png" />
+<p class="caption">Depleted image</p>
+<div class="legend">
+This figure shows the image after the application of the mask and addition of the noise. Note that 50% of the pixels have been removed.</div>
+</div>
+<div class="figure align-center">
+<img alt="demo_admm_3.png" src="demo_admm_3.png" />
+<p class="caption">Reconstructed image</p>
+<div class="legend">
+This figure shows the reconstructed image thanks to the algorithm.</div>
+</div>
+<p><em>This code produces the following output</em>:</p>
+<pre class="literal-block">
+UnLocBoX version 1.7.3. Copyright 2012-2015 LTS2-EPFL, by Nathanael Perraudin
+LTFAT version 2.2.0. Copyright 2005-2016 Peter L. Søndergaard. For help, please type &quot;ltfathelp&quot;. LTFAT is using the MEX backend.
+(Your global and persistent variables have just been cleared. Sorry.)
+The time step is set manually to : 1
+Algorithm selected: ADMM
+Iter 001:     prox_L1: ||A x-y||_1 = 1.299666e+03, REL_OB, iter = 2
+  f(x^*) = 8.465667e+03, rel_eval = 6.445999e-16
+   Relative norm of the primal variables: 2.692005e-15
+   Relative norm of the dual variables: 9.468190e-01
+Iter 002:     prox_L1: ||A x-y||_1 = 2.931166e+03, REL_OB, iter = 2
+  f(x^*) = 1.198212e+04, rel_eval = 2.934748e-01
+   Relative norm of the primal variables: 6.215944e-01
+   Relative norm of the dual variables: 4.690195e-01
+Iter 003:     prox_L1: ||A x-y||_1 = 4.013392e+03, REL_OB, iter = 2
+  f(x^*) = 1.047566e+04, rel_eval = 1.438055e-01
+   Relative norm of the primal variables: 2.774620e-01
+   Relative norm of the dual variables: 2.052393e-01
+Iter 004:     prox_L1: ||A x-y||_1 = 4.715018e+03, REL_OB, iter = 2
+  f(x^*) = 8.991133e+03, rel_eval = 1.651100e-01
+   Relative norm of the primal variables: 6.585760e-02
+   Relative norm of the dual variables: 5.436986e-02
+Iter 005:     prox_L1: ||A x-y||_1 = 5.171634e+03, REL_OB, iter = 2
+  f(x^*) = 8.208612e+03, rel_eval = 9.532923e-02
+   Relative norm of the primal variables: 1.272158e-01
+   Relative norm of the dual variables: 9.229436e-02
+Iter 006:     prox_L1: ||A x-y||_1 = 5.482934e+03, REL_OB, iter = 2
+  f(x^*) = 8.111947e+03, rel_eval = 1.191646e-02
+   Relative norm of the primal variables: 1.459032e-01
+   Relative norm of the dual variables: 1.056078e-01
+Iter 007:     prox_L1: ||A x-y||_1 = 5.752854e+03, REL_OB, iter = 2
+  f(x^*) = 8.382452e+03, rel_eval = 3.227047e-02
+   Relative norm of the primal variables: 9.245724e-02
+   Relative norm of the dual variables: 7.060752e-02
+Iter 008:     prox_L1: ||A x-y||_1 = 6.075547e+03, REL_OB, iter = 2
+  f(x^*) = 8.689643e+03, rel_eval = 3.535141e-02
+   Relative norm of the primal variables: 4.356341e-02
+   Relative norm of the dual variables: 3.760963e-02
+Iter 009:     prox_L1: ||A x-y||_1 = 6.426976e+03, REL_OB, iter = 2
+  f(x^*) = 8.865207e+03, rel_eval = 1.980364e-02
+   Relative norm of the primal variables: 4.157433e-02
+   Relative norm of the dual variables: 3.315877e-02
+Iter 010:     prox_L1: ||A x-y||_1 = 6.734469e+03, REL_OB, iter = 2
+  f(x^*) = 8.898893e+03, rel_eval = 3.785489e-03
+   Relative norm of the primal variables: 3.953241e-02
+   Relative norm of the dual variables: 3.098382e-02
+Iter 011:     prox_L1: ||A x-y||_1 = 6.979770e+03, REL_OB, iter = 2
+  f(x^*) = 8.855191e+03, rel_eval = 4.935186e-03
+   Relative norm of the primal variables: 2.973070e-02
+   Relative norm of the dual variables: 2.458637e-02
+Iter 012:     prox_L1: ||A x-y||_1 = 7.177454e+03, REL_OB, iter = 2
+  f(x^*) = 8.797021e+03, rel_eval = 6.612545e-03
+   Relative norm of the primal variables: 2.175648e-02
+   Relative norm of the dual variables: 1.911560e-02
+Iter 013:     prox_L1: ||A x-y||_1 = 7.347462e+03, REL_OB, iter = 2
+  f(x^*) = 8.758075e+03, rel_eval = 4.446881e-03
+   Relative norm of the primal variables: 1.856954e-02
+   Relative norm of the dual variables: 1.658661e-02
+Iter 014:     prox_L1: ||A x-y||_1 = 7.494467e+03, REL_OB, iter = 2
+  f(x^*) = 8.744047e+03, rel_eval = 1.604211e-03
+   Relative norm of the primal variables: 1.691199e-02
+   Relative norm of the dual variables: 1.504532e-02
+Iter 015:     prox_L1: ||A x-y||_1 = 7.625410e+03, REL_OB, iter = 2
+  f(x^*) = 8.746577e+03, rel_eval = 2.892045e-04
+   Relative norm of the primal variables: 1.502511e-02
+   Relative norm of the dual variables: 1.363501e-02
+Iter 016:     prox_L1: ||A x-y||_1 = 7.745730e+03, REL_OB, iter = 2
+  f(x^*) = 8.754933e+03, rel_eval = 9.544959e-04
+   Relative norm of the primal variables: 1.355962e-02
+   Relative norm of the dual variables: 1.245494e-02
+Iter 017:     prox_L1: ||A x-y||_1 = 7.857157e+03, REL_OB, iter = 2
+  f(x^*) = 8.762592e+03, rel_eval = 8.739763e-04
+   Relative norm of the primal variables: 1.236370e-02
+   Relative norm of the dual variables: 1.141686e-02
+Iter 018:     prox_L1: ||A x-y||_1 = 7.961739e+03, REL_OB, iter = 2
+  f(x^*) = 8.767062e+03, rel_eval = 5.098806e-04
+   Relative norm of the primal variables: 1.128135e-02
+   Relative norm of the dual variables: 1.056372e-02
+Iter 019:     prox_L1: ||A x-y||_1 = 8.057635e+03, REL_OB, iter = 2
+  f(x^*) = 8.768380e+03, rel_eval = 1.503227e-04
+   Relative norm of the primal variables: 1.047710e-02
+   Relative norm of the dual variables: 9.806675e-03
+Iter 020:     prox_L1: ||A x-y||_1 = 8.146448e+03, REL_OB, iter = 2
+  f(x^*) = 8.767831e+03, rel_eval = 6.257691e-05
+   Relative norm of the primal variables: 9.716992e-03
+   Relative norm of the dual variables: 9.142954e-03
+Iter 021:     prox_L1: ||A x-y||_1 = 8.227502e+03, REL_OB, iter = 2
+  f(x^*) = 8.766682e+03, rel_eval = 1.310710e-04
+   Relative norm of the primal variables: 9.088305e-03
+   Relative norm of the dual variables: 8.559725e-03
+Iter 022:     prox_L1: ||A x-y||_1 = 8.303603e+03, REL_OB, iter = 2
+  f(x^*) = 8.765906e+03, rel_eval = 8.853839e-05
+   Relative norm of the primal variables: 8.578264e-03
+   Relative norm of the dual variables: 8.123452e-03
+Iter 023:     prox_L1: ||A x-y||_1 = 8.373619e+03, REL_OB, iter = 2
+  f(x^*) = 8.765680e+03, rel_eval = 2.584757e-05
+   Relative norm of the primal variables: 8.110997e-03
+   Relative norm of the dual variables: 7.650032e-03
+Iter 024:     prox_L1: ||A x-y||_1 = 8.437672e+03, REL_OB, iter = 2
+  f(x^*) = 8.765777e+03, rel_eval = 1.107257e-05
+   Relative norm of the primal variables: 7.579418e-03
+   Relative norm of the dual variables: 7.174434e-03
+Iter 025:     prox_L1: ||A x-y||_1 = 8.497333e+03, REL_OB, iter = 2
+  f(x^*) = 8.765953e+03, rel_eval = 2.007668e-05
+   Relative norm of the primal variables: 7.114197e-03
+   Relative norm of the dual variables: 6.744264e-03
+Iter 026:     prox_L1: ||A x-y||_1 = 8.552731e+03, REL_OB, iter = 2
+  f(x^*) = 8.766071e+03, rel_eval = 1.351357e-05
+   Relative norm of the primal variables: 6.710197e-03
+   Relative norm of the dual variables: 6.389027e-03
+Iter 027:     prox_L1: ||A x-y||_1 = 8.603578e+03, REL_OB, iter = 2
+  f(x^*) = 8.766050e+03, rel_eval = 2.445575e-06
+   Relative norm of the primal variables: 6.377277e-03
+   Relative norm of the dual variables: 6.045993e-03
+Iter 028:     prox_L1: ||A x-y||_1 = 8.651597e+03, REL_OB, iter = 2
+  f(x^*) = 8.765960e+03, rel_eval = 1.019472e-05
+   Relative norm of the primal variables: 6.077534e-03
+   Relative norm of the dual variables: 5.782314e-03
+Iter 029:     prox_L1: ||A x-y||_1 = 8.697924e+03, REL_OB, iter = 2
+  f(x^*) = 8.765928e+03, rel_eval = 3.666064e-06
+   Relative norm of the primal variables: 5.796173e-03
+   Relative norm of the dual variables: 5.556058e-03
+Iter 030:     prox_L1: ||A x-y||_1 = 8.739926e+03, REL_OB, iter = 2
+  f(x^*) = 8.765939e+03, rel_eval = 1.264795e-06
+   Relative norm of the primal variables: 5.565110e-03
+   Relative norm of the dual variables: 5.275399e-03
+Iter 031:     prox_L1: ||A x-y||_1 = 8.779018e+03, REL_OB, iter = 2
+  f(x^*) = 8.766037e+03, rel_eval = 1.112357e-05
+   Relative norm of the primal variables: 5.256417e-03
+   Relative norm of the dual variables: 5.020134e-03
+Iter 032:     prox_L1: ||A x-y||_1 = 8.814867e+03, REL_OB, iter = 2
+  f(x^*) = 8.766129e+03, rel_eval = 1.051612e-05
+   Relative norm of the primal variables: 5.004726e-03
+   Relative norm of the dual variables: 4.766338e-03
+Iter 033:     prox_L1: ||A x-y||_1 = 8.848414e+03, REL_OB, iter = 2
+  f(x^*) = 8.766166e+03, rel_eval = 4.175801e-06
+   Relative norm of the primal variables: 4.762357e-03
+   Relative norm of the dual variables: 4.554970e-03
+Iter 034:     prox_L1: ||A x-y||_1 = 8.880091e+03, REL_OB, iter = 2
+  f(x^*) = 8.766134e+03, rel_eval = 3.583860e-06
+   Relative norm of the primal variables: 4.568377e-03
+   Relative norm of the dual variables: 4.357593e-03
+Iter 035:     prox_L1: ||A x-y||_1 = 8.909905e+03, REL_OB, iter = 2
+  f(x^*) = 8.766031e+03, rel_eval = 1.172481e-05
+   Relative norm of the primal variables: 4.361031e-03
+   Relative norm of the dual variables: 4.172002e-03
+Iter 036:     prox_L1: ||A x-y||_1 = 8.937713e+03, REL_OB, iter = 2
+  f(x^*) = 8.765993e+03, rel_eval = 4.329962e-06
+   Relative norm of the primal variables: 4.200791e-03
+   Relative norm of the dual variables: 4.001096e-03
+Iter 037:     prox_L1: ||A x-y||_1 = 8.963975e+03, REL_OB, iter = 2
+  f(x^*) = 8.766008e+03, rel_eval = 1.713179e-06
+   Relative norm of the primal variables: 3.999647e-03
+   Relative norm of the dual variables: 3.842004e-03
+Iter 038:     prox_L1: ||A x-y||_1 = 8.988169e+03, REL_OB, iter = 2
+  f(x^*) = 8.766051e+03, rel_eval = 4.908652e-06
+   Relative norm of the primal variables: 3.842982e-03
+   Relative norm of the dual variables: 3.666229e-03
+Iter 039:     prox_L1: ||A x-y||_1 = 9.010132e+03, REL_OB, iter = 2
+  f(x^*) = 8.766053e+03, rel_eval = 1.961969e-07
+   Relative norm of the primal variables: 3.645311e-03
+   Relative norm of the dual variables: 3.478540e-03
+Iter 040:     prox_L1: ||A x-y||_1 = 9.030217e+03, REL_OB, iter = 2
+  f(x^*) = 8.766034e+03, rel_eval = 2.190672e-06
+   Relative norm of the primal variables: 3.461220e-03
+   Relative norm of the dual variables: 3.303860e-03
+Iter 041:     prox_L1: ||A x-y||_1 = 9.049104e+03, REL_OB, iter = 2
+  f(x^*) = 8.766076e+03, rel_eval = 4.820851e-06
+   Relative norm of the primal variables: 3.289197e-03
+   Relative norm of the dual variables: 3.154955e-03
+Iter 042:     prox_L1: ||A x-y||_1 = 9.066786e+03, REL_OB, iter = 2
+  f(x^*) = 8.766151e+03, rel_eval = 8.589505e-06
+   Relative norm of the primal variables: 3.161770e-03
+   Relative norm of the dual variables: 3.019240e-03
+Iter 043:     prox_L1: ||A x-y||_1 = 9.083023e+03, REL_OB, iter = 2
+  f(x^*) = 8.766219e+03, rel_eval = 7.754105e-06
+   Relative norm of the primal variables: 3.027163e-03
+   Relative norm of the dual variables: 2.893297e-03
+Iter 044:     prox_L1: ||A x-y||_1 = 9.098192e+03, REL_OB, iter = 2
+  f(x^*) = 8.766268e+03, rel_eval = 5.552690e-06
+   Relative norm of the primal variables: 2.903523e-03
+   Relative norm of the dual variables: 2.780700e-03
+Iter 045:     prox_L1: ||A x-y||_1 = 9.112230e+03, REL_OB, iter = 2
+  f(x^*) = 8.766315e+03, rel_eval = 5.354740e-06
+   Relative norm of the primal variables: 2.791270e-03
+   Relative norm of the dual variables: 2.662385e-03
+Iter 046:     prox_L1: ||A x-y||_1 = 9.125406e+03, REL_OB, iter = 2
+  f(x^*) = 8.766364e+03, rel_eval = 5.596640e-06
+   Relative norm of the primal variables: 2.670904e-03
+   Relative norm of the dual variables: 2.561567e-03
+Iter 047:     prox_L1: ||A x-y||_1 = 9.138245e+03, REL_OB, iter = 2
+  f(x^*) = 8.766381e+03, rel_eval = 1.912412e-06
+   Relative norm of the primal variables: 2.572164e-03
+   Relative norm of the dual variables: 2.465576e-03
+Iter 048:     prox_L1: ||A x-y||_1 = 9.150189e+03, REL_OB, iter = 2
+  f(x^*) = 8.766334e+03, rel_eval = 5.361341e-06
+   Relative norm of the primal variables: 2.474696e-03
+   Relative norm of the dual variables: 2.364278e-03
+Iter 049:     prox_L1: ||A x-y||_1 = 9.160907e+03, REL_OB, iter = 2
+  f(x^*) = 8.766269e+03, rel_eval = 7.380443e-06
+   Relative norm of the primal variables: 2.369123e-03
+   Relative norm of the dual variables: 2.265610e-03
+Iter 050:     prox_L1: ||A x-y||_1 = 9.170517e+03, REL_OB, iter = 2
+  f(x^*) = 8.766182e+03, rel_eval = 9.938589e-06
+   Relative norm of the primal variables: 2.278383e-03
+   Relative norm of the dual variables: 2.172509e-03
+Iter 051:     prox_L1: ||A x-y||_1 = 9.179663e+03, REL_OB, iter = 2
+  f(x^*) = 8.766140e+03, rel_eval = 4.767338e-06
+   Relative norm of the primal variables: 2.181186e-03
+   Relative norm of the dual variables: 2.093109e-03
+Iter 052:     prox_L1: ||A x-y||_1 = 9.188173e+03, REL_OB, iter = 2
+  f(x^*) = 8.766154e+03, rel_eval = 1.509017e-06
+   Relative norm of the primal variables: 2.099914e-03
+   Relative norm of the dual variables: 2.011796e-03
+Iter 053:     prox_L1: ||A x-y||_1 = 9.196121e+03, REL_OB, iter = 2
+  f(x^*) = 8.766167e+03, rel_eval = 1.488615e-06
+   Relative norm of the primal variables: 2.023117e-03
+   Relative norm of the dual variables: 1.945785e-03
+Iter 054:     prox_L1: ||A x-y||_1 = 9.203776e+03, REL_OB, iter = 2
+  f(x^*) = 8.766186e+03, rel_eval = 2.207196e-06
+   Relative norm of the primal variables: 1.958194e-03
+   Relative norm of the dual variables: 1.877329e-03
+Iter 055:     prox_L1: ||A x-y||_1 = 9.211331e+03, REL_OB, iter = 2
+  f(x^*) = 8.766194e+03, rel_eval = 9.533326e-07
+   Relative norm of the primal variables: 1.882875e-03
+   Relative norm of the dual variables: 1.811801e-03
+Iter 056:     prox_L1: ||A x-y||_1 = 9.218483e+03, REL_OB, iter = 2
+  f(x^*) = 8.766181e+03, rel_eval = 1.501649e-06
+   Relative norm of the primal variables: 1.814439e-03
+   Relative norm of the dual variables: 1.749149e-03
+Iter 057:     prox_L1: ||A x-y||_1 = 9.224671e+03, REL_OB, iter = 2
+  f(x^*) = 8.766147e+03, rel_eval = 3.904031e-06
+   Relative norm of the primal variables: 1.752864e-03
+   Relative norm of the dual variables: 1.671262e-03
+Iter 058:     prox_L1: ||A x-y||_1 = 9.230562e+03, REL_OB, iter = 2
+  f(x^*) = 8.766139e+03, rel_eval = 9.229504e-07
+   Relative norm of the primal variables: 1.668520e-03
+   Relative norm of the dual variables: 1.609178e-03
+Iter 059:     prox_L1: ||A x-y||_1 = 9.236304e+03, REL_OB, iter = 2
+  f(x^*) = 8.766153e+03, rel_eval = 1.565187e-06
+   Relative norm of the primal variables: 1.609461e-03
+   Relative norm of the dual variables: 1.555104e-03
+Iter 060:     prox_L1: ||A x-y||_1 = 9.241692e+03, REL_OB, iter = 2
+  f(x^*) = 8.766178e+03, rel_eval = 2.885387e-06
+   Relative norm of the primal variables: 1.561028e-03
+   Relative norm of the dual variables: 1.502883e-03
+Iter 061:     prox_L1: ||A x-y||_1 = 9.246903e+03, REL_OB, iter = 2
+  f(x^*) = 8.766190e+03, rel_eval = 1.387954e-06
+   Relative norm of the primal variables: 1.509324e-03
+   Relative norm of the dual variables: 1.450959e-03
+Iter 062:     prox_L1: ||A x-y||_1 = 9.251709e+03, REL_OB, iter = 2
+  f(x^*) = 8.766206e+03, rel_eval = 1.880607e-06
+   Relative norm of the primal variables: 1.454354e-03
+   Relative norm of the dual variables: 1.394729e-03
+Iter 063:     prox_L1: ||A x-y||_1 = 9.256223e+03, REL_OB, iter = 2
+  f(x^*) = 8.766222e+03, rel_eval = 1.748880e-06
+   Relative norm of the primal variables: 1.392829e-03
+   Relative norm of the dual variables: 1.342811e-03
+Iter 064:     prox_L1: ||A x-y||_1 = 9.260675e+03, REL_OB, iter = 2
+  f(x^*) = 8.766217e+03, rel_eval = 5.863103e-07
+   Relative norm of the primal variables: 1.347441e-03
+   Relative norm of the dual variables: 1.302894e-03
+Iter 065:     prox_L1: ||A x-y||_1 = 9.265036e+03, REL_OB, iter = 2
+  f(x^*) = 8.766204e+03, rel_eval = 1.477133e-06
+   Relative norm of the primal variables: 1.307782e-03
+   Relative norm of the dual variables: 1.263214e-03
+Iter 066:     prox_L1: ||A x-y||_1 = 9.268913e+03, REL_OB, iter = 2
+  f(x^*) = 8.766199e+03, rel_eval = 5.420141e-07
+   Relative norm of the primal variables: 1.271598e-03
+   Relative norm of the dual variables: 1.217189e-03
+Iter 067:     prox_L1: ||A x-y||_1 = 9.272559e+03, REL_OB, iter = 2
+  f(x^*) = 8.766171e+03, rel_eval = 3.195931e-06
+   Relative norm of the primal variables: 1.220538e-03
+   Relative norm of the dual variables: 1.177453e-03
+Iter 068:     prox_L1: ||A x-y||_1 = 9.276007e+03, REL_OB, iter = 2
+  f(x^*) = 8.766156e+03, rel_eval = 1.734033e-06
+   Relative norm of the primal variables: 1.183228e-03
+   Relative norm of the dual variables: 1.139192e-03
+Iter 069:     prox_L1: ||A x-y||_1 = 9.279328e+03, REL_OB, iter = 2
+  f(x^*) = 8.766156e+03, rel_eval = 5.600633e-08
+   Relative norm of the primal variables: 1.142868e-03
+   Relative norm of the dual variables: 1.105386e-03
+Iter 070:     prox_L1: ||A x-y||_1 = 9.282317e+03, REL_OB, iter = 2
+  f(x^*) = 8.766172e+03, rel_eval = 1.813243e-06
+   Relative norm of the primal variables: 1.109329e-03
+   Relative norm of the dual variables: 1.066156e-03
+Iter 071:     prox_L1: ||A x-y||_1 = 9.285030e+03, REL_OB, iter = 2
+  f(x^*) = 8.766179e+03, rel_eval = 7.561667e-07
+   Relative norm of the primal variables: 1.066220e-03
+   Relative norm of the dual variables: 1.029140e-03
+Iter 072:     prox_L1: ||A x-y||_1 = 9.287696e+03, REL_OB, iter = 2
+  f(x^*) = 8.766195e+03, rel_eval = 1.860987e-06
+   Relative norm of the primal variables: 1.032459e-03
+   Relative norm of the dual variables: 1.002592e-03
+Iter 073:     prox_L1: ||A x-y||_1 = 9.290345e+03, REL_OB, iter = 2
+  f(x^*) = 8.766228e+03, rel_eval = 3.791296e-06
+   Relative norm of the primal variables: 1.012513e-03
+   Relative norm of the dual variables: 9.774775e-04
+Iter 074:     prox_L1: ||A x-y||_1 = 9.292937e+03, REL_OB, iter = 2
+  f(x^*) = 8.766273e+03, rel_eval = 5.051593e-06
+   Relative norm of the primal variables: 9.823543e-04
+   Relative norm of the dual variables: 9.492229e-04
+
+ ADMM:
+  f(x^*) = 8.766273e+03, rel_eval = 5.051593e-06
+   Relative norm of the primal variables: 9.823543e-04
+   Relative norm of the dual variables: 9.492229e-04
+ 74 iterations
+ Stopping criterion: REL_NORM_PRIMAL_DUAL
+</pre>
+</div>
+<H2>References:</H2>
+
+
+
+<p><a name="combettes2011proximal"></a>
+
+P.&nbsp;Combettes and J.&nbsp;Pesquet.
+ Proximal splitting methods in signal processing.
+ <em>Fixed-Point Algorithms for Inverse Problems in Science and
+  Engineering</em>, pages 185--212, 2011.
+
+</p>
+
+<p><a name="boyd2011distributed"></a>
+
+S.&nbsp;Boyd, N.&nbsp;Parikh, E.&nbsp;Chu, B.&nbsp;Peleato, and J.&nbsp;Eckstein.
+ Distributed optimization and statistical learning via the alternating
+  direction method of multipliers.
+ <em>Foundations and Trends in Machine Learning</em>,
+  3(1):1--122, 2011.
+
+</p>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="demo_admm_code.html">View the code</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p></p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

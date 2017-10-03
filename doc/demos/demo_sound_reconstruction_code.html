@@ -1,0 +1,245 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">DEMO_SOUND_RECONSTRUCTION - Sound time in painting demonstration</h1>
+<h2>Program code:</h2>
+<div class="highlight"><pre><span></span><span class="c">%DEMO_SOUND_RECONSTRUCTION Sound time in painting demonstration</span>
+<span class="c">%</span>
+<span class="c">%   Here we solve a sound in-painting problem. The problem can be</span>
+<span class="c">%   expressed as this </span>
+<span class="c">%</span>
+<span class="c">%        argmin_x  ||A G^* x-b||^2 + tau * || x ||_1</span>
+<span class="c">%</span>
+<span class="c">%   where b is the signal at the non clipped part,  A an operator</span>
+<span class="c">%   representing the mask selecting the non clipped part of the signal and</span>
+<span class="c">%   G^ is the Gabor synthesis operation</span>
+<span class="c">%</span>
+<span class="c">%   Here the general assumption is that the signal is sparse in the Gabor</span>
+<span class="c">%   domain!</span>
+<span class="c">%   The noiseless particular case of this problem can be epressed as </span>
+<span class="c">%</span>
+<span class="c">%        argmin_x  || x ||_1     s. t.   A G^* x = b</span>
+<span class="c">%</span>
+<span class="c">%   Warning! Note that this demo requires the LTFAT toolbox to work.</span>
+<span class="c">%</span>
+<span class="c">%   We set </span>
+<span class="c">%</span>
+<span class="c">%    f_1(x)=||x||_{1}</span>
+<span class="c">%     We define the prox of f_1 as: </span>
+<span class="c">%</span>
+<span class="c">%        prox_{f1,gamma} (z) = argmin_{x} 1/2 ||x-z||_2^2  +  gamma  ||z||_1</span>
+<span class="c">%</span>
+<span class="c">%    f_2(x)=||Ax-b||_2^2</span>
+<span class="c">%     We define the gradient as: </span>
+<span class="c">%</span>
+<span class="c">%        grad_f(x) = 2 * G A^*( A G^*x - b )</span>
+<span class="c">%</span>
+<span class="c">%   Results</span>
+<span class="c">%   -------</span>
+<span class="c">%</span>
+<span class="c">%   Figure 1: Original spectrogram</span>
+<span class="c">%</span>
+<span class="c">%      This figure shows the original spectrogram.</span>
+<span class="c">%</span>
+<span class="c">%   Figure 2: Spectrogram of the depleted sound</span>
+<span class="c">%</span>
+<span class="c">%      This figure shows the spectrogram after the loss of the sample (We loos 75% of the samples.)</span>
+<span class="c">%</span>
+<span class="c">%   Figure 3: Spectrogram of the reconstructed sound</span>
+<span class="c">%</span>
+<span class="c">%      This figure shows the spectrogram of the reconstructed sound thanks to the algorithm.</span>
+<span class="c">%</span>
+<span class="c">%   References:</span>
+<span class="c">%     P. Combettes and J. Pesquet. A douglas--rachford splitting approach to</span>
+<span class="c">%     nonsmooth convex variational signal recovery. Selected Topics in Signal</span>
+<span class="c">%     Processing, IEEE Journal of, 1(4):564--574, 2007.</span>
+<span class="c">%     </span>
+<span class="c">%</span>
+<span class="c">%   Url: https://lts2.epfl.ch/unlocbox/doc/demos/demo_sound_reconstruction.php</span>
+
+<span class="c">% Copyright (C) 2012-2016 Nathanael Perraudin.</span>
+<span class="c">% This file is part of UNLOCBOX version 1.7.3</span>
+<span class="c">%</span>
+<span class="c">% This program is free software: you can redistribute it and/or modify</span>
+<span class="c">% it under the terms of the GNU General Public License as published by</span>
+<span class="c">% the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">% (at your option) any later version.</span>
+<span class="c">%</span>
+<span class="c">% This program is distributed in the hope that it will be useful,</span>
+<span class="c">% but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">% GNU General Public License for more details.</span>
+<span class="c">%</span>
+<span class="c">% You should have received a copy of the GNU General Public License</span>
+<span class="c">% along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+
+<span class="c">% Author: Nathanael Perraudin</span>
+<span class="c">% Date: sept 30 2011</span>
+<span class="c">%</span>
+
+
+<span class="c">%% Initialisation</span>
+
+<span class="n">clear</span><span class="p">;</span>
+<span class="n">close</span> <span class="n">all</span><span class="p">;</span>
+
+<span class="c">% Loading toolbox</span>
+<span class="n">init_unlocbox</span><span class="p">();</span>
+<span class="n">ltfatstart</span><span class="p">();</span> <span class="c">% start the ltfat toolbox</span>
+
+<span class="n">verbose</span> <span class="p">=</span> <span class="mi">2</span><span class="p">;</span>    <span class="c">% verbosity level</span>
+<span class="n">writefile</span><span class="p">=</span><span class="mi">0</span><span class="p">;</span>    <span class="c">% writting wav sound</span>
+
+<span class="c">%% Defining the problem</span>
+
+<span class="c">% Original sound</span>
+<span class="p">[</span><span class="n">sound_original</span><span class="p">,</span> <span class="n">Fs</span><span class="p">]=</span><span class="n">gspi</span><span class="p">();</span>
+<span class="n">sound_original</span> <span class="p">=</span> <span class="n">sound_original</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span>^<span class="mi">18</span><span class="p">);</span>
+
+
+
+<span class="c">%%</span>
+<span class="n">length_sig</span><span class="p">=</span><span class="nb">length</span><span class="p">(</span><span class="n">sound_original</span><span class="p">);</span> <span class="c">% Put a small number here if you want to proceed only a part a of the signal</span>
+<span class="n">sound_part</span><span class="p">=</span><span class="n">sound_original</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">length_sig</span><span class="p">);</span>
+
+<span class="c">% In oder to write the depleted sound somewhere</span>
+<span class="k">if</span> <span class="n">writefile</span>
+    <span class="n">wavwrite</span><span class="p">(</span><span class="n">sound_part</span><span class="p">,</span><span class="n">Fs</span><span class="p">,</span><span class="s">&#39;original.wav&#39;</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="n">Mask</span> <span class="p">=</span> <span class="nb">rand</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">sound_part</span><span class="p">))</span><span class="o">&gt;</span><span class="mf">0.3</span><span class="p">;</span>
+
+<span class="c">% Depleted sound</span>
+<span class="n">sound_depleted</span> <span class="p">=</span> <span class="n">Mask</span><span class="o">.*</span><span class="n">sound_part</span><span class="p">;</span>
+<span class="n">sound_depleted</span><span class="p">(</span><span class="n">logical</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">Mask</span><span class="p">))</span> <span class="p">=</span> <span class="nb">randn</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">Mask</span><span class="p">(:)),</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">mean</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sound_part</span><span class="p">(:)))</span><span class="o">/</span><span class="mi">5</span><span class="p">;</span>
+<span class="k">if</span> <span class="n">writefile</span>
+    <span class="n">wavwrite</span><span class="p">(</span><span class="n">sound_depleted</span><span class="p">,</span><span class="n">Fs</span><span class="p">,</span><span class="s">&#39;depleted.wav&#39;</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="c">%% Setting proximal operators</span>
+
+<span class="n">tau</span> <span class="p">=</span> <span class="mf">1e-2</span><span class="p">;</span> <span class="c">% regularization parameter for the problem</span>
+
+<span class="c">% select a gabor frame for a real signal with a Gaussian window</span>
+<span class="n">a</span><span class="p">=</span><span class="mi">64</span><span class="p">;</span> <span class="c">% size of the shift in time</span>
+<span class="n">M</span><span class="p">=</span><span class="mi">256</span><span class="p">;</span><span class="c">% number of frequencies</span>
+<span class="n">F</span><span class="p">=</span><span class="n">frametight</span><span class="p">(</span><span class="n">frame</span><span class="p">(</span><span class="s">&#39;dgtreal&#39;</span><span class="p">,</span><span class="s">&#39;gauss&#39;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">M</span><span class="p">));</span>
+<span class="c">% Get the framebounds</span>
+<span class="n">GB</span> <span class="p">=</span> <span class="n">M</span><span class="o">/</span><span class="n">a</span><span class="p">;</span>
+
+<span class="c">% Define the Frame operators</span>
+<span class="n">Psi</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">frana</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+<span class="n">Psit</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="n">frsyn</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">x</span><span class="p">);</span>
+
+
+<span class="c">% setting the function f2 (l2 norm)</span>
+<span class="c">% f2.grad = @(x) 2*Psi(Mask.*(Mask.*(Psit(x)-sound_depleted)));</span>
+<span class="c">% f2.eval = @(x) norm(Mask.*Psit(x)-sound_depleted,&#39;fro&#39;)^2;</span>
+<span class="c">% f2.beta = 2*GB^2;</span>
+
+<span class="c">% noiseless case</span>
+<span class="n">f2</span><span class="p">.</span><span class="n">prox</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">,</span><span class="n">T</span><span class="p">)</span> <span class="n">Psi</span><span class="p">(</span> <span class="n">Psit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">.*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span>  <span class="n">Mask</span> <span class="p">)</span><span class="o">+</span> <span class="n">Mask</span><span class="o">.*</span> <span class="n">sound_depleted</span> <span class="p">);</span>
+<span class="n">f2</span><span class="p">.</span><span class="n">eval</span> <span class="p">=</span> <span class="p">@(</span><span class="n">x</span><span class="p">)</span> <span class="nb">eps</span><span class="p">;</span>
+
+
+<span class="c">% setting the function f1 (l1 norm of the Gabor transform)</span>
+<span class="n">param_l1</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="n">verbose</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="n">f1</span><span class="p">.</span><span class="n">prox</span><span class="p">=@(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="n">prox_l1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">*</span><span class="n">tau</span><span class="p">,</span> <span class="n">param_l1</span><span class="p">);</span>
+<span class="n">f1</span><span class="p">.</span><span class="n">eval</span><span class="p">=@(</span><span class="n">x</span><span class="p">)</span> <span class="n">tau</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>   
+
+
+
+<span class="c">%% solving the problem</span>
+
+
+<span class="c">% setting different parameters  for the simulation</span>
+<span class="n">param</span><span class="p">.</span><span class="n">verbose</span> <span class="p">=</span> <span class="n">verbose</span><span class="p">;</span> <span class="c">% display parameter</span>
+<span class="n">param</span><span class="p">.</span><span class="n">maxit</span> <span class="p">=</span> <span class="mi">30</span><span class="p">;</span> <span class="c">% maximum iteration</span>
+<span class="n">param</span><span class="p">.</span><span class="n">tol</span> <span class="p">=</span> <span class="mf">10e-5</span><span class="p">;</span> <span class="c">% tolerance to stop iterating</span>
+<span class="c">%param.do_ts = @(x) log_decreasing_ts(x, 10, 0.1, 80);</span>
+
+<span class="c">% Change the stopping criterion to avoid computing the objective function</span>
+<span class="c">% every iteration.</span>
+<span class="n">param</span><span class="p">.</span><span class="n">stopping_criterion</span> <span class="p">=</span> <span class="s">&#39;rel_norm_primal&#39;</span><span class="p">;</span> 
+
+<span class="n">sol</span> <span class="p">=</span> <span class="n">Psit</span><span class="p">(</span><span class="n">solvep</span><span class="p">(</span><span class="n">Psi</span><span class="p">(</span><span class="n">sound_depleted</span><span class="p">),{</span><span class="n">f1</span><span class="p">,</span><span class="n">f2</span><span class="p">},</span><span class="n">param</span><span class="p">));</span>
+
+
+
+
+<span class="c">%% Evaluate the result</span>
+<span class="n">snr_in</span> <span class="p">=</span> <span class="n">snr</span><span class="p">(</span><span class="n">sound_part</span><span class="p">,</span><span class="n">sound_depleted</span><span class="p">);</span>
+<span class="n">snr_fin</span> <span class="p">=</span> <span class="n">snr</span><span class="p">(</span><span class="n">sound_part</span><span class="p">,</span><span class="n">sol</span><span class="p">);</span>
+
+
+<span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;The SNR of the initial signal is %g dB \n&#39;</span><span class="p">,</span><span class="n">snr_in</span><span class="p">);</span>
+<span class="n">fprintf</span><span class="p">(</span><span class="s">&#39;The SNR of the recovered (FB) signal is %g dB \n&#39;</span><span class="p">,</span><span class="n">snr_fin</span><span class="p">);</span>
+
+
+
+<span class="c">% In order to write the restored sound somewhere</span>
+<span class="k">if</span> <span class="n">writefile</span>
+    <span class="n">wavwrite</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span><span class="n">Fs</span><span class="p">,</span><span class="s">&#39;restored.wav&#39;</span><span class="p">);</span>
+<span class="k">end</span>
+<span class="c">%%</span>
+<span class="n">dr</span><span class="p">=</span><span class="mi">90</span><span class="p">;</span>
+
+<span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">plotframe</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">Psi</span><span class="p">(</span><span class="n">sound_part</span><span class="p">),</span><span class="n">Fs</span><span class="p">,</span><span class="n">dr</span><span class="p">);</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;Gabor transform of the original sound&#39;</span><span class="p">);</span>
+
+<span class="n">figure</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">plotframe</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">Psi</span><span class="p">(</span><span class="n">sound_depleted</span><span class="p">),</span><span class="n">Fs</span><span class="p">,</span><span class="n">dr</span><span class="p">);</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;Gabor transform of the depleted sound&#39;</span><span class="p">);</span>
+
+<span class="n">figure</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">plotframe</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="n">Psi</span><span class="p">(</span><span class="n">sol</span><span class="p">),</span><span class="n">Fs</span><span class="p">,</span><span class="n">dr</span><span class="p">);</span>
+<span class="n">title</span><span class="p">(</span><span class="s">&#39;Gabor transform of the reconstructed sound&#39;</span><span class="p">);</span>
+</pre></div>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="demo_sound_reconstruction.html">View the help</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p></p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>

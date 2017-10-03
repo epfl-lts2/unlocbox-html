@@ -1,0 +1,113 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head class="include" file="../../include/header.html">
+<link rel="stylesheet" href="../../include/html4css1.css" type="text/css">
+<link rel="stylesheet" href="../../include/unlocbox.css" type="text/css">
+<link rel="stylesheet" href="../../include/color_text.css" type="text/css">
+<title>UNLocBoX - Matlab Convex optimization toolbox</title>
+<META NAME="keywords" CONTENT="UNLocX, UNLocBoX, convex, optimization, problem, sparsity, forward, backward, admm, sdmm, douglas, rachford, proximal, operator, splitting, method, matlab, toolbox, LTS2"/> 
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <div class="masthead include" file="../../include/topofpage.html"></div>
+    </div>
+    <div id="navigation">
+        <div class="masthead include" file="../../include/menu.html"></div>
+    </div>
+     <div id="content">
+        <table width=100% >
+            <tr valign=top>
+            <td>
+                <div id="main_content">
+
+                    <h1 class="title">NORM_TV4D - 4 Dimentional TV norm</h1>
+<h2>Program code:</h2>
+<div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>y <span class="p">=</span><span class="w"> </span><span class="nf">norm_tv4d</span><span class="p">(</span>u,wx, wy, wz, wt<span class="p">)</span><span class="w"></span>
+<span class="c">%NORM_TV4D 4 Dimentional TV norm</span>
+<span class="c">%   Usage:  y = norm_tv4d(x)</span>
+<span class="c">%           y = norm_tv4d(x, wx, wy, wz, wt )</span>
+<span class="c">%</span>
+<span class="c">%   Input parameters:</span>
+<span class="c">%         x     : Input data (3 dimentional matrix)</span>
+<span class="c">%         wx    : Weights along x</span>
+<span class="c">%         wy    : Weights along y</span>
+<span class="c">%         wz    : Weights along z</span>
+<span class="c">%         wt    : Weights along t</span>
+<span class="c">%</span>
+<span class="c">%   Output parameters:</span>
+<span class="c">%         y   : Norm</span>
+<span class="c">%</span>
+<span class="c">%   Compute the 4-dimentional TV norm of x. If the input I is a 5</span>
+<span class="c">%   dimentional signal. This function will compute the norm of all 4</span>
+<span class="c">%   dimentional cubes and return a vector of norms.</span>
+<span class="c">%</span>
+<span class="c">%   See also: norm_tv norm_tvnd norm_tv3d</span>
+<span class="c">%</span>
+<span class="c">%   Url: https://lts2.epfl.ch/unlocbox/doc/utils/norm_tv4d.php</span>
+
+<span class="c">% Copyright (C) 2012-2016 Nathanael Perraudin.</span>
+<span class="c">% This file is part of UNLOCBOX version 1.7.3</span>
+<span class="c">%</span>
+<span class="c">% This program is free software: you can redistribute it and/or modify</span>
+<span class="c">% it under the terms of the GNU General Public License as published by</span>
+<span class="c">% the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c">% (at your option) any later version.</span>
+<span class="c">%</span>
+<span class="c">% This program is distributed in the hope that it will be useful,</span>
+<span class="c">% but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c">% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c">% GNU General Public License for more details.</span>
+<span class="c">%</span>
+<span class="c">% You should have received a copy of the GNU General Public License</span>
+<span class="c">% along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="c">% Author: Nathanael Perraudin</span>
+<span class="c">% Date:   24 April 2014</span>
+
+<span class="k">if</span> <span class="n">nargin</span><span class="o">&gt;</span><span class="mi">1</span>
+    <span class="p">[</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">,</span> <span class="n">dt</span><span class="p">]</span> <span class="p">=</span> <span class="n">gradient_op4d</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">wx</span><span class="p">,</span> <span class="n">wy</span><span class="p">,</span> <span class="n">wz</span><span class="p">,</span> <span class="n">wt</span><span class="p">);</span>
+<span class="k">else</span>
+    <span class="p">[</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">,</span> <span class="n">dt</span><span class="p">]</span> <span class="p">=</span> <span class="n">gradient_op4d</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
+<span class="k">end</span>
+    
+<span class="n">temp</span> <span class="p">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dz</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="p">);</span>
+<span class="c">% y = sum(temp(:));</span>
+
+<span class="c">% This allows to return a vector of norms</span>
+<span class="n">y</span> <span class="p">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="mi">2</span><span class="p">),</span><span class="mi">3</span><span class="p">),</span><span class="mi">4</span><span class="p">),[],</span><span class="mi">1</span><span class="p">);</span>
+
+
+<span class="k">end</span>
+</pre></div>
+
+
+                </div>
+            </td>
+            <td>
+                <div id="sidebar">
+                    <div class="span2-doc" id="codeswitch"><div id="menutitle"><a href="norm_tv4d.html">View the help</a></div>
+</div>
+                    <br/>
+                    <div id="seealso"><p><div id="menutitle">See also:</div>
+<ul>
+<li><a href="#BASEURL#/doc/utils/norm_tv.html">norm_tv</a></li>
+<li><a href="#BASEURL#/doc/utils/norm_tvnd.html">norm_tvnd</a></li>
+<li><a href="#BASEURL#/doc/utils/norm_tv3d.html">norm_tv3d</a></li>
+</ul>
+</p></div>
+                </div>
+            </td>            
+            </tr>
+        </table>
+    </div>
+    <div id="footer">
+        <div class="masthead include" file="../../include/bottom.html"></div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../include/unlocbox.js" type="text/javascript"></script>
+
+</body>
+</html>
